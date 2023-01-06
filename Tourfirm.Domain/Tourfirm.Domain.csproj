@@ -9,9 +9,10 @@
     <ItemGroup>
       <Folder Include="Entity" />
       <Folder Include="Enum" />
+      <Folder Include="Extensions" />
       <Folder Include="Helpers" />
       <Folder Include="Response" />
-      <Folder Include="ViewModel" />
+      <Folder Include="ViewModels" />
     </ItemGroup>
 
 </Project>
