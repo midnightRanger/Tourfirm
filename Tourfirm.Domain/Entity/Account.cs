@@ -7,6 +7,7 @@ public class Account
     [Key]
     public int Id { get; set; }
     public string? Email { get; set; }
+    public string? Login { get; set; }
     public string? Password { get; set; }
     public bool? isActive { get; set; }
     public List<Role> Roles { get; set; } = new();

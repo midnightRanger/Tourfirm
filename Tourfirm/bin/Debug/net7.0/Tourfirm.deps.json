@@ -13,7 +13,10 @@
           "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.1",
           "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime": "7.0.1",
           "Swashbuckle.AspNetCore.SwaggerGen": "6.4.0",
-          "Swashbuckle.AspNetCore.SwaggerUI": "6.4.0"
+          "Swashbuckle.AspNetCore.SwaggerUI": "6.4.0",
+          "Tourfirm.API": "1.0.0",
+          "Tourfirm.DAL": "1.0.0",
+          "Tourfirm.Domain": "1.0.0"
         },
         "runtime": {
           "Tourfirm.dll": {}
@@ -275,7 +278,37 @@
         }
       },
       "System.Runtime.CompilerServices.Unsafe/4.7.1": {},
-      "System.Security.Cryptography.Cng/4.5.0": {}
+      "System.Security.Cryptography.Cng/4.5.0": {},
+      "Tourfirm.API/1.0.0": {
+        "dependencies": {
+          "Tourfirm.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Tourfirm.API.dll": {}
+        }
+      },
+      "Tourfirm.DAL/1.0.0": {
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.1",
+          "Microsoft.EntityFrameworkCore": "7.0.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime": "7.0.1",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.4.0",
+          "Swashbuckle.AspNetCore.SwaggerUI": "6.4.0",
+          "Tourfirm.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Tourfirm.DAL.dll": {}
+        }
+      },
+      "Tourfirm.Domain/1.0.0": {
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.1"
+        },
+        "runtime": {
+          "Tourfirm.Domain.dll": {}
+        }
+      }
     }
   },
   "libraries": {
@@ -507,6 +540,21 @@
       "sha512": "sha512-WG3r7EyjUe9CMPFSs6bty5doUqT+q9pbI80hlNzo2SkPkZ4VTuZkGWjpp77JB8+uaL4DFPRdBsAY+DX3dBK92A==",
       "path": "system.security.cryptography.cng/4.5.0",
       "hashPath": "system.security.cryptography.cng.4.5.0.nupkg.sha512"
+    },
+    "Tourfirm.API/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Tourfirm.DAL/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Tourfirm.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     }
   }
 }

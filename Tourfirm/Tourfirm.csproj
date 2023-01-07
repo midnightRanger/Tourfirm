@@ -16,4 +16,10 @@
       <PackageReference Include="Swashbuckle.AspNetCore.SwaggerUI" Version="6.4.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Tourfirm.API\Tourfirm.API.csproj" />
+      <ProjectReference Include="..\Tourfirm.DAL\Tourfirm.DAL.csproj" />
+      <ProjectReference Include="..\Tourfirm.Domain\Tourfirm.Domain.csproj" />
+    </ItemGroup>
+
 </Project>

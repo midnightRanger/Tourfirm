@@ -1,0 +1,16 @@
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\bin\Debug\net7.0\Tourfirm.DAL.deps.json
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\bin\Debug\net7.0\Tourfirm.DAL.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\bin\Debug\net7.0\Tourfirm.DAL.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\obj\Debug\net7.0\Tourfirm.DAL.csproj.AssemblyReference.cache
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\obj\Debug\net7.0\Tourfirm.DAL.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\obj\Debug\net7.0\Tourfirm.DAL.AssemblyInfoInputs.cache
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\obj\Debug\net7.0\Tourfirm.DAL.AssemblyInfo.cs
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\obj\Debug\net7.0\Tourfirm.DAL.csproj.CoreCompileInputs.cache
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\obj\Debug\net7.0\EFCoreNpgsqlNodaTime.cs
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\obj\Debug\net7.0\Tourfirm.DAL.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\obj\Debug\net7.0\refint\Tourfirm.DAL.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\obj\Debug\net7.0\Tourfirm.DAL.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\obj\Debug\net7.0\ref\Tourfirm.DAL.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\bin\Debug\net7.0\Tourfirm.Domain.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\bin\Debug\net7.0\Tourfirm.Domain.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.DAL\obj\Debug\net7.0\Tourfirm.DAL.csproj.CopyComplete

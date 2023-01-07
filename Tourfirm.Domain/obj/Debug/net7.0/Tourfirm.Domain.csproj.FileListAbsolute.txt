@@ -1,0 +1,12 @@
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\bin\Debug\net7.0\Tourfirm.Domain.deps.json
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\bin\Debug\net7.0\Tourfirm.Domain.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\bin\Debug\net7.0\Tourfirm.Domain.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\obj\Debug\net7.0\Tourfirm.Domain.csproj.AssemblyReference.cache
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\obj\Debug\net7.0\Tourfirm.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\obj\Debug\net7.0\Tourfirm.Domain.AssemblyInfoInputs.cache
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\obj\Debug\net7.0\Tourfirm.Domain.AssemblyInfo.cs
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\obj\Debug\net7.0\Tourfirm.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\obj\Debug\net7.0\Tourfirm.Domain.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\obj\Debug\net7.0\refint\Tourfirm.Domain.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\obj\Debug\net7.0\Tourfirm.Domain.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Domain\obj\Debug\net7.0\ref\Tourfirm.Domain.dll

@@ -10,6 +10,10 @@ public class ApplicationContext : DbContext
         Database.EnsureCreated();
     }
 
+    public ApplicationContext()
+    { 
+    }
+
     public DbSet<Account> Account { get; set; } = null!;
     public DbSet<Cart> Cart { get; set; } = null!;
     public DbSet<Country> Country { get; set; } = null!;

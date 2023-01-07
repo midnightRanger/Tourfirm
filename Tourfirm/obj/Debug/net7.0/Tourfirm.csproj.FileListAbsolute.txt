@@ -51,3 +51,9 @@ C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\obj\Debug\net7.0\refint\Tourfirm
 C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\obj\Debug\net7.0\Tourfirm.pdb
 C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\obj\Debug\net7.0\Tourfirm.genruntimeconfig.cache
 C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\obj\Debug\net7.0\ref\Tourfirm.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.DAL.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.Domain.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.DAL.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.Domain.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.API.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.API.pdb

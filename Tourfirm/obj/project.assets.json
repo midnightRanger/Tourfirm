@@ -541,6 +541,51 @@
             "rid": "win"
           }
         }
+      },
+      "Tourfirm.API/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Tourfirm.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Tourfirm.API.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Tourfirm.API.dll": {}
+        }
+      },
+      "Tourfirm.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.1",
+          "Microsoft.EntityFrameworkCore": "7.0.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime": "7.0.1",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.4.0",
+          "Swashbuckle.AspNetCore.SwaggerUI": "6.4.0",
+          "Tourfirm.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Tourfirm.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Tourfirm.DAL.dll": {}
+        }
+      },
+      "Tourfirm.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.1"
+        },
+        "compile": {
+          "bin/placeholder/Tourfirm.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Tourfirm.Domain.dll": {}
+        }
       }
     }
   },
@@ -1363,6 +1408,21 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Tourfirm.API/1.0.0": {
+      "type": "project",
+      "path": "../Tourfirm.API/Tourfirm.API.csproj",
+      "msbuildProject": "../Tourfirm.API/Tourfirm.API.csproj"
+    },
+    "Tourfirm.DAL/1.0.0": {
+      "type": "project",
+      "path": "../Tourfirm.DAL/Tourfirm.DAL.csproj",
+      "msbuildProject": "../Tourfirm.DAL/Tourfirm.DAL.csproj"
+    },
+    "Tourfirm.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Tourfirm.Domain/Tourfirm.Domain.csproj",
+      "msbuildProject": "../Tourfirm.Domain/Tourfirm.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1372,7 +1432,10 @@
       "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.1",
       "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime >= 7.0.1",
       "Swashbuckle.AspNetCore.SwaggerGen >= 6.4.0",
-      "Swashbuckle.AspNetCore.SwaggerUI >= 6.4.0"
+      "Swashbuckle.AspNetCore.SwaggerUI >= 6.4.0",
+      "Tourfirm.API >= 1.0.0",
+      "Tourfirm.DAL >= 1.0.0",
+      "Tourfirm.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1401,7 +1464,17 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.API\\Tourfirm.API.csproj": {
+              "projectPath": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.API\\Tourfirm.API.csproj"
+            },
+            "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.DAL\\Tourfirm.DAL.csproj": {
+              "projectPath": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.DAL\\Tourfirm.DAL.csproj"
+            },
+            "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.Domain\\Tourfirm.Domain.csproj": {
+              "projectPath": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.Domain\\Tourfirm.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
