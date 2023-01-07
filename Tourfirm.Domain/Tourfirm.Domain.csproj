@@ -7,7 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Entity" />
       <Folder Include="Enum" />
       <Folder Include="Extensions" />
       <Folder Include="Helpers" />
