@@ -6,7 +6,7 @@ using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.API.Controllers;
 
-[Authorize]
+[Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/user")]
 [ApiController]
 public class UserController: ControllerBase
