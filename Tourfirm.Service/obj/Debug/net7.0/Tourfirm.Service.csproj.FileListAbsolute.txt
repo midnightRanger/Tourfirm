@@ -1,0 +1,17 @@
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\bin\Debug\net7.0\Tourfirm.Service.deps.json
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\bin\Debug\net7.0\Tourfirm.Service.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\bin\Debug\net7.0\Tourfirm.Service.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\bin\Debug\net7.0\Tourfirm.DAL.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\bin\Debug\net7.0\Tourfirm.Domain.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\bin\Debug\net7.0\Tourfirm.DAL.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\bin\Debug\net7.0\Tourfirm.Domain.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\obj\Debug\net7.0\Tourfirm.Service.csproj.AssemblyReference.cache
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\obj\Debug\net7.0\Tourfirm.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\obj\Debug\net7.0\Tourfirm.Service.AssemblyInfoInputs.cache
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\obj\Debug\net7.0\Tourfirm.Service.AssemblyInfo.cs
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\obj\Debug\net7.0\Tourfirm.Service.csproj.CoreCompileInputs.cache
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\obj\Debug\net7.0\Tourfirm.Service.csproj.CopyComplete
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\obj\Debug\net7.0\Tourfirm.Service.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\obj\Debug\net7.0\refint\Tourfirm.Service.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\obj\Debug\net7.0\Tourfirm.Service.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm.Service\obj\Debug\net7.0\ref\Tourfirm.Service.dll

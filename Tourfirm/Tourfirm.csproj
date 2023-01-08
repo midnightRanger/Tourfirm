@@ -20,6 +20,7 @@
       <ProjectReference Include="..\Tourfirm.API\Tourfirm.API.csproj" />
       <ProjectReference Include="..\Tourfirm.DAL\Tourfirm.DAL.csproj" />
       <ProjectReference Include="..\Tourfirm.Domain\Tourfirm.Domain.csproj" />
+      <ProjectReference Include="..\Tourfirm.Service\Tourfirm.Service.csproj" />
     </ItemGroup>
 
 </Project>

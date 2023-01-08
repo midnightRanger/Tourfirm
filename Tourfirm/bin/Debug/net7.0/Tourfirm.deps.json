@@ -16,7 +16,8 @@
           "Swashbuckle.AspNetCore.SwaggerUI": "6.4.0",
           "Tourfirm.API": "1.0.0",
           "Tourfirm.DAL": "1.0.0",
-          "Tourfirm.Domain": "1.0.0"
+          "Tourfirm.Domain": "1.0.0",
+          "Tourfirm.Service": "1.0.0"
         },
         "runtime": {
           "Tourfirm.dll": {}
@@ -281,6 +282,8 @@
       "System.Security.Cryptography.Cng/4.5.0": {},
       "Tourfirm.API/1.0.0": {
         "dependencies": {
+          "System.IdentityModel.Tokens.Jwt": "6.15.1",
+          "Tourfirm.DAL": "1.0.0",
           "Tourfirm.Domain": "1.0.0"
         },
         "runtime": {
@@ -307,6 +310,15 @@
         },
         "runtime": {
           "Tourfirm.Domain.dll": {}
+        }
+      },
+      "Tourfirm.Service/1.0.0": {
+        "dependencies": {
+          "Tourfirm.DAL": "1.0.0",
+          "Tourfirm.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Tourfirm.Service.dll": {}
         }
       }
     }
@@ -552,6 +564,11 @@
       "sha512": ""
     },
     "Tourfirm.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Tourfirm.Service/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

@@ -8,6 +8,7 @@ using Tourfirm.API.Controllers;
 using Tourfirm.DAL;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.DAL.Repositories;
+using Tourfirm.Service.Implementations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +19,21 @@ builder.Services.AddHttpClient();
 
 builder.Services.AddTransient<IAccount, AccountRepository>();
 builder.Services.AddTransient<IUser, UserRepository>();
+builder.Services.AddTransient<ICart, CartRepository>();
+builder.Services.AddTransient<ICountry, CountryRepository>();
+builder.Services.AddTransient<IHotel, HotelRepository>();
+builder.Services.AddTransient<IHotelProperties, HotelPropertiesRepository>();
+builder.Services.AddTransient<IHotelService, HotelServiceRepository>();
+builder.Services.AddTransient<IPaymentInfo, PaymentInfoRepository>();
+builder.Services.AddTransient<IReview, ReviewRepository>();
+builder.Services.AddTransient<IRole, RoleRepository>();
+builder.Services.AddTransient<IRoute, RouteRepository>();
+builder.Services.AddTransient<ITour, TourRepository>();
+builder.Services.AddTransient<ITourImage, TourImageRepository>();
+builder.Services.AddTransient<ITourType, TourTypeRepository>();
+
+builder.Services.AddScoped<IAuthService, AuthService>();
+
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -100,6 +116,6 @@ AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Auth}/{action=Login}/{id?}");
 
 app.Run();

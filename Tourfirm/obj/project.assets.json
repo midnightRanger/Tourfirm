@@ -546,6 +546,8 @@
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
+          "System.IdentityModel.Tokens.Jwt": "6.15.1",
+          "Tourfirm.DAL": "1.0.0",
           "Tourfirm.Domain": "1.0.0"
         },
         "compile": {
@@ -585,6 +587,20 @@
         },
         "runtime": {
           "bin/placeholder/Tourfirm.Domain.dll": {}
+        }
+      },
+      "Tourfirm.Service/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Tourfirm.DAL": "1.0.0",
+          "Tourfirm.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Tourfirm.Service.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Tourfirm.Service.dll": {}
         }
       }
     }
@@ -1423,6 +1439,11 @@
       "type": "project",
       "path": "../Tourfirm.Domain/Tourfirm.Domain.csproj",
       "msbuildProject": "../Tourfirm.Domain/Tourfirm.Domain.csproj"
+    },
+    "Tourfirm.Service/1.0.0": {
+      "type": "project",
+      "path": "../Tourfirm.Service/Tourfirm.Service.csproj",
+      "msbuildProject": "../Tourfirm.Service/Tourfirm.Service.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -1435,7 +1456,8 @@
       "Swashbuckle.AspNetCore.SwaggerUI >= 6.4.0",
       "Tourfirm.API >= 1.0.0",
       "Tourfirm.DAL >= 1.0.0",
-      "Tourfirm.Domain >= 1.0.0"
+      "Tourfirm.Domain >= 1.0.0",
+      "Tourfirm.Service >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1473,6 +1495,9 @@
             },
             "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.Domain\\Tourfirm.Domain.csproj": {
               "projectPath": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.Domain\\Tourfirm.Domain.csproj"
+            },
+            "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.Service\\Tourfirm.Service.csproj": {
+              "projectPath": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.Service\\Tourfirm.Service.csproj"
             }
           }
         }

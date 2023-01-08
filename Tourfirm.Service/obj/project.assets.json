@@ -424,7 +424,7 @@
           }
         },
         "build": {
-          "build/netstandard2.0/Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime.targets": {}
+          "build/netstandard2.0/_._": {}
         }
       },
       "Npgsql.NodaTime/7.0.1": {
@@ -540,6 +540,38 @@
             "assetType": "runtime",
             "rid": "win"
           }
+        }
+      },
+      "Tourfirm.DAL/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Microsoft.AspNetCore.Authentication.JwtBearer": "7.0.1",
+          "Microsoft.EntityFrameworkCore": "7.0.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL": "7.0.1",
+          "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime": "7.0.1",
+          "Swashbuckle.AspNetCore.SwaggerGen": "6.4.0",
+          "Swashbuckle.AspNetCore.SwaggerUI": "6.4.0",
+          "Tourfirm.Domain": "1.0.0"
+        },
+        "compile": {
+          "bin/placeholder/Tourfirm.DAL.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Tourfirm.DAL.dll": {}
+        }
+      },
+      "Tourfirm.Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "dependencies": {
+          "Microsoft.EntityFrameworkCore": "7.0.1"
+        },
+        "compile": {
+          "bin/placeholder/Tourfirm.Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Tourfirm.Domain.dll": {}
         }
       }
     }
@@ -1363,16 +1395,23 @@
         "useSharedDesignerContext.txt",
         "version.txt"
       ]
+    },
+    "Tourfirm.DAL/1.0.0": {
+      "type": "project",
+      "path": "../Tourfirm.DAL/Tourfirm.DAL.csproj",
+      "msbuildProject": "../Tourfirm.DAL/Tourfirm.DAL.csproj"
+    },
+    "Tourfirm.Domain/1.0.0": {
+      "type": "project",
+      "path": "../Tourfirm.Domain/Tourfirm.Domain.csproj",
+      "msbuildProject": "../Tourfirm.Domain/Tourfirm.Domain.csproj"
     }
   },
   "projectFileDependencyGroups": {
     "net7.0": [
-      "Microsoft.AspNetCore.Authentication.JwtBearer >= 7.0.1",
-      "Microsoft.EntityFrameworkCore >= 7.0.1",
-      "Npgsql.EntityFrameworkCore.PostgreSQL >= 7.0.1",
-      "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime >= 7.0.1",
-      "Swashbuckle.AspNetCore.SwaggerGen >= 6.4.0",
-      "Swashbuckle.AspNetCore.SwaggerUI >= 6.4.0"
+      "Microsoft.Extensions.Logging.Abstractions >= 7.0.0",
+      "Tourfirm.DAL >= 1.0.0",
+      "Tourfirm.Domain >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -1401,7 +1440,14 @@
       "frameworks": {
         "net7.0": {
           "targetAlias": "net7.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.DAL\\Tourfirm.DAL.csproj": {
+              "projectPath": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.DAL\\Tourfirm.DAL.csproj"
+            },
+            "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.Domain\\Tourfirm.Domain.csproj": {
+              "projectPath": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm.Domain\\Tourfirm.Domain.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
@@ -1414,29 +1460,9 @@
       "net7.0": {
         "targetAlias": "net7.0",
         "dependencies": {
-          "Microsoft.AspNetCore.Authentication.JwtBearer": {
+          "Microsoft.Extensions.Logging.Abstractions": {
             "target": "Package",
-            "version": "[7.0.1, )"
-          },
-          "Microsoft.EntityFrameworkCore": {
-            "target": "Package",
-            "version": "[7.0.1, )"
-          },
-          "Npgsql.EntityFrameworkCore.PostgreSQL": {
-            "target": "Package",
-            "version": "[7.0.1, )"
-          },
-          "Npgsql.EntityFrameworkCore.PostgreSQL.NodaTime": {
-            "target": "Package",
-            "version": "[7.0.1, )"
-          },
-          "Swashbuckle.AspNetCore.SwaggerGen": {
-            "target": "Package",
-            "version": "[6.4.0, )"
-          },
-          "Swashbuckle.AspNetCore.SwaggerUI": {
-            "target": "Package",
-            "version": "[6.4.0, )"
+            "version": "[7.0.0, )"
           }
         },
         "imports": [
