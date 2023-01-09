@@ -29,7 +29,78 @@ public class AuthService: IAuthService
         //TODO
         //_proFileRepository = proFileRepository;
     }
-    
+
+    public async Task<BaseResponse<ClaimsIdentity>> Register(RegisterViewModel model)
+    {
+         try
+        {
+            var user = await _accountRepository.getAll().FirstOrDefaultAsync(x => x.Login == model.Login);
+            if (user != null)
+            {
+                return new BaseResponse<ClaimsIdentity>()
+                {
+                    Description = "Пользователь с таким логином уже есть",
+                };
+            }
+
+            List<Role> roles = new List<Role>()
+            {
+                new Role() { Name = "USER", Description = "Average USER",  }
+            };
+
+            user = new Account()
+            {
+                Login = model.Login,
+                Email = model.Email,
+                Roles = roles,
+                isActive = true,
+                Password = PasswordHasher.HashPassword(model.Password),
+            };
+
+            var userInfo = new User()
+            {
+                Name = model.Name,
+                Surname = model.Surname,
+                AccountId = user.Id,
+                Account = user,
+                Age = model.Age,
+                Balance = 0.00
+            };
+
+            var userCart = new Cart()
+            {
+                UserId= userInfo.Id, 
+                User = userInfo,
+                Sum = 0.00, 
+                Value = 0,
+                Tours = null
+            };
+
+
+
+            await _accountRepository.addAccount(user);
+            await _userRepository.addUser(userInfo);
+            await _cartRepository.addCart(userCart);
+            var result = Authenticate(user);
+
+            return new BaseResponse<ClaimsIdentity>()
+            {
+                Data = result,
+                Description = "Объект добавился",
+                StatusCode = StatusCode.OK
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"[Register]: {ex.Message}");
+            return new BaseResponse<ClaimsIdentity>()
+            {
+                Description = ex.Message,
+                StatusCode = StatusCode.InternalServerError
+            };
+        }
+    }
+
     public async Task<BaseResponse<ClaimsIdentity>> Login(LoginViewModel model)
     {
         try
@@ -72,10 +143,11 @@ public class AuthService: IAuthService
     
     private ClaimsIdentity Authenticate(Account account)
     {
+        var accountRole = _accountRepository.getAll().Include(r => r.Roles).FirstOrDefault(a=>a.Id == account.Id);
         var claims = new List<Claim>
         {
             new Claim(ClaimsIdentity.DefaultNameClaimType, account.Login),
-            new Claim(ClaimsIdentity.DefaultRoleClaimType, account.Roles[0].Name)
+            new Claim(ClaimsIdentity.DefaultRoleClaimType, accountRole.Roles[0].Name)
         };
         return new ClaimsIdentity(claims, "ApplicationCookie",
             ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);

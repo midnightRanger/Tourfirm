@@ -9,5 +9,8 @@ public class Cart
     public int Value { get; set; }
     public double Sum { get; set; }
 
-    public List<Tour> Tours { get; set; } = new();
+    public List<Tour>? Tours { get; set; } = new();
+    
+    public int UserId { get; set; }
+    public User? User { get; set; }
 }
