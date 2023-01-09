@@ -38,7 +38,7 @@ public class AuthController : Controller
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(response.Data));
 
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Main", "Home");
             }
             ModelState.AddModelError("", response.Description);
         }

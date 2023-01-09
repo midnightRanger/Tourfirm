@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "m1vcYWrmWRMNoROx/XvIxvcpHOdW/+UyQ08t+poCcDI=",
+  "Hash": "6Woxr+02xmooS20Oc+cb5jSOVpg00ff3IBn4U5INUK0=",
   "Source": "Tourfirm",
   "BasePath": "_content/Tourfirm",
   "Mode": "Default",
@@ -49,6 +49,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\obj\\Debug\\net7.0\\scopedcss\\projectbundle\\Tourfirm.bundle.scp.css"
+    },
+    {
+      "Identity": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\css\\offcanvas-navbar.css",
+      "SourceId": "Tourfirm",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\",
+      "BasePath": "_content/Tourfirm",
+      "RelativePath": "css/offcanvas-navbar.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\offcanvas-navbar.css"
     },
     {
       "Identity": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\css\\signin.css",

@@ -5,6 +5,10 @@
       "PackagePath": "staticwebassets\\Tourfirm.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\css\\offcanvas-navbar.css",
+      "PackagePath": "staticwebassets\\css\\offcanvas-navbar.css"
+    },
+    {
       "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\css\\signin.css",
       "PackagePath": "staticwebassets\\css\\signin.css"
     },

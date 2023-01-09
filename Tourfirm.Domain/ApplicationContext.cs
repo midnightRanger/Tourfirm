@@ -7,12 +7,74 @@ public class ApplicationContext : DbContext
 {
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
-        
+       // Database.EnsureDeleted(); 
         Database.EnsureCreated();
     }
 
     public ApplicationContext()
     { 
+    }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+
+            modelBuilder.Entity<Country>().HasData(new[]
+            {
+                new Country() {Id = 1, Name = "Russia", Climate = "Mild", Language = "Russian", Tours = null, MidTemp = 18},
+                new Country() {Id = 2, Name = "Brazil", Climate = "Tropical", Language = "Portugal", Tours = null, MidTemp = 26},
+                new Country() {Id = 3, Name = "Israel", Climate = "Subtropical", Language = "Hebrew", Tours = null, MidTemp = 30}
+            });
+            
+            modelBuilder.Entity<Route>().HasData(new[]
+            {
+                new Route() {Id = 1, Hours = 4, StartPos = "Moscow", EndPost = "Sochi", Type = "Train", Tours = null},
+                new Route() {Id = 2, Hours = 26, StartPos = "Moscow", EndPost = "Brasilia", Type = "Plane", Tours = null},
+                new Route() {Id = 3, Hours = 15, StartPos = "Moscow", EndPost = "Jerusalem", Type = "Plane", Tours = null},
+                
+            });
+
+            modelBuilder.Entity<HotelService>().HasData(new[]
+            {
+                new HotelService() {Id=1, Cost = 300, Name = "Taxi calling", HotelPropertiesId = 1},
+                new HotelService() {Id = 2, Cost = 500, Name = "Auto sharing", HotelPropertiesId = 1},
+                new HotelService() {Id = 3, Cost = 3200, Name = "Cloth Cleaning", HotelPropertiesId = 2}, 
+                new HotelService() {Id = 4, Cost = 120, Name = "Flowers delivery", HotelPropertiesId = 3}
+            });
+            
+            modelBuilder.Entity<HotelProperties>().HasData(new[]
+            {
+                new HotelProperties() {Id = 1, Booking = "Garanteed", Capacity = 300, Classification = "Hotel", Food = "BB", Stars = 5, Style = "Modern"},
+                new HotelProperties() {Id = 2, Booking = "Garanteed", Capacity = 200, Classification = "Motel", Food = "AI", Stars =4, Style = "AR-Deco"},
+                new HotelProperties() {Id = 3, Booking = "Garanteed", Capacity = 500, Classification = "Hotel", Food = "AI", Stars =5, Style = "Retro"},
+
+            });
+            
+            modelBuilder.Entity<Hotel>().HasData(new[]
+            {
+               new Hotel() { Id = 1, Name = "Volga", Rate = 3.3, HotelPropertiesId = 1}, 
+               new Hotel() {Id=2, Name = "El Sapacho", Rate = 4.4, HotelPropertiesId = 2},
+               new Hotel() {Id=3, Name="HeavyHeaven", Rate = 2.0, HotelPropertiesId = 3}
+            });
+            
+            modelBuilder.Entity<TourType>().HasData(new[]
+            {
+                new TourType() { Id = 1, Name = "Oversea"}, 
+                new TourType() {Id=2, Name = "Internally"} 
+            });
+
+            modelBuilder.Entity<Tour>().HasData(new[]
+            {
+                new Tour() { Id = 1, Name = "From Russia with love", Description = "Average tour on Russian", Cost = 30000, RouteId=1, HotelId = 1, TourTypeId = 2, CountryId = 1},
+                new Tour() { Id = 2, Name = "Brazilian Sun", Description = "Let's have a fun in the hottest Country!", Cost = 130000, RouteId=2, HotelId = 2, TourTypeId = 1, CountryId = 2},
+                new Tour() { Id = 3, Name = "Deserts and Skorpions", Description = "Put your hat on your head - its really hot there", Cost = 90000, RouteId=3, HotelId = 3, TourTypeId = 2, CountryId = 3}
+
+            });
+        
+            // modelBuilder.Entity<UserModel>()
+            //.HasMany(u => u.Grades)
+            //.WithMany(g => g.Buyers);
+
+            base.OnModelCreating(modelBuilder);
     }
 
     public DbSet<Account> Account { get; set; } = null!;
