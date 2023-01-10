@@ -18,15 +18,17 @@ public class HomeController : Controller
         _logger = logger;
         _tourRepository = tourRepository;
         _allTours = _tourRepository.getAll().Include(t => t.Country).Include(t => t.TourType)
-            .Include(t => t.Route).Include(t => t.Hotel).ThenInclude(h => h.HotelProperties)
+            .Include(t => t.Route).Include(t=>t.TourImages).Include(t => t.Hotel).ThenInclude(h => h.HotelProperties)
             .ThenInclude(h => h.HotelServices);
     }
-    public IActionResult Main() => View(); 
+    public IActionResult Main() => View();
+
 
     public IActionResult Index()
     {
         return View();
     }
+    
 
     public IActionResult Privacy()
     {

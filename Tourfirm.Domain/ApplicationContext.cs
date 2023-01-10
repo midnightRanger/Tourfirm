@@ -69,6 +69,19 @@ public class ApplicationContext : DbContext
                 new Tour() { Id = 3, Name = "Deserts and Skorpions", Description = "Put your hat on your head - its really hot there", Cost = 90000, RouteId=3, HotelId = 3, TourTypeId = 2, CountryId = 3}
 
             });
+
+            modelBuilder.Entity<TourImage>().HasData(new[]
+            {
+                new TourImage() { Id = 1, Path = "~/images/FRWL1.jpg", TourId = 1 },
+                new TourImage() { Id = 2, Path = "~/images/BS1.jpg", TourId = 2 },
+                new TourImage() { Id = 3, Path = "~/images/DAS1.jpg", TourId = 3 },
+            });
+            
+            modelBuilder.Entity<Review>().HasData(new[]
+            {
+                new Review() { Id = 1, Text = "Отличный тур! Все понравилось", UserId = 1, IsAccept = true, TourId = 2 },
+                new Review() { Id = 2, Text = "Были огрехи, но в целом все хорошо", UserId = 1, IsAccept = true, TourId = 2 },
+            });
         
             // modelBuilder.Entity<UserModel>()
             //.HasMany(u => u.Grades)

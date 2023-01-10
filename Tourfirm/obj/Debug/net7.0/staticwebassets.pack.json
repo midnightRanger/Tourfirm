@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\offcanvas-navbar.css"
     },
     {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\css\\product.css",
+      "PackagePath": "staticwebassets\\css\\product.css"
+    },
+    {
       "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\css\\signin.css",
       "PackagePath": "staticwebassets\\css\\signin.css"
     },
@@ -19,6 +23,26 @@
     {
       "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\favicon.ico",
       "PackagePath": "staticwebassets\\favicon.ico"
+    },
+    {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\BS1.jpg",
+      "PackagePath": "staticwebassets\\images\\BS1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\BS2.jpg",
+      "PackagePath": "staticwebassets\\images\\BS2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\BS3.jpg",
+      "PackagePath": "staticwebassets\\images\\BS3.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\DAS1.jpg",
+      "PackagePath": "staticwebassets\\images\\DAS1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\FRWL1.jpg",
+      "PackagePath": "staticwebassets\\images\\FRWL1.jpg"
     },
     {
       "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\js\\site.js",

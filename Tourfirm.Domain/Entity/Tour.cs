@@ -25,4 +25,5 @@ public class Tour
     public List<Cart> Carts { get; set; } = new();
     public List<TourImage> TourImages { get; set; } = new();
     public List<PaymentInfo> PaymentInfos { get; set; } = new();
+    public List<Review> Reviews { get; set; } = new();
 }
