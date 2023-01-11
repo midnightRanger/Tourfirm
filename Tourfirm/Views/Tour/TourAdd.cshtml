@@ -29,20 +29,27 @@
         </div>
         <div class="form-group">
             <label for="inputType">Tour type</label>
-            <select id="inputType" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
-            </select>
+               <select id="inputType" class="form-control" asp-items="@Model.AllTourTypes">
+                    </select>
         </div>
         <div class="form-group">
-                <label for="inputRoute">Tour route</label>
-            <select id="inputRoute" class="form-control">
-                <option selected>Choose...</option>
-                <option>...</option>
+            <label for="inputRoute">Tour route</label>
+            <select id="inputRoute" class="form-control" asp-items="@Model.AllRoutes">
             </select>
-            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inputCountry">Tour country</label>
+            <select id="inputCountry" class="form-control" asp-items="@Model.AllCountries">
+            </select>
+        </div>
+        
+        <div class="mb-3">
+          <label for="formFileMultiple" class="form-label">Choose photos</label>
+          <input class="form-control" type="file" id="formFileMultiple" multiple="multiple">
+        </div>
     </div>
-    <button type="submit" class="btn btn-primary">Sign in</button>
+    <button type="submit" class="btn btn-primary margin-md">Add tour</button>
 </form>
 
 </body>

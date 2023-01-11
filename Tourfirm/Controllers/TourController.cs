@@ -6,6 +6,7 @@ using Tourfirm.DAL.Interfaces;
 using Tourfirm.DAL.ViewModels;
 using Tourfirm.Domain.Entity;
 using Tourfirm.Domain.ViewModels;
+using Route = Tourfirm.Domain.Entity.Route;
 
 namespace Tourfirm.Controllers;
 
@@ -37,10 +38,10 @@ public class TourController : Controller
     [HttpGet]
     public async Task<IActionResult> TourAdd(TourAddViewModel tourAddViewModel)
     {
-        tourAddViewModel.AllHotels = new SelectList(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
-        // tourAddViewModel.AllCountries = await _countryRepository.getCountries();
-        // tourAddViewModel.AllRoutes = await _routeRepository.getRoutes();
-        // tourAddViewModel.AllTourTypes = await _tourTypeRepository.getTourTypes();
+        tourAddViewModel.AllHotels = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
+        tourAddViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
+        tourAddViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
+        tourAddViewModel.AllTourTypes = new(await _tourTypeRepository.getTourTypes(), nameof(TourType.Id), nameof(TourType.Name));
         return View(tourAddViewModel);
     }
     
