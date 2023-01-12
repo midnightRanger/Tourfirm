@@ -21,7 +21,7 @@ public class TourAddViewModel : ResponseModel.ReponseModel
     public SelectList? AllRoutes { get; set; }
     public SelectList? AllHotels { get; set; }
     public SelectList? AllTourTypes { get; set; }
-    public SelectList AllCountries { get; set; }
+    public SelectList? AllCountries { get; set; }
     
     [Required(ErrorMessage = "Please select files")]
     public List<IFormFile> Files { get; set; }

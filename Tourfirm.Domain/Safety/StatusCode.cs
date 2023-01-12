@@ -8,7 +8,7 @@ public enum StatusCode
     ProductNotFound = 10,
 
     NoImages = 20,
-    NoMoney = 30,
+    NoFormat = 30,
 
     OK = 200,
     InternalServerError = 500,

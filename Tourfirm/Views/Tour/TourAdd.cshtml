@@ -6,28 +6,18 @@
     Layout = "_Layout";
 }
 <html lang="en">
+<script type="text/javascript" charset="utf-8" id="zm-extension" src="chrome-extension://cnhbkkedmelfmalgjpkngiaoifpdfcnl/scripts/webrtc-patch.js" async=""></script>
+
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+ <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+ <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
- <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+ 
 <form asp-controller="Tour" asp-action="TourAdd" method="post" enctype="multipart/form-data">
-        @if (Model.IsResponse)
-        {
-            if (Model.IsSuccess)
-            {
-                <div class="alert alert-success">
-                    @Model.Message
-                </div>
-            }
-            else
-            {
-                <div class="alert alert-danger">
-                    @Model.Message
-                </div>
-            }
-        }
+<div class="alert alert-danger" asp-validation-summary="All"></div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputName"> Name </label>

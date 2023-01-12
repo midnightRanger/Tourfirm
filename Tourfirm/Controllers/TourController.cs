@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Tourfirm.DAL;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.DAL.ViewModels;
@@ -44,29 +46,41 @@ public class TourController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> TourAdd(TourAddViewModel tourAddViewModel, string? notification)
+    public async Task<IActionResult> TourAdd(string? notification)
     {
         if(notification != null)
             ModelState.AddModelError("", notification);
-        
+
+        TourAddViewModel tourAddViewModel = new(); 
         tourAddViewModel.AllHotels = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
         tourAddViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
         tourAddViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
         tourAddViewModel.AllTourTypes = new(await _tourTypeRepository.getTourTypes(), nameof(TourType.Id), nameof(TourType.Name));
+
         return View(tourAddViewModel);
     }
 
     [HttpPost]
     public async Task<IActionResult> TourAdd(TourAddViewModel tourAddViewModel, Tour tour)
     {
+        if (!ModelState.IsValid)
+        { 
+            tourAddViewModel.AllHotels = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
+            tourAddViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
+            tourAddViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
+            tourAddViewModel.AllTourTypes = new(await _tourTypeRepository.getTourTypes(), nameof(TourType.Id), nameof(TourType.Name));
+
+            return View(tourAddViewModel);
+        }
+
         var response = await _tourService.CreateTour(tour, tourAddViewModel);
 
         if (response.StatusCode == Domain.Safety.StatusCode.OK)
         {
-            return RedirectToAction("Main", "Home", new {notification = response.Description}); 
+            return RedirectToAction("Main", "Home", new { notification = response.Description });
         }
-
-        return RedirectToAction("TourAdd", "Tour", new { notification = response.Description }); 
+        ModelState.AddModelError("", response.Description);
+        return RedirectToAction("TourAdd", "Tour", new { notification = response.Description });
     }
     
     [HttpGet]

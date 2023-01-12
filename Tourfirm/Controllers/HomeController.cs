@@ -52,7 +52,7 @@ public class HomeController : Controller
         
         if (!String.IsNullOrEmpty(keyword))
             tourList = _allTours.Where(t
-                => t.Name.Contains(keyword));
+                => t.Name != null && t.Name.Contains(keyword));
         else tourList = _allTours;
 
         return View(tourList); 

@@ -55,11 +55,19 @@ public class TourService : ITourService
                     {
                         return new BaseResponse<bool>()
                         {
-                            StatusCode = StatusCode.NoImages,
-                            Description = "There are no images for tour"
+                            StatusCode = StatusCode.NoFormat,
+                            Description = "There is not correct format"
                         };
                     }
                 }
+            }
+            else
+            {
+                return new BaseResponse<bool>()
+                {
+                    StatusCode = StatusCode.NoImages,
+                    Description = "There are no images for this tour"
+                };
             }
 
             return new BaseResponse<bool>()
