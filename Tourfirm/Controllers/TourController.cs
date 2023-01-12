@@ -84,7 +84,7 @@ public class TourController : Controller
     }
 
     
-    public async Task<IActionResult> TourDelete(int id)
+    public async Task<IActionResult> TourDelete(int? id)
     {
         var response = await _tourService.DeleteTour(await _tourRepository.getTour(id));
 

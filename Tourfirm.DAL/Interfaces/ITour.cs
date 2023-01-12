@@ -11,7 +11,7 @@ public interface ITour
     public bool checkTour(int id);
 
     public Task<List<Tour>> getTours();
-    public Task<Tour> getTour(int id);
+    public Task<Tour> getTour(int? id);
     
     public IQueryable<Tour> getAll(); 
 }

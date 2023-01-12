@@ -50,7 +50,7 @@ public class TourRepository: ITour
         return await _db.Tour.ToListAsync();
     }
 
-    public async Task<Tour> getTour(int id)
+    public async Task<Tour> getTour(int? id)
     {
         Tour? tour = await _db.Tour.FindAsync(id);
 
