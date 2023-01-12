@@ -46,8 +46,11 @@ public class TourController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> TourIndex(Tour.SortState sortTour = Tour.SortState.IdAsc)
+    public async Task<IActionResult> TourIndex(string? notification, Tour.SortState sortTour = Tour.SortState.IdAsc)
     {
+        if(notification != null)
+            ModelState.AddModelError("", notification);
+        
         // ReSharper disable once HeapView.BoxingAllocation
         ViewData["IdSort"] = sortTour == Tour.SortState.IdAsc ? Tour.SortState.IdDesc : Tour.SortState.IdAsc;
         IQueryable<Tour> tours = _tourRepository.getAll();
@@ -73,9 +76,21 @@ public class TourController : Controller
         return View(await tours.AsNoTracking().ToListAsync());
 
     }
-    
+
     [HttpGet]
-    public async 
+    public async Task<IActionResult> TourDeleteConfirm(int id)
+    {
+        return View(await _tourRepository.getTour(id));
+    }
+
+    
+    public async Task<IActionResult> TourDelete(int id)
+    {
+        var response = await _tourService.DeleteTour(await _tourRepository.getTour(id));
+
+        return RedirectToAction("TourIndex", "Tour", new { notification = response.Description});
+        
+    }
 
     [HttpGet]
     public async Task<IActionResult> TourAdd(string? notification)

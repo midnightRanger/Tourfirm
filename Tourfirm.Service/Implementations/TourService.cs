@@ -88,4 +88,28 @@ public class TourService : ITourService
             };
         }
     }
+
+    public async Task<BaseResponse<bool>> DeleteTour(Tour tour)
+    {
+        try
+        {
+             _tourRepository.deleteTour(tour.Id);
+             
+             return new BaseResponse<bool>()
+             {
+                 Data = true,
+                 StatusCode = StatusCode.OK,
+                 Description = "Tour delete procedure was successfully completed"
+             };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"[Creating Tour Procedure]: {ex.Message}");
+            return new BaseResponse<bool>()
+            {
+                Description = ex.Message,
+                StatusCode = StatusCode.InternalServerError
+            };
+        }
+    }
 }

@@ -5,6 +5,10 @@
     Layout = "_Layout";
 }
 
+@if (!ViewData.ModelState.IsValid)
+{
+  <div class="validation alert alert-danger mb-md-5" asp-validation-summary="All"></div>
+}
 <table class="table">
   <thead>
   <tr>
@@ -64,8 +68,8 @@
           </div>
         }
       </td>
-       <td><a asp-action="TourUpdate" asp-controller="Tour" asp-route-id="@item.Id">Edit</a></td>
-      <td><a asp-action="TourDelete" asp-controller="Tour" asp-route-id="@item.Id">Delete</a></td>
+       @* <td><a asp-action="TourUpdate" asp-controller="Tour" asp-route-id="@item.Id">Edit</a></td> *@
+      <td><a asp-action="TourDeleteConfirm" asp-controller="Tour" asp-route-id="@item.Id">Delete</a></td>
     </tr>
   }
   </tbody>
