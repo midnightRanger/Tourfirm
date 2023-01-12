@@ -93,6 +93,31 @@ public class TourController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> TourUpdate(string? notification, int? id)
+    {
+        var tour = await _tourRepository.getTour(id);
+        if(notification != null)
+            ModelState.AddModelError("", notification);
+
+        TourUpdateViewModel tourUpdateViewModel = new(); 
+        tourUpdateViewModel.AllHotels = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
+        tourUpdateViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
+        tourUpdateViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
+        tourUpdateViewModel.AllTourTypes = new(await _tourTypeRepository.getTourTypes(), nameof(TourType.Id), nameof(TourType.Name));
+
+        tourUpdateViewModel.Cost = tour.Cost;
+        tourUpdateViewModel.Description = tour.Description;
+        tourUpdateViewModel.Name = tour.Name;
+
+        foreach (var image in tour.TourImages)
+        {
+            tourUpdateViewModel.Images.Add(new TourImage() { Path = image.Path, TourId = image.TourId });
+        }
+        
+        return View(tourAddViewModel);
+    }
+    
+    [HttpGet]
     public async Task<IActionResult> TourAdd(string? notification)
     {
         if(notification != null)
@@ -106,6 +131,7 @@ public class TourController : Controller
 
         return View(tourAddViewModel);
     }
+    
 
     [HttpPost]
     public async Task<IActionResult> TourAdd(TourAddViewModel tourAddViewModel, Tour tour)
