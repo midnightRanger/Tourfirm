@@ -1,4 +1,4 @@
-namespace GameStop;
+namespace Tourfirm.Domain.Safety;
 
 public enum StatusCode
 {
@@ -7,7 +7,7 @@ public enum StatusCode
         
     ProductNotFound = 10,
 
-    CartNotFound = 20,
+    NoImages = 20,
     NoMoney = 30,
 
     OK = 200,

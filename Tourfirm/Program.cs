@@ -8,7 +8,9 @@ using Tourfirm.API.Controllers;
 using Tourfirm.DAL;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.DAL.Repositories;
+using Tourfirm.Domain.Entity;
 using Tourfirm.Service.Implementations;
+using Tourfirm.Service.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -33,6 +35,7 @@ builder.Services.AddTransient<ITourImage, TourImageRepository>();
 builder.Services.AddTransient<ITourType, TourTypeRepository>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<ITourService, TourService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();

@@ -5,7 +5,9 @@ using Tourfirm.DAL;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.DAL.ViewModels;
 using Tourfirm.Domain.Entity;
+using Tourfirm.Domain.Safety;
 using Tourfirm.Domain.ViewModels;
+using Tourfirm.Service.Interfaces;
 using Route = Tourfirm.Domain.Entity.Route;
 
 namespace Tourfirm.Controllers;
@@ -21,8 +23,11 @@ public class TourController : Controller
     private readonly ITourType _tourTypeRepository;
     private readonly ICountry _countryRepository;
     private readonly IRoute _routeRepository;
+    private readonly ITourService _tourService;
+    private readonly ITourImage _tourImageRepository;
+    private readonly IWebHostEnvironment _app;
 
-    public TourController(ApplicationContext db, ILogger<TourController> logger, ITour tourRepository, IUser userRepository, IReview reviewRepository, IHotel hotelRepository, ITourType tourTypeRepository, ICountry countryRepository, IRoute routeRepository)
+    public TourController(ApplicationContext db, ILogger<TourController> logger, ITour tourRepository, IUser userRepository, IReview reviewRepository, IHotel hotelRepository, ITourType tourTypeRepository, ICountry countryRepository, IRoute routeRepository, IWebHostEnvironment app, ITourImage tourImageRepository, ITourService tourService)
     {
         _db = db;
         _logger = logger;
@@ -33,16 +38,35 @@ public class TourController : Controller
         _tourTypeRepository = tourTypeRepository;
         _countryRepository = countryRepository;
         _routeRepository = routeRepository;
+        _app = app;
+        _tourImageRepository = tourImageRepository;
+        _tourService = tourService;
     }
 
     [HttpGet]
-    public async Task<IActionResult> TourAdd(TourAddViewModel tourAddViewModel)
+    public async Task<IActionResult> TourAdd(TourAddViewModel tourAddViewModel, string? notification)
     {
+        if(notification != null)
+            ModelState.AddModelError("", notification);
+        
         tourAddViewModel.AllHotels = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
         tourAddViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
         tourAddViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
         tourAddViewModel.AllTourTypes = new(await _tourTypeRepository.getTourTypes(), nameof(TourType.Id), nameof(TourType.Name));
         return View(tourAddViewModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> TourAdd(TourAddViewModel tourAddViewModel, Tour tour)
+    {
+        var response = await _tourService.CreateTour(tour, tourAddViewModel);
+
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+        {
+            return RedirectToAction("Main", "Home", new {notification = response.Description}); 
+        }
+
+        return RedirectToAction("TourAdd", "Tour", new { notification = response.Description }); 
     }
     
     [HttpGet]

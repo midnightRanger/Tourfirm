@@ -45,6 +45,30 @@
       "PackagePath": "staticwebassets\\images\\FRWL1.jpg"
     },
     {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\IDEF0СКЛАД.jpg.jpg",
+      "PackagePath": "staticwebassets\\images\\IDEF0СКЛАД.jpg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\eg1.jpg",
+      "PackagePath": "staticwebassets\\images\\eg1.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\eg2.jpg",
+      "PackagePath": "staticwebassets\\images\\eg2.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\notfound.jpg",
+      "PackagePath": "staticwebassets\\images\\notfound.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\Декомпозицияпредметнойобласти.PNG",
+      "PackagePath": "staticwebassets\\images\\Декомпозицияпредметнойобласти.PNG"
+    },
+    {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\Диаграммаклассов.png",
+      "PackagePath": "staticwebassets\\images\\Диаграммаклассов.png"
+    },
+    {
       "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

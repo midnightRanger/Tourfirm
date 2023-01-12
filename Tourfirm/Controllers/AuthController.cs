@@ -33,7 +33,7 @@ public class AuthController : Controller
         if (ModelState.IsValid)
         {
             var response = await _authService.Login(model);
-            if (response.StatusCode == GameStop.StatusCode.OK)
+            if (response.StatusCode == Domain.Safety.StatusCode.OK)
             {
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(response.Data));
@@ -54,7 +54,7 @@ public class AuthController : Controller
         if(ModelState.IsValid)
         {
             var response = await _authService.Register(model);
-            if (response.StatusCode == GameStop.StatusCode.OK)
+            if (response.StatusCode == Domain.Safety.StatusCode.OK)
             {
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme,
                     new ClaimsPrincipal(response.Data));

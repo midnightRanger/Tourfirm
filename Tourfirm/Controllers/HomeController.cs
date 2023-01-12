@@ -42,11 +42,11 @@ public class HomeController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Main(string? keyword, string? error)
+    public async Task<IActionResult> Main(string? keyword, string? notification)
     {
         ViewData["keyword"] = keyword;
-        if(error != null)
-            ModelState.AddModelError("", error);
+        if(notification != null)
+            ModelState.AddModelError("", notification);
         
         IEnumerable<Tour> tourList;
         

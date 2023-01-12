@@ -1,4 +1,5 @@
-@model Tourfirm.Domain.ViewModels.TourAddViewModel
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Tourfirm.Domain.ViewModels.TourAddViewModel 
 
 @{
     ViewBag.Title = "Tour Info";
@@ -10,44 +11,63 @@
     <title>Title</title>
 </head>
 <body>
-<form asp-controller="Tour" asp-action="TourAdd" >
+ <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+<form asp-controller="Tour" asp-action="TourAdd" method="post" enctype="multipart/form-data">
+        @if (Model.IsResponse)
+        {
+            if (Model.IsSuccess)
+            {
+                <div class="alert alert-success">
+                    @Model.Message
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-danger">
+                    @Model.Message
+                </div>
+            }
+        }
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputName"> Name </label>
-            <input type="text" class="form-control" id="inputName" placeholder="Tour's name">
+            <input type="text" class="form-control" id="inputName" name="Name" placeholder="Tour's name">
+            <span asp-validation-for="Name"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="inputDescription">Description</label>
-            <textarea class="form-control" id="inputDescription" placeholder="Description"></textarea>
+            <textarea class="form-control" id="inputDescription" name="Description" placeholder="Description"></textarea>
+            <span asp-validation-for="Description"></span>
         </div>
     </div>
     <div class="form-row">
-    <div class="form-group">
-    <label for="inputHotel">Hotel</label>
-        <select id="inputHotel" class="form-control" asp-items="@Model.AllHotels">
-        </select>
+        <div class="form-group">
+            <label for="inputHotel">Hotel</label>
+            <select id="inputHotel" name="HotelId" class="form-control" asp-items="@Model.AllHotels">
+            </select>
         </div>
         <div class="form-group">
             <label for="inputType">Tour type</label>
-               <select id="inputType" class="form-control" asp-items="@Model.AllTourTypes">
-                    </select>
+            <select id="inputType" name="TourTypeId" class="form-control" asp-items="@Model.AllTourTypes">
+            </select>
         </div>
         <div class="form-group">
             <label for="inputRoute">Tour route</label>
-            <select id="inputRoute" class="form-control" asp-items="@Model.AllRoutes">
+            <select id="inputRoute" name="RouteId" class="form-control" asp-items="@Model.AllRoutes">
             </select>
         </div>
-        
+
         <div class="form-group">
             <label for="inputCountry">Tour country</label>
-            <select id="inputCountry" class="form-control" asp-items="@Model.AllCountries">
+            <select id="inputCountry" name="CountryId" class="form-control" asp-items="@Model.AllCountries">
             </select>
         </div>
-        
+
         <div class="mb-3">
-          <label for="formFileMultiple" class="form-label">Choose photos</label>
-          <input class="form-control" type="file" id="formFileMultiple" multiple="multiple">
-        </div>
+            <label for="formFileMultiple" class="form-label">Choose photos</label>
+            <input class="form-control" asp-for="Files" type="file" id="formFileMultiple" multiple="multiple">
+            <span asp-validation-for="Files" class="text-danger"></span>
+            </div>
     </div>
     <button type="submit" class="btn btn-primary margin-md">Add tour</button>
 </form>

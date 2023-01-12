@@ -59,6 +59,3 @@ C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.API.dl
 C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.API.pdb
 C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.Service.dll
 C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.Service.pdb
-C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Microsoft.DotNet.PlatformAbstractions.dll
-C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
-C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Newtonsoft.Json.dll

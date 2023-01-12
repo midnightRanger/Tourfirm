@@ -1,12 +1,13 @@
 using System.Security.Claims;
 using GameStop;
 using GameStop.Models.Safety;
-using GameStop.Response;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.DAL.ViewModels;
 using Tourfirm.Domain.Entity;
+using Tourfirm.Domain.Response;
+using Tourfirm.Domain.Safety;
 
 namespace Tourfirm.Service.Implementations;
 

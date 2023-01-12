@@ -1,4 +1,7 @@
-namespace GameStop.Response;
+using GameStop;
+using Tourfirm.Domain.Safety;
+
+namespace Tourfirm.Domain.Response;
 
 public class BaseResponse<T> : IBaseResponse<T>
 {
