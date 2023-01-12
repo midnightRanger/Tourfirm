@@ -26,4 +26,12 @@ public class Tour
     public List<TourImage> TourImages { get; set; } = new();
     public List<PaymentInfo> PaymentInfos { get; set; } = new();
     public List<Review> Reviews { get; set; } = new();
+    
+    public enum SortState
+    {
+        IdAsc,
+        IdDesc,
+        LoginAsc,
+        LoginDesc
+    }
 }

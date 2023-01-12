@@ -46,6 +46,38 @@ public class TourController : Controller
     }
 
     [HttpGet]
+    public async Task<IActionResult> TourIndex(Tour.SortState sortTour = Tour.SortState.IdAsc)
+    {
+        // ReSharper disable once HeapView.BoxingAllocation
+        ViewData["IdSort"] = sortTour == Tour.SortState.IdAsc ? Tour.SortState.IdDesc : Tour.SortState.IdAsc;
+        IQueryable<Tour> tours = _tourRepository.getAll();
+        
+        var allTours = _tourRepository.getAll().Include(t=>t.Reviews).ThenInclude(r=>r.User).Include(t => t.TourImages).Include(t => t.Country)
+            .Include(t => t.Hotel).ThenInclude(t=>t.HotelProperties).ThenInclude(t=>t.HotelServices).Include(t => t.Route).Include(t => t.TourType);
+
+        switch (sortTour)
+        {
+            case Tour.SortState.IdAsc:
+            {
+                tours = allTours.OrderBy(p => p.Id);
+                break;
+            }
+
+            case Tour.SortState.IdDesc:
+            {
+                tours = allTours.OrderByDescending(p => p.Id);
+                break;
+            }
+        }
+
+        return View(await tours.AsNoTracking().ToListAsync());
+
+    }
+    
+    [HttpGet]
+    public async 
+
+    [HttpGet]
     public async Task<IActionResult> TourAdd(string? notification)
     {
         if(notification != null)
