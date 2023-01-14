@@ -24,7 +24,6 @@ public class TourUpdateViewModel
     public SelectList? AllTourTypes { get; set; }
     public SelectList? AllCountries { get; set; }
     
-    [Required(ErrorMessage = "Please select files")]
     public List<IFormFile>? Files { get; set; }
 
     public List<TourImage>? Images { get; set; } = new(); 

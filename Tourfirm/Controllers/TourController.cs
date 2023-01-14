@@ -148,7 +148,7 @@ public class TourController : Controller
             return RedirectToAction("Main", "Home", new { notification = response.Description });
         }
         ModelState.AddModelError("", response.Description);
-        return RedirectToAction("TourAdd", "Tour", new { notification = response.Description });
+        return RedirectToAction("TourUpdate", "Tour", new { notification = response.Description });
 
     }
     

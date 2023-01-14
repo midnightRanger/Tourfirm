@@ -104,7 +104,7 @@ public class TourService : ITourService
                 };
             }
             
-            if (tourViewModel.Files.Count > 0)
+            if (tourViewModel.Files != null)
             {
                 foreach (var file in tourViewModel.Files)
                 {
@@ -131,14 +131,7 @@ public class TourService : ITourService
                     }
                 }
             }
-            else
-            {
-                return new BaseResponse<bool>()
-                {
-                    StatusCode = StatusCode.NoImages,
-                    Description = "There are no images for this tour"
-                };
-            }
+            
 
             tour.Cost = tourModel.Cost;
             tour.CountryId = tourModel.CountryId;
