@@ -23,8 +23,8 @@ public class TourUpdateViewModel
     public SelectList? AllHotels { get; set; }
     public SelectList? AllTourTypes { get; set; }
     public SelectList? AllCountries { get; set; }
-    
-    public List<IFormFile>? Files { get; set; }
+
+    public List<IFormFile>? Files { get; set; } = new();
 
     public List<TourImage>? Images { get; set; } = new(); 
 }

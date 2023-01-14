@@ -104,7 +104,7 @@ public class TourService : ITourService
                 };
             }
             
-            if (tourViewModel.Files != null)
+            if (tourViewModel.Files.Count != 0)
             {
                 foreach (var file in tourViewModel.Files)
                 {
@@ -139,7 +139,6 @@ public class TourService : ITourService
             tour.HotelId = tourModel.HotelId;
             tour.Name = tourViewModel.Name;
             tour.RouteId = tourModel.RouteId;
-            tour.TourImages = tourModel.TourImages;
             tour.TourTypeId = tourModel.TourTypeId;
 
             _tourRepository.updateTour(tour);
