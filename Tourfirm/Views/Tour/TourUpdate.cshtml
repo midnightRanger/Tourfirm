@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model Tourfirm.Domain.ViewModels.TourAddViewModel 
+@model Tourfirm.Domain.ViewModels.TourUpdateViewModel 
 
 @{
     ViewBag.Title = "Tour Info";
@@ -11,8 +11,39 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="~/css/site.css" rel="stylesheet"/>
  <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
- <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script>
+   function addToCart(id)
+   {
+     $.ajax({
+     url: '@Url.Action("ImageRemove","Tour")',
+     data: { id: id },
+     method: 'POST',
+          success: function(data){
+       //call is successfully completed and we got result in data
+     },
+     error:function (xhr, ajaxOptions, thrownError){
+                     //some errror, some show err msg to user and log the error  
+                     alert(xhr.responseText);
+   
+                   }    
+     });
+   }
+  
+   const btns = document.querySelectorAll('button[id^=but]')
+   
+   btns.forEach(btn => {
+   
+      btn.addEventListener('click', event => {
+           addToCart(this.nodeName())
+      });
+   
+   });
+
+ 
+    </script>
 </head>
 <body>
  
@@ -57,9 +88,26 @@
             <label for="formFileMultiple" class="form-label">Choose photos</label>
             <input class="form-control" asp-for="Files" type="file" id="formFileMultiple" multiple="multiple">
             <span asp-validation-for="Files" class="text-danger"></span>
-            </div>
+        </div>
+         @if (Model.Images.Count == 0)
+                {
+                  <div> There are no pics:(</div>
+                }
+         else
+         {
+             <div class="container-fluid">
+
+                 @foreach (var image in Model.Images)
+                 {
+                     <img src=@Url.Content(image.Path) class="img-thumbnail" style="height: 300px; width:  400px;" class="d-block w-100" alt="...">
+
+                     <a asp-action="ImageRemove" asp-controller="Tour" asp-route-tourId="@Model.Id" asp style="width:100%; padding: 10px;" asp-route-id="@image.Id" class="btn btn-danger"> Delete </a>
+
+                 }
+             </div>
+         }            
     </div>
-    <button type="submit" class="btn btn-primary margin-md">Add tour</button>
+    <button type="submit" class="btn btn-primary margin-md">Update Tour</button>
 </form>
 
 </body>

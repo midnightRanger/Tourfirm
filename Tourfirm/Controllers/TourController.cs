@@ -45,6 +45,13 @@ public class TourController : Controller
         _tourService = tourService;
     }
 
+    public async Task<IActionResult> ImageRemove(int id, int tourId)
+    {
+        _tourImageRepository.deleteTourImage(id);
+        await _db.SaveChangesAsync(); 
+        return RedirectToAction("TourUpdate", "Tour", new {id = tourId });
+    }
+
     [HttpGet]
     public async Task<IActionResult> TourIndex(string? notification, Tour.SortState sortTour = Tour.SortState.IdAsc)
     {
@@ -95,7 +102,9 @@ public class TourController : Controller
     [HttpGet]
     public async Task<IActionResult> TourUpdate(string? notification, int? id)
     {
-        var tour = await _tourRepository.getTour(id);
+        IQueryable<Tour> tours = _tourRepository.getAll().Include(t=>t.TourImages);
+        var tour = await tours.FirstOrDefaultAsync(t=>t.Id == id);
+        
         if(notification != null)
             ModelState.AddModelError("", notification);
 
@@ -108,13 +117,21 @@ public class TourController : Controller
         tourUpdateViewModel.Cost = tour.Cost;
         tourUpdateViewModel.Description = tour.Description;
         tourUpdateViewModel.Name = tour.Name;
+        tourUpdateViewModel.Id = tour.Id; 
 
         foreach (var image in tour.TourImages)
         {
-            tourUpdateViewModel.Images.Add(new TourImage() { Path = image.Path, TourId = image.TourId });
+            tourUpdateViewModel.Images.Add(image);
         }
         
-        return View(tourAddViewModel);
+        
+        return View(tourUpdateViewModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> TourUpdate(TourUpdateViewModel tourUpdateViewModel)
+    {
+        
     }
     
     [HttpGet]

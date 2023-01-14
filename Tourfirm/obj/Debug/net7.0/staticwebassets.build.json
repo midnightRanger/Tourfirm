@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "6PtHc6QN+fVJMCEMhI80QMGHzSZLTD1d0VZdrLovfBg=",
+  "Hash": "0eTzGF0HtKYwdysd3Vz/luc5Ibj8RRjLql0aJXaFcz8=",
   "Source": "Tourfirm",
   "BasePath": "_content/Tourfirm",
   "Mode": "Default",
@@ -134,6 +134,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\02.09.2022 - 6.PNG",
+      "SourceId": "Tourfirm",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\",
+      "BasePath": "_content/Tourfirm",
+      "RelativePath": "images/02.09.2022 - 6.PNG",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\02.09.2022 - 6.PNG"
     },
     {
       "Identity": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\Декомпозицияпредметнойобласти.PNG",

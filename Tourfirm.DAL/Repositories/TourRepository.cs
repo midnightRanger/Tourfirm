@@ -52,7 +52,7 @@ public class TourRepository: ITour
 
     public async Task<Tour> getTour(int? id)
     {
-        Tour? tour = await _db.Tour.FindAsync(id);
+        Tour? tour = await _db.Tour.FindAsync(id); 
 
         if (tour != null)
         {

@@ -7,6 +7,7 @@ namespace Tourfirm.Domain.ViewModels;
 
 public class TourUpdateViewModel
 {
+    public int? Id { get; set; }
     [Required(ErrorMessage = "Fill the name field!")]
     [DataType(DataType.Text)]
     [Display(Name="Name")]
@@ -25,5 +26,6 @@ public class TourUpdateViewModel
     
     [Required(ErrorMessage = "Please select files")]
     public List<IFormFile>? Files { get; set; }
-    public List<TourImage>? Images { get; set; }
+
+    public List<TourImage>? Images { get; set; } = new(); 
 }
