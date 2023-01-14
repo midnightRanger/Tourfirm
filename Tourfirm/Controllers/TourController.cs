@@ -129,9 +129,27 @@ public class TourController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> TourUpdate(TourUpdateViewModel tourUpdateViewModel)
+    public async Task<IActionResult> TourUpdate(TourUpdateViewModel tourUpdateViewModel, Tour tour)
     {
-        
+        if (!ModelState.IsValid)
+        { 
+            tourUpdateViewModel.AllHotels = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
+            tourUpdateViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
+            tourUpdateViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
+            tourUpdateViewModel.AllTourTypes = new(await _tourTypeRepository.getTourTypes(), nameof(TourType.Id), nameof(TourType.Name));
+
+            return View(tourUpdateViewModel);
+        }
+
+        var response = await _tourService.UpdateTour(tour, tourUpdateViewModel);
+
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+        {
+            return RedirectToAction("Main", "Home", new { notification = response.Description });
+        }
+        ModelState.AddModelError("", response.Description);
+        return RedirectToAction("TourAdd", "Tour", new { notification = response.Description });
+
     }
     
     [HttpGet]
