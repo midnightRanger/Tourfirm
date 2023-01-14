@@ -41,7 +41,7 @@
           </ul>
         </li>
       </ul>
-      <form method="get" asp-action="Main" class="d-flex" role="search">
+      <form method="get" asp-action="Main" asp-controller="Home" class="d-flex" role="search">
         <input name="keyword" value="@ViewData["keyword"]" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Search</button>
       </form>

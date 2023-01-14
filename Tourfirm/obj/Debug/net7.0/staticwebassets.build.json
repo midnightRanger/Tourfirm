@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "0eTzGF0HtKYwdysd3Vz/luc5Ibj8RRjLql0aJXaFcz8=",
+  "Hash": "9t2s8hQ9aK1Y0O8u+vUP3LLCaSmeYKUY5C75gLdi8FU=",
   "Source": "Tourfirm",
   "BasePath": "_content/Tourfirm",
   "Mode": "Default",
@@ -236,6 +236,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\BS3.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\bs3jpg.jpg",
+      "SourceId": "Tourfirm",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\",
+      "BasePath": "_content/Tourfirm",
+      "RelativePath": "images/bs3jpg.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\bs3jpg.jpg"
     },
     {
       "Identity": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\DAS1.jpg",
