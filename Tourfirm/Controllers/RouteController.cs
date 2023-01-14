@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Tourfirm.DAL;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.Domain.Entity;
+using Tourfirm.Service.Interfaces;
 using Route = Tourfirm.Domain.Entity.Route;
 
 namespace Tourfirm.Controllers;
@@ -12,16 +13,36 @@ public class RouteController : Controller
     private readonly ILogger<RouteController> _logger;
     private readonly ApplicationContext _db;
     private readonly IRoute _routeRepository;
+    private readonly IRouteService _routeService; 
 
-    public RouteController(ApplicationContext db, ILogger<RouteController> logger, IRoute routeRepository)
+    public RouteController(ApplicationContext db, ILogger<RouteController> logger, IRoute routeRepository, IRouteService routeService)
     {
         _db = db;
         _logger = logger;
         _routeRepository = routeRepository;
+        _routeService = routeService;
     }
 
     [HttpGet]
-    public IActionResult RouteAdd() => View(); 
+    public IActionResult RouteAdd() => View();
+
+    [HttpPost]
+    public async Task<IActionResult> RouteAdd(Route route)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(route);
+        }
+
+        var response = await _routeService.CreateRoute(route);
+
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+        {
+            return RedirectToAction("RouteIndex", "Route", new { notification = response.Description });
+        }
+        ModelState.AddModelError("", response.Description);
+        return RedirectToAction("RouteIndex", "Route", new { notification = response.Description });
+    }
 
     [HttpGet]
     public async Task<IActionResult> RouteIndex(string? notification, Route.SortState sortRoute = Route.SortState.IdAsc)
