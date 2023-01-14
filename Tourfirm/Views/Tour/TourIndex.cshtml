@@ -4,9 +4,6 @@
     ViewBag.Title = "Tours";
     Layout = "_Layout";
 }
-<head>
-  
-</head>
 @if (!ViewData.ModelState.IsValid)
 {
   <div class="validation alert alert-danger mb-md-5 padding-md" asp-validation-summary="All"></div>
@@ -70,8 +67,9 @@
           </div>
         }
       </td>
-       <td><a asp-action="TourUpdate" asp-controller="Tour" asp-route-id="@item.Id">Update</a></td>
+       
       <td><a asp-action="TourDeleteConfirm" asp-controller="Tour" asp-route-id="@item.Id">Delete</a></td>
+      <td><a asp-action="TourUpdate" asp-controller="Tour" asp-route-id="@item.Id">Update</a></td>
     </tr>
   }
   </tbody>

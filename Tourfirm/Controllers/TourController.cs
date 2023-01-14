@@ -137,7 +137,11 @@ public class TourController : Controller
             tourUpdateViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
             tourUpdateViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
             tourUpdateViewModel.AllTourTypes = new(await _tourTypeRepository.getTourTypes(), nameof(TourType.Id), nameof(TourType.Name));
-
+            
+            IQueryable<Tour> tours = _tourRepository.getAll().Include(t=>t.TourImages);
+            var tourModel = await tours.FirstOrDefaultAsync(t=>t.Id == tourUpdateViewModel.Id);
+            tourUpdateViewModel.Images = tourModel.TourImages; 
+            
             return View(tourUpdateViewModel);
         }
 

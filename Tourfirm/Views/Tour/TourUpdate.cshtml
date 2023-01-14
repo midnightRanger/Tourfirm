@@ -48,7 +48,10 @@
 <body>
  
 <form asp-controller="Tour" asp-action="TourUpdate" method="post" enctype="multipart/form-data">
-<div class="alert alert-danger" asp-validation-summary="All"></div>
+@if (!ViewData.ModelState.IsValid)
+{
+  <div class="validation alert alert-danger mb-md-5 padding-md" asp-validation-summary="All"></div>
+}
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputName"> Name </label>
