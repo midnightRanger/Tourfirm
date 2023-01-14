@@ -5,6 +5,7 @@ public enum StatusCode
     UserNotFound = 0,
     UserAlreadyExists = 1,
     TourNotFound = 3,
+    RouteNotFound = 4,
         
     ProductNotFound = 10,
 

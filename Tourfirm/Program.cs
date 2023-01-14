@@ -36,6 +36,7 @@ builder.Services.AddTransient<ITourType, TourTypeRepository>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITourService, TourService>();
+builder.Services.AddScoped<IRouteService, RouteService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
