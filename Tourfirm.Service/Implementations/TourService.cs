@@ -89,6 +89,87 @@ public class TourService : ITourService
         }
     }
 
+    public async Task<BaseResponse<bool>> UpdateTour(Tour tourModel, TourUpdateViewModel tourViewModel)
+    {
+        try
+        {
+            var tour = await _tourRepository.getTour(tourViewModel.Id);
+
+            if (tour == null)
+            {
+                return new BaseResponse<bool>()
+                {
+                    StatusCode = StatusCode.TourNotFound,
+                    Description = "Tour not found"
+                };
+            }
+            
+            if (tourViewModel.Files.Count > 0)
+            {
+                foreach (var file in tourViewModel.Files)
+                {
+                    if (FormFileExtensions.IsImage(file))
+                    {
+                        string path = "/images/" + file.FileName;
+                        using (FileStream fileStream = new FileStream(_app.WebRootPath + path,
+                                   FileMode.Create))
+                        {
+                            await file.CopyToAsync(fileStream);
+                        }
+
+                        await _tourImageRepository.addTourImage(new TourImage()
+                            { Path = $"~/images/{file.FileName}", TourId = tour.Id });
+                        await _db.SaveChangesAsync();
+                    }
+                    else
+                    {
+                        return new BaseResponse<bool>()
+                        {
+                            StatusCode = StatusCode.NoFormat,
+                            Description = "There is not correct format"
+                        };
+                    }
+                }
+            }
+            else
+            {
+                return new BaseResponse<bool>()
+                {
+                    StatusCode = StatusCode.NoImages,
+                    Description = "There are no images for this tour"
+                };
+            }
+
+            tour.Cost = tourModel.Cost;
+            tour.CountryId = tourModel.CountryId;
+            tour.Description = tourViewModel.Description;
+            tour.HotelId = tourModel.HotelId;
+            tour.Name = tourViewModel.Name;
+            tour.RouteId = tourModel.RouteId;
+            tour.TourImages = tourModel.TourImages;
+            tour.TourTypeId = tourModel.TourTypeId;
+
+            _tourRepository.updateTour(tour);
+
+            return new BaseResponse<bool>()
+            {
+                Data = true,
+                StatusCode = StatusCode.OK,
+                Description = "Tour was updated"
+            };
+        }
+
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"[UpdateTour]: {ex.Message}");
+            return new BaseResponse<bool>()
+            {
+                Description = ex.Message,
+                StatusCode = StatusCode.InternalServerError
+            };
+        } 
+    }
+
     public async Task<BaseResponse<bool>> DeleteTour(Tour tour)
     {
         try

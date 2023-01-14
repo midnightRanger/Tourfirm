@@ -7,6 +7,6 @@ namespace Tourfirm.Service.Interfaces;
 public interface ITourService
 {
     Task<BaseResponse<bool>> CreateTour(Tour tour, TourAddViewModel tourAddViewModel);
-    // Task<BaseResponse<bool>> UpdateTour(Tour tour);
+    Task<BaseResponse<bool>> UpdateTour(Tour tourModel, TourUpdateViewModel tourViewModel);
     Task<BaseResponse<bool>> DeleteTour(Tour tour);
 }
