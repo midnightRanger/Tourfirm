@@ -21,6 +21,9 @@ public class RouteController : Controller
     }
 
     [HttpGet]
+    public IActionResult RouteAdd() => View(); 
+
+    [HttpGet]
     public async Task<IActionResult> RouteIndex(string? notification, Route.SortState sortRoute = Route.SortState.IdAsc)
     {
         if(notification != null)
