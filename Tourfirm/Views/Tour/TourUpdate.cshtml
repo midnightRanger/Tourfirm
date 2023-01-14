@@ -99,10 +99,10 @@
 
                  @foreach (var image in Model.Images)
                  {
-                     <img src=@Url.Content(image.Path) class="img-thumbnail" style="display:inline-block; height: 400px; width:  400px;" class="d-block w-100" alt="...">
-
-                     <a asp-action="ImageRemove" asp-controller="Tour" asp-route-tourId="@Model.Id"  style="padding: 10px;" asp-route-id="@image.Id" class="btn btn-danger"> Delete </a>
-
+                     <div style="display:inline-block; height: 400px; width:  400px;">
+                        <img src=@Url.Content(image.Path) class="img-thumbnail"  class="d-block w-100" alt="...">
+                        <a asp-action="ImageRemove" asp-controller="Tour" asp-route-tourId="@Model.Id" asp-route-id="@image.Id" style="padding: 10px; width: 100%" class="btn btn-danger"> Delete </a> 
+                       </div>
                  }
              </div>
          }            
