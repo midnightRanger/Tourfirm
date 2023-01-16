@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Tourfirm.DAL;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.Domain.Entity;
+using Tourfirm.Domain.ViewModels;
 using Tourfirm.Service.Interfaces;
 using Route = Tourfirm.Domain.Entity.Route;
 
@@ -85,5 +86,35 @@ public class RouteController : Controller
         }
 
         return View(await routes.AsNoTracking().ToListAsync());
+    }
+    
+     [HttpGet]
+    public async Task<IActionResult> RouteUpdate(string? notification, int id)
+    {
+        var route = await _routeRepository.getRoute(id);
+        
+        if(notification != null)
+            ModelState.AddModelError("", notification);
+
+        return View(route);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> RouteUpdate(Route route)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(route);
+        }
+
+        var response = await _routeService.UpdateRoute(route);
+
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+        {
+            return RedirectToAction("RouteIndex", "Route", new { notification = response.Description });
+        }
+        ModelState.AddModelError("", response.Description);
+        return RedirectToAction("RouteUpdate", "Route", new { notification = response.Description });
+
     }
 }
