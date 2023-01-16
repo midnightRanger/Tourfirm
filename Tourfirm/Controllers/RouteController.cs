@@ -43,6 +43,21 @@ public class RouteController : Controller
         ModelState.AddModelError("", response.Description);
         return RedirectToAction("RouteIndex", "Route", new { notification = response.Description });
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> RouteDeleteConfirm(int id)
+    {
+        return View(await _routeRepository.getRoute(id));
+    }
+
+    
+    public async Task<IActionResult> RouteDelete(int id)
+    {
+        var response = await _routeService.DeleteRoute(await _routeRepository.getRoute(id));
+
+        return RedirectToAction("RouteIndex", "Route", new { notification = response.Description});
+        
+    }
 
     [HttpGet]
     public async Task<IActionResult> RouteIndex(string? notification, Route.SortState sortRoute = Route.SortState.IdAsc)
