@@ -4,6 +4,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using GameStop.Models.Safety;
 using Microsoft.Extensions.Configuration;
 using Tourfirm.DAL;
 using Tourfirm.Domain.Entity;
@@ -29,7 +30,7 @@ public class TokenController : ControllerBase
     {
         if (account != null && account.Email != null && account.Login != null && account.Password != null)
         {
-            var accountObj = await GetAccount(account.Email, account.Password);
+            var accountObj = await GetAccount(account.Email, PasswordHasher.HashPassword(account.Password));
 
             if (accountObj != null)
             {
@@ -54,15 +55,10 @@ public class TokenController : ControllerBase
 
                 return Ok(new JwtSecurityTokenHandler().WriteToken(token));
             }
-            else
-            {
-                return BadRequest("Bad Credentials");
-            }
+
+            return BadRequest("Bad Credentials");
         }
-        else
-        {
-            return BadRequest();
-        }
+        return BadRequest();
     }
 
     private async Task<Account> GetAccount(string email, string password)
