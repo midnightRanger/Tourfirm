@@ -1,0 +1,50 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Tourfirm.Domain.Entity.Hotel; 
+
+@{
+    ViewBag.Title = "Hotel Add";
+    Layout = "_Layout";
+}
+<html lang="en">
+<script type="text/javascript" charset="utf-8" id="zm-extension" src="chrome-extension://cnhbkkedmelfmalgjpkngiaoifpdfcnl/scripts/webrtc-patch.js" async=""></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel</title>
+ <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+ <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+ 
+<form asp-controller="Hotel" asp-action="HotelAdd" method="post" enctype="multipart/form-data">
+<div class="alert alert-danger" asp-validation-summary="All"></div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputName"> Hotel's name </label>
+            <input type="text" class="form-control" id="inputName" asp-for="Name" placeholder="Saint place, Ragnarok"/>
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputEndPost">  </label>
+            <input type="text" class="form-control" id="input" asp-for="" placeholder="Brasil, Jerusalem, New-York"/>
+            <span asp-validation-for="EndPost"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputHours"> Hours </label>
+            <input type="number" class="form-control" id="inputHours" asp-for="Hours" placeholder="11, 25, 5"/>
+            <span asp-validation-for="Hours"></span>
+        </div>
+          <div class="form-group col-md-6">
+                    <label for="inputHours"> Type </label>
+                    <input type="text" class="form-control" id="inputType" asp-for="Type" placeholder="Plane, train, subway"/>
+                    <span asp-validation-for="Type"></span>
+                    </div>
+        
+    </div>
+    <div class="container-fluid">
+        <button type="submit" class="btn btn-primary margin-md">Add Route</button>
+    </div>
+</form>
+
+</body>
+</html>

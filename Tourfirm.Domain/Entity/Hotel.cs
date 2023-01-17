@@ -12,5 +12,13 @@ public class Hotel
     public int HotelPropertiesId { get; set; }
     public HotelProperties? HotelProperties { get; set; }
 
-    public List<Tour> Tours { get; set; } = new();
+    public List<Tour>? Tours { get; set; } = new();
+    
+    public enum SortState
+    {
+        IdAsc,
+        IdDesc,
+        NameAsc,
+        NameDesc
+    }
 }
