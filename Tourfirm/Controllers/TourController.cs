@@ -199,7 +199,13 @@ public class TourController : Controller
     public async Task<IActionResult> TourInfo(int? id)
     {
         var allTours = _tourRepository.getAll().Include(t=>t.Reviews).ThenInclude(r=>r.User).Include(t => t.TourImages).Include(t => t.Country)
-            .Include(t => t.Hotel).ThenInclude(t=>t.HotelProperties).ThenInclude(t=>t.HotelServices).Include(t => t.Route).Include(t => t.TourType);
+            .Include(t => t.Hotel).
+            ThenInclude(t=>t.HotelProperties).
+            ThenInclude(h=>h.BookingType).
+            Include(t => t.Hotel).
+            ThenInclude(t=>t.HotelProperties).
+            ThenInclude(t=>t.HotelServices).Include(t => t.Route).
+            Include(t => t.TourType);
         Tour tour = allTours.FirstOrDefault(p => p.Id == id);
         
         if (tour != null)

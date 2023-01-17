@@ -32,7 +32,9 @@ public class HotelController : Controller
         
         // ReSharper disable once HeapView.BoxingAllocation
         ViewData["IdHotel"] = sortHotel == Hotel.SortState.IdAsc ? Hotel.SortState.IdDesc : Hotel.SortState.IdAsc;
-        IQueryable<Hotel> hotels = _hotelRepository.getAll().Include(h=>h.HotelProperties).ThenInclude(h=>h.HotelServices);
+        IQueryable<Hotel> hotels = _hotelRepository.getAll().Include(h=>h.HotelProperties).
+            ThenInclude(h=>h.HotelServices).
+            Include(h=>h.HotelProperties).ThenInclude(h=>h.BookingType);
         
         switch (sortHotel)
         {

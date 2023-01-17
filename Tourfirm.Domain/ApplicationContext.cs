@@ -7,7 +7,7 @@ public class ApplicationContext : DbContext
 {
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
-       // Database.EnsureDeleted(); 
+        //Database.EnsureDeleted(); 
         Database.EnsureCreated();
     }
 
@@ -17,7 +17,39 @@ public class ApplicationContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        //
+        // modelBuilder.Entity<Role>().HasData(new[]
+        // {
+        //     new Role() { Id = 1, Name = "USER", Description="Average User"}
+        // });
+        //
+        // modelBuilder.Entity<Account>().HasData(new[]
+        // {
+        //     new Account()
+        //     {
+        //         Id=1, Email = "somemail@mail.ru", Login = "kuznetsov123", Password = "123", isActive = true
+        //         
+        //     }
+        // });
+        //
+        // modelBuilder.Entity<AccountModel>().HasData(new[]
+        // {
+        //     new Ac
+        // });
 
+        // modelBuilder.Entity<User>().HasData(new[]
+        // {
+        //     new User() { Id = 1, AccountId = 1, Age = 19, Balance = 0.00, Name = "semen", Surname = "kuznetsov"}
+        // });
+
+        
+        modelBuilder.Entity<BookingType>().HasData(new[]
+        {
+            new BookingType() { Id = 1, Name="Garanteed", Description = "Typical garanteed booking"},
+            new BookingType() { Id=2, Name="Non-garanteed", Description = "Non-garanteed booking"},
+            new BookingType() { Id=3, Name="Super garanteed", Description = "Super Garanteed booking"}
+        });
+        
             modelBuilder.Entity<Country>().HasData(new[]
             {
                 new Country() {Id = 1, Name = "Russia", Climate = "Mild", Language = "Russian", Tours = null, MidTemp = 18},
@@ -32,6 +64,14 @@ public class ApplicationContext : DbContext
                 new Route() {Id = 3, Hours = 15, StartPos = "Moscow", EndPost = "Jerusalem", Type = "Plane", Tours = null},
                 
             });
+            
+            modelBuilder.Entity<HotelProperties>().HasData(new[]
+            {
+                new HotelProperties() {Id = 1, BookingTypeId = 1, Capacity = 300, Classification = "Hotel", Food = "BB", Stars = 5, Style = "Modern"},
+                new HotelProperties() {Id = 2, BookingTypeId = 1, Capacity = 200, Classification = "Motel", Food = "AI", Stars =4, Style = "AR-Deco"},
+                new HotelProperties() {Id = 3, BookingTypeId = 1, Capacity = 500, Classification = "Hotel", Food = "AI", Stars =5, Style = "Retro"},
+
+            });
 
             modelBuilder.Entity<HotelService>().HasData(new[]
             {
@@ -41,13 +81,6 @@ public class ApplicationContext : DbContext
                 new HotelService() {Id = 4, Cost = 120, Name = "Flowers delivery", HotelPropertiesId = 3}
             });
             
-            modelBuilder.Entity<HotelProperties>().HasData(new[]
-            {
-                new HotelProperties() {Id = 1, Booking = "Garanteed", Capacity = 300, Classification = "Hotel", Food = "BB", Stars = 5, Style = "Modern"},
-                new HotelProperties() {Id = 2, Booking = "Garanteed", Capacity = 200, Classification = "Motel", Food = "AI", Stars =4, Style = "AR-Deco"},
-                new HotelProperties() {Id = 3, Booking = "Garanteed", Capacity = 500, Classification = "Hotel", Food = "AI", Stars =5, Style = "Retro"},
-
-            });
             
             modelBuilder.Entity<Hotel>().HasData(new[]
             {
@@ -62,13 +95,7 @@ public class ApplicationContext : DbContext
                 new TourType() {Id=2, Name = "Internally"} 
             });
 
-            modelBuilder.Entity<Tour>().HasData(new[]
-            {
-                new Tour() { Id = 1, Name = "From Russia with love", Description = "Average tour on Russian", Cost = 30000, RouteId=1, HotelId = 1, TourTypeId = 2, CountryId = 1},
-                new Tour() { Id = 2, Name = "Brazilian Sun", Description = "Let's have a fun in the hottest Country!", Cost = 130000, RouteId=2, HotelId = 2, TourTypeId = 1, CountryId = 2},
-                new Tour() { Id = 3, Name = "Deserts and Skorpions", Description = "Put your hat on your head - its really hot there", Cost = 90000, RouteId=3, HotelId = 3, TourTypeId = 2, CountryId = 3}
-
-            });
+            
 
             modelBuilder.Entity<TourImage>().HasData(new[]
             {
@@ -77,26 +104,26 @@ public class ApplicationContext : DbContext
                 new TourImage() { Id = 3, Path = "~/images/DAS1.jpg", TourId = 3 },
             });
             
-            modelBuilder.Entity<Review>().HasData(new[]
+            modelBuilder.Entity<Tour>().HasData(new[]
             {
-                new Review() { Id = 1, Text = "Отличный тур! Все понравилось", UserId = 1, IsAccept = true, TourId = 2 },
-                new Review() { Id = 2, Text = "Были огрехи, но в целом все хорошо", UserId = 1, IsAccept = true, TourId = 2 },
-            });
+                new Tour() { Id = 1, Name = "From Russia with love", Description = "Average tour on Russian", Cost = 30000, RouteId=1, HotelId = 1, TourTypeId = 2, CountryId = 1},
+                new Tour() { Id = 2, Name = "Brazilian Sun", Description = "Let's have a fun in the hottest Country!", Cost = 130000, RouteId=2, HotelId = 2, TourTypeId = 1, CountryId = 2},
+                new Tour() { Id = 3, Name = "Deserts and Skorpions", Description = "Put your hat on your head - its really hot there", Cost = 90000, RouteId=3, HotelId = 3, TourTypeId = 2, CountryId = 3}
 
-            modelBuilder.Entity<BookingType>().HasData(new[]
-            {
-                new BookingType() { Id = 1, Name="Garanteed", Description = "Typical garanteed booking"},
-                new BookingType() {Id=2, Name="Non-garanteed", Description = "Non-garanteed booking"},
-                new BookingType() {Id=3, Name="Super garanteed", Description = "Super Garanteed booking"}
             });
-        
-            // modelBuilder.Entity<UserModel>()
-            //.HasMany(u => u.Grades)
-            //.WithMany(g => g.Buyers);
+            
+            // modelBuilder.Entity<Review>().HasData(new[]
+            // {
+            //     new Review() { Id = 1, Text = "Отличный тур! Все понравилось", UserId = 1, IsAccept = true, TourId = 2 },
+            //     new Review() { Id = 2, Text = "Были огрехи, но в целом все хорошо", UserId = 1, IsAccept = true, TourId = 2 },
+            // });
+
+
 
             base.OnModelCreating(modelBuilder);
     }
 
+    public DbSet<Role> Role { get; set; } = null!;
     public DbSet<Account> Account { get; set; } = null!;
     public DbSet<Cart> Cart { get; set; } = null!;
     public DbSet<Country> Country { get; set; } = null!;
@@ -105,7 +132,6 @@ public class ApplicationContext : DbContext
     public DbSet<HotelService> HotelService { get; set; } = null!;
     public DbSet<PaymentInfo> PaymentInfo { get; set; } = null!;
     public DbSet<Review> Review { get; set; } = null!;
-    public DbSet<Role> Role { get; set; } = null!;
     public DbSet<Route> Route { get; set; } = null!;
     public DbSet<Tour> Tour { get; set; } = null!;
     public DbSet<TourImage> TourImage { get; set; } = null!;
