@@ -82,6 +82,13 @@ public class ApplicationContext : DbContext
                 new Review() { Id = 1, Text = "Отличный тур! Все понравилось", UserId = 1, IsAccept = true, TourId = 2 },
                 new Review() { Id = 2, Text = "Были огрехи, но в целом все хорошо", UserId = 1, IsAccept = true, TourId = 2 },
             });
+
+            modelBuilder.Entity<BookingType>().HasData(new[]
+            {
+                new BookingType() { Id = 1, Name="Garanteed", Description = "Typical garanteed booking"},
+                new BookingType() {Id=2, Name="Non-garanteed", Description = "Non-garanteed booking"},
+                new BookingType() {Id=3, Name="Super garanteed", Description = "Super Garanteed booking"}
+            });
         
             // modelBuilder.Entity<UserModel>()
             //.HasMany(u => u.Grades)
@@ -104,4 +111,5 @@ public class ApplicationContext : DbContext
     public DbSet<TourImage> TourImage { get; set; } = null!;
     public DbSet<TourType> TourType { get; set; } = null!;
     public DbSet<User> User { get; set; } = null!;
+    public DbSet<BookingType> BookingType { get; set; } = null!; 
 }
