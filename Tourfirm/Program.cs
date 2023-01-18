@@ -33,6 +33,7 @@ builder.Services.AddTransient<IRoute, RouteRepository>();
 builder.Services.AddTransient<ITour, TourRepository>();
 builder.Services.AddTransient<ITourImage, TourImageRepository>();
 builder.Services.AddTransient<ITourType, TourTypeRepository>();
+builder.Services.AddTransient<IBookingType, BookingRepository>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITourService, TourService>();

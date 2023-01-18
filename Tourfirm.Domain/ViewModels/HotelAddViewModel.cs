@@ -22,7 +22,7 @@ public class HotelAddViewModel
     public string? Classification { get; set; }
     [Required(ErrorMessage = "Fill the food type field!")]
     [DataType(DataType.Text)]
-    [Display(Name="Name")]
+    [Display(Name="Food")]
     public string? Food { get; set; }
     public SelectList? AllBookings { get; set; }
     public string? Style { get; set; }

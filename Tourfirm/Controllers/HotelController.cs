@@ -14,16 +14,15 @@ public class HotelController : Controller
     private readonly ILogger<HotelController> _logger;
     private readonly ApplicationContext _db;
     private readonly IHotel _hotelRepository;
+    private readonly IBookingType _bookingType;
 
-    public HotelController(ILogger<HotelController> logger, ApplicationContext db, IHotel hotelRepository)
+    public HotelController(ILogger<HotelController> logger, ApplicationContext db, IHotel hotelRepository, IBookingType bookingType)
     {
         _logger = logger;
         _db = db;
         _hotelRepository = hotelRepository;
+        _bookingType = bookingType;
     }
-
-    [HttpGet]
-    public IActionResult HotelAdd(string? notification) => View(); 
     
     [HttpGet]
     public async Task<IActionResult> HotelAdd(string? notification)
@@ -32,12 +31,8 @@ public class HotelController : Controller
             ModelState.AddModelError("", notification);
 
         HotelAddViewModel hotelAddViewModel = new(); 
-        hotelAddViewModel.AllBookings = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
-        tourAddViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
-        tourAddViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
-        tourAddViewModel.AllTourTypes = new(await _tourTypeRepository.getTourTypes(), nameof(TourType.Id), nameof(TourType.Name));
-
-        return View(tourAddViewModel);
+        hotelAddViewModel.AllBookings = new(await _bookingType.getBookingTypes(), nameof(BookingType.Id), nameof(BookingType.Name));
+        return View(hotelAddViewModel);
     }
     
 
