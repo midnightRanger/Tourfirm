@@ -15,13 +15,15 @@ public class HotelController : Controller
     private readonly ApplicationContext _db;
     private readonly IHotel _hotelRepository;
     private readonly IBookingType _bookingType;
+    private readonly IHotelFuncService _hotelService;
 
-    public HotelController(ILogger<HotelController> logger, ApplicationContext db, IHotel hotelRepository, IBookingType bookingType)
+    public HotelController(ILogger<HotelController> logger, ApplicationContext db, IHotel hotelRepository, IBookingType bookingType, IHotelFuncService hotelService)
     {
         _logger = logger;
         _db = db;
         _hotelRepository = hotelRepository;
         _bookingType = bookingType;
+        _hotelService = hotelService;
     }
     
     [HttpGet]
@@ -35,6 +37,25 @@ public class HotelController : Controller
         return View(hotelAddViewModel);
     }
     
+    [HttpPost]
+    public async Task<IActionResult> HotelAdd(HotelAddViewModel hotelAddViewModel)
+    {
+        if (!ModelState.IsValid)
+        { 
+            hotelAddViewModel.AllBookings = new(await _bookingType.getBookingTypes(), nameof(BookingType.Id), nameof(BookingType.Name));
+            return View(hotelAddViewModel);
+        }
+
+        var response = await _hotelService.CreateHotel(hotelAddViewModel);
+
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+        {
+            return RedirectToAction("HotelIndex", "Hotel", new { notification = response.Description });
+        }
+        ModelState.AddModelError("", response.Description);
+        return RedirectToAction("HotelAdd", "Hotel", new { notification = response.Description });
+    }
+    
 
     public async Task<IActionResult> HotelIndex(string? notification, Hotel.SortState sortHotel = Hotel.SortState.IdAsc)
     {
@@ -46,7 +67,6 @@ public class HotelController : Controller
         IQueryable<Hotel> hotels = _hotelRepository.getAll().Include(h=>h.HotelProperties).
             ThenInclude(h=>h.HotelServices).
             Include(h=>h.HotelProperties).ThenInclude(h=>h.BookingType);
-        
         switch (sortHotel)
         {
             case Hotel.SortState.IdAsc:

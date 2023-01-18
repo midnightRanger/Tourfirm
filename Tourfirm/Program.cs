@@ -11,6 +11,7 @@ using Tourfirm.DAL.Repositories;
 using Tourfirm.Domain.Entity;
 using Tourfirm.Service.Implementations;
 using Tourfirm.Service.Interfaces;
+using IHotelService = Tourfirm.DAL.Interfaces.IHotelService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -38,6 +39,7 @@ builder.Services.AddTransient<IBookingType, BookingRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITourService, TourService>();
 builder.Services.AddScoped<IRouteService, RouteService>();
+builder.Services.AddScoped<IHotelFuncService, HotelFuncService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();

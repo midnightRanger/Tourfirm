@@ -45,6 +45,11 @@
             <span asp-validation-for="Food"></span>
         </div>
           
+          <div class="form-group">
+                    <label for="inputBookingType"></label>
+                    <select id="inputBookingType" asp-for="BookingTypeId" class="form-control" asp-items="@Model.AllBookings">
+                    </select>
+                </div>
         
     </div>
     <div class="container-fluid">

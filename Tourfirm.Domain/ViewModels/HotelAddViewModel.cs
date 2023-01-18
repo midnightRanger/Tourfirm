@@ -23,6 +23,8 @@ public class HotelAddViewModel
     [Required(ErrorMessage = "Fill the food type field!")]
     [DataType(DataType.Text)]
     [Display(Name="Food")]
+    
+    public int? BookingTypeId { get; set; }
     public string? Food { get; set; }
     public SelectList? AllBookings { get; set; }
     public string? Style { get; set; }
