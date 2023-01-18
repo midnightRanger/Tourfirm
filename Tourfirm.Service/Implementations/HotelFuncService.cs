@@ -72,6 +72,43 @@ public class HotelFuncService : IHotelFuncService
         throw new NotImplementedException();
     }
 
+    public async Task<BaseResponse<bool>> UpdateHotel(HotelAddViewModel hotelModel)
+    {
+        try
+        {
+            if (hotelModel == null)
+            {
+                return new BaseResponse<bool>()
+                {
+                    StatusCode = StatusCode.TourNotFound,
+                    Description = "Hotel not found"
+                };
+            }
+            
+            _hotelPropertiesRepository.updateHotelProperties(hotelProperties);
+            _hotelRepository.updateHotel(hotel); 
+            
+            await _db.SaveChangesAsync(); 
+            
+            return new BaseResponse<bool>()
+            {
+                Data = true,
+                StatusCode = StatusCode.OK,
+                Description = "Hotel was updated"
+            };
+        }
+
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"[Update Hotel]: {ex.Message}");
+            return new BaseResponse<bool>()
+            {
+                Description = ex.Message,
+                StatusCode = StatusCode.InternalServerError
+            };
+        } 
+    }
+
     public Task<BaseResponse<bool>> DeleteHotel(Hotel hotel)
     {
         throw new NotImplementedException();

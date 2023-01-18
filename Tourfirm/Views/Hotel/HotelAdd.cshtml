@@ -44,8 +44,14 @@
             <input type="text" class="form-control" id="inputFood" asp-for="Food" placeholder="BA, AI"/>
             <span asp-validation-for="Food"></span>
         </div>
+        
+        <div class="form-group col-md-6">
+                    <label for="inputStyle"> Style </label>
+                    <input type="text" class="form-control" id="inputStyle" asp-for="Style" placeholder="AR-Deco, Modern"/>
+                    <span asp-validation-for="Style"></span>
+                </div>
           
-          <div class="form-group">
+        <div class="form-group">
                     <label for="inputBookingType"></label>
                     <select id="inputBookingType" asp-for="BookingTypeId" class="form-control" asp-items="@Model.AllBookings">
                     </select>

@@ -56,6 +56,44 @@ public class HotelController : Controller
         return RedirectToAction("HotelAdd", "Hotel", new { notification = response.Description });
     }
     
+    [HttpGet]
+    public async Task<IActionResult> HotelUpdate(string? notification, int id)
+    {
+        Hotel hotel =  _hotelRepository.getAll().Include(h=>h.HotelProperties).ThenInclude(h=>h.HotelServices).FirstOrDefault(h=>h.Id == id);
+        
+        if(notification != null)
+            ModelState.AddModelError("", notification);
+
+        HotelAddViewModel hotelModel = new()
+        {
+            Name = hotel.Name,
+            AllBookings = new(await _bookingType.getBookingTypes(), nameof(BookingType.Id), nameof(BookingType.Name)),
+            Capacity = hotel.HotelProperties.Capacity, Classification = hotel.HotelProperties.Classification,
+            Food = hotel.HotelProperties.Food, Stars = hotel.HotelProperties.Stars, Style = hotel.HotelProperties.Style
+        };
+
+        return View(hotelModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> HotelUpdate(HotelAddViewModel hotelModel)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(hotelModel);
+        }
+
+        var response = await _hotelService.UpdateHotel(hotelModel);
+
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+        {
+            return RedirectToAction("HotelIndex", "Hotel", new { notification = response.Description });
+        }
+        ModelState.AddModelError("", response.Description);
+        return RedirectToAction("HotelUpdate", "Hotel", new { notification = response.Description });
+
+    }
+    
 
     public async Task<IActionResult> HotelIndex(string? notification, Hotel.SortState sortHotel = Hotel.SortState.IdAsc)
     {
