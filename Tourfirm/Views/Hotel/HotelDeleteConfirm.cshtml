@@ -10,8 +10,9 @@
         <h1 class="display-4 fw-normal">Are you sure?</h1>
         <p class="lead fw-normal">You want to delete a Hotel "@Model.Name" </p>
         
-            <a asp-action="HotelDelete" asp-controller="Hotel" asp style="width:100%; padding: 10px;"  asp-route-id="@Model.Id" class="btn btn-danger margin-bottom-md"> Delete </a>
-        
+        <div style="margin-bottom: 1em">
+        <a asp-action="HotelDelete" asp-controller="Hotel" asp style="width:100%; padding: 10px;"  asp-route-id="@Model.Id" class="btn btn-danger margin-bottom-md"> Delete </a>
+        </div>
         <form asp-action="HotelIndex" asp-controller="Hotel" method="get">
             <input type="submit" style="width:100%; padding: 10px;" value="Back" class="btn btn-primary margin-bottom-md"/>
         </form>
