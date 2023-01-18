@@ -136,7 +136,7 @@ public class HotelController : Controller
     
     public async Task<IActionResult> HotelDelete(int id)
     {
-        var response = await _hotelService.DeleteHotel(await _hotelRepository.getRoute(id));
+        var response = await _hotelService.DeleteHotel(await _hotelRepository.getHotel(id));
 
         return RedirectToAction("HotelIndex", "Hotel", new { notification = response.Description});
         

@@ -121,8 +121,27 @@ public class HotelFuncService : IHotelFuncService
         } 
     }
 
-    public Task<BaseResponse<bool>> DeleteHotel(Hotel hotel)
+    public async Task<BaseResponse<bool>> DeleteHotel(Hotel hotel)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _hotelRepository.deleteHotel(hotel.Id);
+             
+            return new BaseResponse<bool>()
+            {
+                Data = true,
+                StatusCode = StatusCode.OK,
+                Description = "Hotel delete procedure was successfully completed"
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"[Deleting Hotel Procedure]: {ex.Message}");
+            return new BaseResponse<bool>()
+            {
+                Description = ex.Message,
+                StatusCode = StatusCode.InternalServerError
+            };
+        }
     }
 }
