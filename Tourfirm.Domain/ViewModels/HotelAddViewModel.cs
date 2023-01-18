@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Tourfirm.Domain.ViewModels;
 
@@ -23,6 +24,6 @@ public class HotelAddViewModel
     [DataType(DataType.Text)]
     [Display(Name="Name")]
     public string? Food { get; set; }
-    public string? Booking { get; set; }
+    public SelectList? AllBookings { get; set; }
     public string? Style { get; set; }
 }

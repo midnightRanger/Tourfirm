@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Tourfirm.DAL;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.Domain.Entity;
+using Tourfirm.Domain.ViewModels;
 using Tourfirm.Service.Interfaces;
 using Route = Microsoft.AspNetCore.Routing.Route;
 
@@ -23,6 +24,21 @@ public class HotelController : Controller
 
     [HttpGet]
     public IActionResult HotelAdd(string? notification) => View(); 
+    
+    [HttpGet]
+    public async Task<IActionResult> HotelAdd(string? notification)
+    {
+        if(notification != null)
+            ModelState.AddModelError("", notification);
+
+        HotelAddViewModel hotelAddViewModel = new(); 
+        hotelAddViewModel.AllBookings = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
+        tourAddViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
+        tourAddViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
+        tourAddViewModel.AllTourTypes = new(await _tourTypeRepository.getTourTypes(), nameof(TourType.Id), nameof(TourType.Name));
+
+        return View(tourAddViewModel);
+    }
     
 
     public async Task<IActionResult> HotelIndex(string? notification, Hotel.SortState sortHotel = Hotel.SortState.IdAsc)
