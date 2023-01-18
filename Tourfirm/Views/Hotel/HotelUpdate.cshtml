@@ -2,7 +2,7 @@
 @model Tourfirm.Domain.ViewModels.HotelAddViewModel; 
 
 @{
-    ViewBag.Title = "Hotel Add";
+    ViewBag.Title = "Hotel Update";
     Layout = "_Layout";
 }
 <html lang="en">
@@ -16,38 +16,38 @@
 </head>
 <body>
  
-<form asp-controller="Hotel" asp-action="HotelAdd" method="post" enctype="multipart/form-data">
+<form asp-controller="Hotel" asp-action="HotelUpdate" method="post" enctype="multipart/form-data">
 <div class="alert alert-danger" asp-validation-summary="All"></div>
     <div class="form-row">
         <div class="form-group col-md-6">
             <label for="inputName"> Hotel's name </label>
-            <input type="text" class="form-control" id="inputName" asp-for="Name" placeholder="Saint place, Ragnarok"/>
+            <input type="text" class="form-control" id="inputName" value="@Model.Name" asp-for="Name" placeholder="Saint place, Ragnarok"/>
             <span asp-validation-for="Name"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="inputStars"> Stars </label>
-            <input type="number" class="form-control" id="inputStars" asp-for="Stars" placeholder="3,4,5"/>
+            <input type="number" class="form-control" id="inputStars" value="@Model.Stars" asp-for="Stars" placeholder="3,4,5"/>
             <span asp-validation-for="Stars"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="inputCapacity"> Capacity </label>
-            <input type="number" class="form-control" id="inputCapacity" asp-for="Capacity" placeholder="100, 2000, 30000"/>
+            <input type="number" class="form-control" id="inputCapacity"  value="@Model.Capacity" asp-for="Capacity" placeholder="100, 2000, 30000"/>
             <span asp-validation-for="Capacity"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="inputClassification"> Classification </label>
-            <input type="text" class="form-control" id="inputClassification" asp-for="Classification" placeholder="Motel, Hotel"/>
+            <input type="text" class="form-control" id="inputClassification" value="@Model.Classification" asp-for="Classification" placeholder="Motel, Hotel"/>
             <span asp-validation-for="Classification"></span>
         </div>
         <div class="form-group col-md-6">
             <label for="inputFood"> Food type </label>
-            <input type="text" class="form-control" id="inputFood" asp-for="Food" placeholder="BA, AI"/>
+            <input type="text" class="form-control" id="inputFood" value="@Model.Food" asp-for="Food" placeholder="BA, AI"/>
             <span asp-validation-for="Food"></span>
         </div>
         
         <div class="form-group col-md-6">
                     <label for="inputStyle"> Style </label>
-                    <input type="text" class="form-control" id="inputStyle" asp-for="Style" placeholder="AR-Deco, Modern"/>
+                    <input type="text" class="form-control" id="inputStyle" value="@Model.Style" asp-for="Style" placeholder="AR-Deco, Modern"/>
                     <span asp-validation-for="Style"></span>
                 </div>
           
@@ -59,7 +59,7 @@
         
     </div>
     <div class="container-fluid">
-        <button type="submit" class="btn btn-primary margin-md">Add Hotel</button>
+        <button type="submit" class="btn btn-primary margin-md">Update Hotel</button>
     </div>
 </form>
 

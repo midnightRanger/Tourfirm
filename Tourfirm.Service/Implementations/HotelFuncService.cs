@@ -67,11 +67,6 @@ public class HotelFuncService : IHotelFuncService
         }
     }
 
-    public Task<BaseResponse<bool>> UpdateHotel(Hotel hotel)
-    {
-        throw new NotImplementedException();
-    }
-
     public async Task<BaseResponse<bool>> UpdateHotel(HotelAddViewModel hotelModel)
     {
         try
@@ -84,9 +79,26 @@ public class HotelFuncService : IHotelFuncService
                     Description = "Hotel not found"
                 };
             }
+
+            HotelProperties updatedProperties =
+                await _hotelPropertiesRepository.getHotelProperty(hotelModel.HotelPropertiesId);
             
-            _hotelPropertiesRepository.updateHotelProperties(hotelProperties);
-            _hotelRepository.updateHotel(hotel); 
+                
+            updatedProperties.BookingTypeId = hotelModel.BookingTypeId;
+            updatedProperties.Capacity = hotelModel.Capacity;
+            updatedProperties.Classification = hotelModel.Classification;
+            updatedProperties.Food = hotelModel.Food;
+            updatedProperties.Stars = hotelModel.Stars; updatedProperties.Style = hotelModel.Style;
+            
+            _hotelPropertiesRepository.updateHotelProperties(updatedProperties);
+            await _db.SaveChangesAsync();
+
+            Hotel updatedHotel = await _hotelRepository.getHotel(hotelModel.Id);
+
+            updatedHotel.Id = hotelModel.Id;
+            updatedHotel.Name = hotelModel.Name; 
+            
+            _hotelRepository.updateHotel(updatedHotel); 
             
             await _db.SaveChangesAsync(); 
             

@@ -69,7 +69,7 @@ public class HotelController : Controller
             Name = hotel.Name,
             AllBookings = new(await _bookingType.getBookingTypes(), nameof(BookingType.Id), nameof(BookingType.Name)),
             Capacity = hotel.HotelProperties.Capacity, Classification = hotel.HotelProperties.Classification,
-            Food = hotel.HotelProperties.Food, Stars = hotel.HotelProperties.Stars, Style = hotel.HotelProperties.Style
+            Food = hotel.HotelProperties.Food, Stars = hotel.HotelProperties.Stars, Style = hotel.HotelProperties.Style, HotelPropertiesId = hotel.HotelPropertiesId
         };
 
         return View(hotelModel);
@@ -80,9 +80,13 @@ public class HotelController : Controller
     {
         if (!ModelState.IsValid)
         {
+            
             return View(hotelModel);
         }
 
+        Hotel hotel = _hotelRepository.getAll().Include(h => h.HotelProperties).FirstOrDefault(h => h.Id == hotelModel.Id);
+
+        hotelModel.HotelPropertiesId = hotel.HotelPropertiesId; 
         var response = await _hotelService.UpdateHotel(hotelModel);
 
         if (response.StatusCode == Domain.Safety.StatusCode.OK)
@@ -121,5 +125,20 @@ public class HotelController : Controller
         }
 
         return View(await hotels.AsNoTracking().ToListAsync());
+    }
+    
+    [HttpGet]
+    public async Task<IActionResult> HotelDeleteConfirm(int id)
+    {
+        return View(await _hotelRepository.getHotel(id));
+    }
+
+    
+    public async Task<IActionResult> HotelDelete(int id)
+    {
+        var response = await _hotelService.DeleteHotel(await _hotelRepository.getRoute(id));
+
+        return RedirectToAction("HotelIndex", "Hotel", new { notification = response.Description});
+        
     }
 }

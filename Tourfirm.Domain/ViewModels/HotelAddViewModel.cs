@@ -6,6 +6,7 @@ namespace Tourfirm.Domain.ViewModels;
 public class HotelAddViewModel
 {
     public int Id { get; set; }
+    public int HotelPropertiesId { get; set; }
     
     [Required(ErrorMessage = "Fill the name field!")]
     [DataType(DataType.Text)]
