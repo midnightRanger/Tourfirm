@@ -102,32 +102,32 @@ public class TourTypeController: Controller
     }
     
      [HttpGet]
-    public async Task<IActionResult> RouteUpdate(string? notification, int id)
+    public async Task<IActionResult> TourTypeUpdate(string? notification, int id)
     {
-        var route = await _routeRepository.getRoute(id);
+        var tourType = await _tourTypeRepository.getTourType(id);
         
         if(notification != null)
             ModelState.AddModelError("", notification);
 
-        return View(route);
+        return View(tourType);
     }
 
     [HttpPost]
-    public async Task<IActionResult> RouteUpdate(Route route)
+    public async Task<IActionResult> TourTypeUpdate(TourType tourType)
     {
         if (!ModelState.IsValid)
         {
-            return View(route);
+            return View(tourType);
         }
 
-        var response = await _routeService.UpdateRoute(route);
+        var response = await _tourTypeService.UpdateTourType(tourType);
 
         if (response.StatusCode == Domain.Safety.StatusCode.OK)
         {
-            return RedirectToAction("RouteIndex", "Route", new { notification = response.Description });
+            return RedirectToAction("TourTypeIndex", "TourType", new { notification = response.Description });
         }
         ModelState.AddModelError("", response.Description);
-        return RedirectToAction("RouteUpdate", "Route", new { notification = response.Description });
+        return RedirectToAction("TourTypeIndex", "TourType", new { notification = response.Description });
 
     }
 }
