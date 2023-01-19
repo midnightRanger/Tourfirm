@@ -14,7 +14,9 @@
   <tr>
     <th scope="col"> <a asp-action="TourTypeIndex" asp-controller="TourType" asp-route-sortTourType="@ViewBag.IdSort"> ID </a> </th>
     <th scope="col"> <a asp-action="TourTypeIndex" asp-controller="TourType" asp-route-sortTourType="@ViewBag.NameSort"> Name </a> </th>
-  </tr>
+    <th scope="col"> Delete </th>
+    <th scope="col"> Update </th>
+    </tr>
   </thead>
   <tbody>
   @foreach (var item in Model)
