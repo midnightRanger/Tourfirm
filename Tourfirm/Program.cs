@@ -39,6 +39,7 @@ builder.Services.AddTransient<IBookingType, BookingRepository>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITourService, TourService>();
 builder.Services.AddScoped<IRouteService, RouteService>();
+builder.Services.AddScoped<ITourTypeService, TourTypeService>();
 builder.Services.AddScoped<IHotelFuncService, HotelFuncService>();
 
 builder.Services.AddControllers();
