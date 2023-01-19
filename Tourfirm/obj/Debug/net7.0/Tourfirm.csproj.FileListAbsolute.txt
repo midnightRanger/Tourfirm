@@ -59,3 +59,15 @@ C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.API.dl
 C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.API.pdb
 C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.Service.dll
 C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Tourfirm.Service.pdb
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\CsvHelper.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Microsoft.AspNetCore.JsonPatch.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Microsoft.AspNetCore.Mvc.Razor.Extensions.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Microsoft.AspNetCore.Razor.Language.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Microsoft.CodeAnalysis.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Microsoft.CodeAnalysis.Razor.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Microsoft.DotNet.PlatformAbstractions.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Microsoft.Extensions.DependencyModel.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\Newtonsoft.Json.Bson.dll
+C:\Users\Лев\RiderProjects\Tourfirm\Tourfirm\bin\Debug\net7.0\System.Security.Permissions.dll

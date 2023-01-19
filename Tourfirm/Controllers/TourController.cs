@@ -1,3 +1,5 @@
+using System.Globalization;
+using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -228,5 +230,22 @@ public class TourController : Controller
         await _reviewRepository.addReview(review);
 
         return RedirectToAction("TourInfo", "Tour", new { id = review.TourId });
+    }
+
+    public async Task<IActionResult> TourToCsv()
+    {
+        using var ms = new MemoryStream();
+        using var writer = new StreamWriter(ms, System.Text.Encoding.UTF8);
+        using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
+        
+        await writer.WriteLineAsync("Tour");
+        await csv.WriteRecordsAsync(await _tourRepository.getAll().ToListAsync());
+        await csv.NextRecordAsync();
+
+           await writer.FlushAsync();
+                    ms.Seek(0, SeekOrigin.Begin);
+                    var result = ms.ToArray();
+                    ms.Close();
+                    return File(result, "application/force-download", "tours.csv");
     }
 }

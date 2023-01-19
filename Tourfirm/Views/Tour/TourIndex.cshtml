@@ -76,8 +76,14 @@
 </table>
 
 <form asp-action="TourAdd" method="get"  asp-controller="Tour">
+  <div class="container-fluid">
+    <input type="submit" value="Add new tour" class="btn btn-primary" style="width:100%"/>
+  </div>
+</form>
+
+<form asp-action="TourToCsv" method="get"  asp-controller="Tour">
 <div class="container-fluid">
-  <input type="submit" value="Add new tour" class="btn btn-primary" style="width:100%"/>
+  <input type="submit" value="Download CSV" class="btn btn-primary" style="width:100%; margin-top: 1em"/>
 </div>
 </form>
 
