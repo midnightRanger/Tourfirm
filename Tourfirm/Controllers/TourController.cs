@@ -46,6 +46,12 @@ public class TourController : Controller
         _tourImageRepository = tourImageRepository;
         _tourService = tourService;
     }
+    
+    [ActivatorUtilitiesConstructor]
+    public TourController(ITour tourRepositoryObject)
+    {
+        _tourRepository = tourRepositoryObject; 
+    }
 
     public async Task<IActionResult> ImageRemove(int id, int tourId)
     {
@@ -82,7 +88,7 @@ public class TourController : Controller
             }
         }
 
-        return View(await tours.AsNoTracking().ToListAsync());
+        return View("TourIndex", tours.AsNoTracking().ToList());
 
     }
 

@@ -1,0 +1,16 @@
+﻿<wpf:ResourceDictionary xml:space="preserve" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:ss="urn:shemas-jetbrains-com:settings-storage-xaml" xmlns:wpf="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=16fffd1f_002D9798_002D4df1_002D9e86_002D61e5d0b41b4c/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TestTourIndexView" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::88199090-A7F2-4B57-BF95-064596C1313D::net7.0::Tourfirm.UnitTests.TourControllerTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=2c0b5a82_002D4edb_002D49b4_002Db275_002Db07b6fc89160/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" IsActive="True" Name="TourControllerTest" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::88199090-A7F2-4B57-BF95-064596C1313D::net7.0::Tourfirm.UnitTests.ViewTests.TourControllerTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String>
+	<s:String x:Key="/Default/Environment/UnitTesting/UnitTestSessionStore/Sessions/=8d6f5889_002D9d0a_002D4205_002D929b_002Dbab9dc5d4747/@EntryIndexedValue">&lt;SessionState ContinuousTestingMode="0" Name="TourControllerTest #2" xmlns="urn:schemas-jetbrains-com:jetbrains-ut-session"&gt;&#xD;
+  &lt;TestAncestor&gt;&#xD;
+    &lt;TestId&gt;MSTest::88199090-A7F2-4B57-BF95-064596C1313D::net7.0::Tourfirm.UnitTests.TourControllerTest&lt;/TestId&gt;&#xD;
+  &lt;/TestAncestor&gt;&#xD;
+&lt;/SessionState&gt;</s:String></wpf:ResourceDictionary>
