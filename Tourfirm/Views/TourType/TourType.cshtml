@@ -1,0 +1,35 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Tourfirm.Domain.Entity.TourType; 
+
+@{
+    ViewBag.Title = "Tour Type Add";
+    Layout = "_Layout";
+}
+<html lang="en">
+<script type="text/javascript" charset="utf-8" id="zm-extension" src="chrome-extension://cnhbkkedmelfmalgjpkngiaoifpdfcnl/scripts/webrtc-patch.js" async=""></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tour type adding page</title>
+ <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+ <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+ 
+<form asp-controller="TourType" asp-action="TourTypeAdd" method="post" enctype="multipart/form-data">
+<div class="alert alert-danger" asp-validation-summary="All"></div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputName"> Name </label>
+            <input type="text" class="form-control" id="inputName" asp-for="Name" placeholder="Internal, Oversea"/>
+            <span asp-validation-for="Name"></span>
+        </div>
+        
+    </div>
+    <div class="container-fluid">
+        <button type="submit" class="btn btn-primary margin-md">Add Tour Type</button>
+    </div>
+</form>
+
+</body>
+</html>
