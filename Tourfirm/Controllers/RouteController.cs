@@ -12,13 +12,11 @@ namespace Tourfirm.Controllers;
 public class RouteController : Controller
 {
     private readonly ILogger<RouteController> _logger;
-    private readonly ApplicationContext _db;
     private readonly IRoute _routeRepository;
     private readonly IRouteService _routeService; 
 
-    public RouteController(ApplicationContext db, ILogger<RouteController> logger, IRoute routeRepository, IRouteService routeService)
+    public RouteController( ILogger<RouteController> logger, IRoute routeRepository, IRouteService routeService)
     {
-        _db = db;
         _logger = logger;
         _routeRepository = routeRepository;
         _routeService = routeService;
@@ -85,7 +83,7 @@ public class RouteController : Controller
             }
         }
 
-        return View(await routes.AsNoTracking().ToListAsync());
+        return View("RouteIndex", await routes.AsNoTracking().ToListAsync());
     }
     
      [HttpGet]

@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Mvc;
 
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Microsoft.EntityFrameworkCore; 
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Moq;
 using Tourfirm.Controllers;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.Domain.Entity;
+using Tourfirm.Service.Interfaces;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace Tourfirm.UnitTests.ViewTests;
@@ -15,7 +17,8 @@ namespace Tourfirm.UnitTests.ViewTests;
 [TestClass]
 public class TourControllerTest
 {
-
+    private readonly ILogger<TourController> _logger;
+    
     [TestMethod]
     public async Task TestTourIndexView()
     {
@@ -66,10 +69,20 @@ public class TourControllerTest
             }
         };
         
-        var _tourRepository = new Mock<ITour>();
-        _tourRepository.Setup(e => e.getAll()).Returns(tours.AsQueryable);
+        var tourRepository = new Mock<ITour>();
+        tourRepository.Setup(e => e.getAll()).Returns(tours.AsQueryable);
+
+        var userRepository = new Mock<IUser>();
+        var reviewRepository = new Mock<IReview>();
+        var hotelRepository = new Mock<IHotel>();
+        var tourTypeRepository = new Mock<ITourType>();
+        var countryRepository = new Mock<ICountry>();
+        var routeRepository = new Mock<IRoute>();
+        var tourService = new Mock<ITourService>();
+        var tourImageRepository = new Mock<ITourImage>();
          
-        var controller = new TourController(_tourRepository.Object, );
+        var controller = new TourController(  _logger,  tourRepository.Object,userRepository.Object, reviewRepository.Object,
+            hotelRepository.Object,tourTypeRepository.Object,countryRepository.Object,routeRepository.Object,tourImageRepository.Object,tourService.Object);
         var result =  await controller.TourIndex("testing") as ViewResult;
         var model = result.Model as IEnumerable<Tour>; 
         Assert.AreEqual("TourIndex", result.ViewName);

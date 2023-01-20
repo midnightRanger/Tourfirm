@@ -19,21 +19,19 @@ namespace Tourfirm.Controllers;
 public class TourController : Controller
 {
     private readonly ILogger<TourController> _logger;
-    private readonly ApplicationContext _db;
-    private readonly ITour _tourRepository;
-    private readonly IUser _userRepository;
-    private readonly IReview _reviewRepository;
-    private readonly IHotel _hotelRepository;
-    private readonly ITourType _tourTypeRepository;
-    private readonly ICountry _countryRepository;
-    private readonly IRoute _routeRepository;
-    private readonly ITourService _tourService;
-    private readonly ITourImage _tourImageRepository;
-    private readonly IWebHostEnvironment _app;
+    private readonly ITour? _tourRepository;
+    private readonly IUser? _userRepository;
+    private readonly IReview? _reviewRepository;
+    private readonly IHotel? _hotelRepository;
+    private readonly ITourType? _tourTypeRepository;
+    private readonly ICountry? _countryRepository;
+    private readonly IRoute? _routeRepository;
+    private readonly ITourService? _tourService;
+    private readonly ITourImage? _tourImageRepository;
+  
 
-    public TourController(ApplicationContext db, ILogger<TourController> logger, ITour tourRepository, IUser userRepository, IReview reviewRepository, IHotel hotelRepository, ITourType tourTypeRepository, ICountry countryRepository, IRoute routeRepository, IWebHostEnvironment app, ITourImage tourImageRepository, ITourService tourService)
+    public TourController(ILogger<TourController> logger, ITour tourRepository, IUser userRepository, IReview reviewRepository, IHotel hotelRepository, ITourType tourTypeRepository, ICountry countryRepository, IRoute routeRepository, ITourImage tourImageRepository, ITourService tourService)
     {
-        _db = db;
         _logger = logger;
         _tourRepository = tourRepository;
         _userRepository = userRepository;
@@ -42,21 +40,13 @@ public class TourController : Controller
         _tourTypeRepository = tourTypeRepository;
         _countryRepository = countryRepository;
         _routeRepository = routeRepository;
-        _app = app;
         _tourImageRepository = tourImageRepository;
         _tourService = tourService;
-    }
-    
-    [ActivatorUtilitiesConstructor]
-    public TourController(ITour tourRepositoryObject)
-    {
-        _tourRepository = tourRepositoryObject; 
     }
 
     public async Task<IActionResult> ImageRemove(int id, int tourId)
     {
         _tourImageRepository.deleteTourImage(id);
-        await _db.SaveChangesAsync(); 
         return RedirectToAction("TourUpdate", "Tour", new {id = tourId });
     }
 
