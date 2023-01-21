@@ -155,7 +155,72 @@ public class HotelController : Controller
                 .ToListAsync(),
             HotelId = id
         };
+        
         return View(hotelService);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> HotelServiceUpdate(HotelService hotelModel, int propertiesId)
+    {
+        Hotel hotel = await _hotelRepository.getAll().Where(h => h.HotelPropertiesId == propertiesId).FirstOrDefaultAsync() ?? throw new InvalidOperationException();  
+        if (!ModelState.IsValid)
+        {
+            return RedirectToAction("HotelServiceUpdate", "Hotel", new {id = hotel.HotelPropertiesId}); 
+        }
+
+        hotelModel.HotelPropertiesId = propertiesId; 
+        var response = await _hotelService.UpdateService(hotelModel);
+
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+        {
+            return RedirectToAction("HotelIndex", "Hotel", new { notification = response.Description });
+        }
+        ModelState.AddModelError("", response.Description);
+        return RedirectToAction("HotelServiceUpdate", "Hotel", new { notification = response.Description });
+    } 
+    
+    
+    [HttpGet]
+    public async Task<IActionResult> HotelServiceUpdate(string? notification, int id)
+    {
+        if(notification != null)
+            ModelState.AddModelError("", notification);
+
+        HotelService hotelService = await _hotelServ.getHotelService(id); 
+        
+        return View(hotelService);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> HotelService(HotelServiceAddViewModel hotelModel, int? id,  string? notification)
+    {
+        if(notification != null)
+            ModelState.AddModelError("", notification);
+        Hotel hotel = await _hotelRepository.getAll().Include(h => h.HotelProperties).ThenInclude(h => h.HotelServices).FirstOrDefaultAsync(h=>h.Id==id);
+
+        if (!ModelState.IsValid)
+        {
+            HotelServiceAddViewModel hotelService = new HotelServiceAddViewModel()
+            {
+                HotelServices = await _hotelServ.getAll().Where(h => h.HotelPropertiesId == hotel.HotelPropertiesId)
+                    .ToListAsync(),
+                HotelId = hotelModel.HotelId
+            };
+            return View(hotelModel);
+        }
+
+        
+        hotelModel.HotelId = hotel.Id;
+        hotelModel.HotelPropertiesId = hotel.HotelPropertiesId; 
+        
+        var response = await _hotelService.CreateService(hotelModel);
+
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+        {
+            return RedirectToAction("HotelService", "Hotel", new { id = hotelModel.HotelId });
+        }
+        ModelState.AddModelError("", response.Description);
+        return RedirectToAction("HotelService", "Hotel", new { id = hotelModel.HotelId, notification = response.Description });
     }
     
     public async Task<IActionResult> HotelServiceRemove(int id, int hotelId)

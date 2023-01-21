@@ -1,0 +1,40 @@
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model Tourfirm.Domain.Entity.HotelService; 
+
+@{
+    ViewBag.Title = "Hotel Service Update";
+    Layout = "_Layout";
+}
+<html lang="en">
+<script type="text/javascript" charset="utf-8" id="zm-extension" src="chrome-extension://cnhbkkedmelfmalgjpkngiaoifpdfcnl/scripts/webrtc-patch.js" async=""></script>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Hotel Service Update</title>
+ <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+ <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+</head>
+<body>
+ 
+<form asp-controller="Hotel" asp-action="HotelServiceUpdate" asp-route-propertiesId="@Model.HotelPropertiesId" method="post" enctype="multipart/form-data">
+<div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputName"> Service name </label>
+            <input type="text" class="form-control" value="@Model.Name" id="inputName" asp-for="Name" placeholder="Taxi calling, car sharing"/>
+            <span asp-validation-for="Name"></span>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputCost"> Cost </label>
+            <input type="number" step="0.1" class="form-control" value="@Model.Cost" id="inputCost" asp-for="Cost" placeholder="3000.0, 2000.0"/>
+            <span asp-validation-for="Cost"></span>
+        </div>
+        <div style="margin-top: 1em">
+                <button type="submit" class="btn btn-primary margin-md w-100">Update Service</button>
+            </div>
+       
+        </div>
+</form>
+
+</body>
+</html>

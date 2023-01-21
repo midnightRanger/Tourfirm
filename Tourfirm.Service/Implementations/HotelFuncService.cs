@@ -175,4 +175,33 @@ public class HotelFuncService : IHotelFuncService
             };
         }
     }
+    
+    public async Task<BaseResponse<bool>> UpdateService(HotelService hotelModel)
+    {
+        try
+        {
+            HotelProperties updatedProperties =
+                await _hotelPropertiesRepository.getHotelProperty(hotelModel.HotelPropertiesId);
+            hotelModel.HotelProperties = updatedProperties;
+            
+            _hotelPropertiesRepository.updateHotelProperties(updatedProperties);
+            _hotelService.updateHotelService(hotelModel);
+             
+            return new BaseResponse<bool>()
+            {
+                Data = true,
+                StatusCode = StatusCode.OK,
+                Description = "Hotel service updating procedure was successfully completed"
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"[Updating Hotel Service Procedure]: {ex.Message}");
+            return new BaseResponse<bool>()
+            {
+                Description = ex.Message,
+                StatusCode = StatusCode.InternalServerError
+            };
+        }
+    }
 }

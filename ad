@@ -1,0 +1,352 @@
+[33mcommit 20de7cab9a9556d77807c579915f73fdb103d84a[m
+Author: Lev Ostapenko <012938576a@gmail.com>
+Date:   Wed Jan 18 22:45:01 2023 +0300
+
+    fixed update hotel
+
+[1mdiff --git a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.API.dll b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.API.dll[m
+[1mindex 9846cbe..ffb0376 100644[m
+Binary files a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.API.dll and b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.API.dll differ
+[1mdiff --git a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.API.pdb b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.API.pdb[m
+[1mindex 08ab1ee..9e6d99c 100644[m
+Binary files a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.API.pdb and b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.API.pdb differ
+[1mdiff --git a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.DAL.dll b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.DAL.dll[m
+[1mindex 4a30005..3d3f78f 100644[m
+Binary files a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.DAL.dll and b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.DAL.dll differ
+[1mdiff --git a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.DAL.pdb b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.DAL.pdb[m
+[1mindex f258367..ad8f9f6 100644[m
+Binary files a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.DAL.pdb and b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.DAL.pdb differ
+[1mdiff --git a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.Domain.dll b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.Domain.dll[m
+[1mindex 84b75ac..a999d21 100644[m
+Binary files a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.Domain.dll and b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.Domain.dll differ
+[1mdiff --git a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.Domain.pdb b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.Domain.pdb[m
+[1mindex acab36d..7058112 100644[m
+Binary files a/Tourfirm.API/bin/Debug/net7.0/Tourfirm.Domain.pdb and b/Tourfirm.API/bin/Debug/net7.0/Tourfirm.Domain.pdb differ
+[1mdiff --git a/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.csproj.AssemblyReference.cache b/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.csproj.AssemblyReference.cache[m
+[1mindex 2ce10c6..b9a931c 100644[m
+Binary files a/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.csproj.AssemblyReference.cache and b/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.csproj.AssemblyReference.cache differ
+[1mdiff --git a/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.dll b/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.dll[m
+[1mindex 9846cbe..ffb0376 100644[m
+Binary files a/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.dll and b/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.dll differ
+[1mdiff --git a/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.pdb b/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.pdb[m
+[1mindex 08ab1ee..9e6d99c 100644[m
+Binary files a/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.pdb and b/Tourfirm.API/obj/Debug/net7.0/Tourfirm.API.pdb differ
+[1mdiff --git a/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.DAL.dll b/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.DAL.dll[m
+[1mindex 4a30005..3d3f78f 100644[m
+Binary files a/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.DAL.dll and b/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.DAL.dll differ
+[1mdiff --git a/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.DAL.pdb b/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.DAL.pdb[m
+[1mindex f258367..ad8f9f6 100644[m
+Binary files a/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.DAL.pdb and b/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.DAL.pdb differ
+[1mdiff --git a/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.Domain.dll b/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.Domain.dll[m
+[1mindex 84b75ac..a999d21 100644[m
+Binary files a/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.Domain.dll and b/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.Domain.dll differ
+[1mdiff --git a/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.Domain.pdb b/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.Domain.pdb[m
+[1mindex acab36d..7058112 100644[m
+Binary files a/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.Domain.pdb and b/Tourfirm.DAL/bin/Debug/net7.0/Tourfirm.Domain.pdb differ
+[1mdiff --git a/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.csproj.AssemblyReference.cache b/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.csproj.AssemblyReference.cache[m
+[1mindex 67932fd..c2ab273 100644[m
+Binary files a/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.csproj.AssemblyReference.cache and b/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.csproj.AssemblyReference.cache differ
+[1mdiff --git a/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.dll b/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.dll[m
+[1mindex 4a30005..3d3f78f 100644[m
+Binary files a/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.dll and b/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.dll differ
+[1mdiff --git a/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.pdb b/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.pdb[m
+[1mindex f258367..ad8f9f6 100644[m
+Binary files a/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.pdb and b/Tourfirm.DAL/obj/Debug/net7.0/Tourfirm.DAL.pdb differ
+[1mdiff --git a/Tourfirm.Domain/ViewModels/HotelAddViewModel.cs b/Tourfirm.Domain/ViewModels/HotelAddViewModel.cs[m
+[1mindex 971824c..c2d4b0d 100644[m
+[1m--- a/Tourfirm.Domain/ViewModels/HotelAddViewModel.cs[m
+[1m+++ b/Tourfirm.Domain/ViewModels/HotelAddViewModel.cs[m
+[36m@@ -6,6 +6,7 @@[m [mnamespace Tourfirm.Domain.ViewModels;[m
+ public class HotelAddViewModel[m
+ {[m
+     public int Id { get; set; }[m
+[32m+[m[32m    public int HotelPropertiesId { get; set; }[m
+     [m
+     [Required(ErrorMessage = "Fill the name field!")][m
+     [DataType(DataType.Text)][m
+[1mdiff --git a/Tourfirm.Domain/bin/Debug/net7.0/Tourfirm.Domain.dll b/Tourfirm.Domain/bin/Debug/net7.0/Tourfirm.Domain.dll[m
+[1mindex 84b75ac..a999d21 100644[m
+Binary files a/Tourfirm.Domain/bin/Debug/net7.0/Tourfirm.Domain.dll and b/Tourfirm.Domain/bin/Debug/net7.0/Tourfirm.Domain.dll differ
+[1mdiff --git a/Tourfirm.Domain/bin/Debug/net7.0/Tourfirm.Domain.pdb b/Tourfirm.Domain/bin/Debug/net7.0/Tourfirm.Domain.pdb[m
+[1mindex acab36d..7058112 100644[m
+Binary files a/Tourfirm.Domain/bin/Debug/net7.0/Tourfirm.Domain.pdb and b/Tourfirm.Domain/bin/Debug/net7.0/Tourfirm.Domain.pdb differ
+[1mdiff --git a/Tourfirm.Domain/obj/Debug/net7.0/Tourfirm.Domain.dll b/Tourfirm.Domain/obj/Debug/net7.0/Tourfirm.Domain.dll[m
+[1mindex 84b75ac..a999d21 100644[m
+Binary files a/Tourfirm.Domain/obj/Debug/net7.0/Tourfirm.Domain.dll and b/Tourfirm.Domain/obj/Debug/net7.0/Tourfirm.Domain.dll differ
+[1mdiff --git a/Tourfirm.Domain/obj/Debug/net7.0/Tourfirm.Domain.pdb b/Tourfirm.Domain/obj/Debug/net7.0/Tourfirm.Domain.pdb[m
+[1mindex acab36d..7058112 100644[m
+Binary files a/Tourfirm.Domain/obj/Debug/net7.0/Tourfirm.Domain.pdb and b/Tourfirm.Domain/obj/Debug/net7.0/Tourfirm.Domain.pdb differ
+[1mdiff --git a/Tourfirm.Domain/obj/Debug/net7.0/ref/Tourfirm.Domain.dll b/Tourfirm.Domain/obj/Debug/net7.0/ref/Tourfirm.Domain.dll[m
+[1mindex 13e0f15..4668828 100644[m
+Binary files a/Tourfirm.Domain/obj/Debug/net7.0/ref/Tourfirm.Domain.dll and b/Tourfirm.Domain/obj/Debug/net7.0/ref/Tourfirm.Domain.dll differ
+[1mdiff --git a/Tourfirm.Domain/obj/Debug/net7.0/refint/Tourfirm.Domain.dll b/Tourfirm.Domain/obj/Debug/net7.0/refint/Tourfirm.Domain.dll[m
+[1mindex 13e0f15..4668828 100644[m
+Binary files a/Tourfirm.Domain/obj/Debug/net7.0/refint/Tourfirm.Domain.dll and b/Tourfirm.Domain/obj/Debug/net7.0/refint/Tourfirm.Domain.dll differ
+[1mdiff --git a/Tourfirm.Service/Implementations/HotelFuncService.cs b/Tourfirm.Service/Implementations/HotelFuncService.cs[m
+[1mindex bf6b2c2..6d5627e 100644[m
+[1m--- a/Tourfirm.Service/Implementations/HotelFuncService.cs[m
+[1m+++ b/Tourfirm.Service/Implementations/HotelFuncService.cs[m
+[36m@@ -67,11 +67,6 @@[m [mpublic class HotelFuncService : IHotelFuncService[m
+         }[m
+     }[m
+ [m
+[31m-    public Task<BaseResponse<bool>> UpdateHotel(Hotel hotel)[m
+[31m-    {[m
+[31m-        throw new NotImplementedException();[m
+[31m-    }[m
+[31m-[m
+     public async Task<BaseResponse<bool>> UpdateHotel(HotelAddViewModel hotelModel)[m
+     {[m
+         try[m
+[36m@@ -84,9 +79,26 @@[m [mpublic class HotelFuncService : IHotelFuncService[m
+                     Description = "Hotel not found"[m
+                 };[m
+             }[m
+[32m+[m
+[32m+[m[32m            HotelProperties updatedProperties =[m
+[32m+[m[32m                await _hotelPropertiesRepository.getHotelProperty(hotelModel.HotelPropertiesId);[m
+[32m+[m[41m            [m
+[32m+[m[41m                [m
+[32m+[m[32m            updatedProperties.BookingTypeId = hotelModel.BookingTypeId;[m
+[32m+[m[32m            updatedProperties.Capacity = hotelModel.Capacity;[m
+[32m+[m[32m            updatedProperties.Classification = hotelModel.Classification;[m
+[32m+[m[32m            updatedProperties.Food = hotelModel.Food;[m
+[32m+[m[32m            updatedProperties.Stars = hotelModel.Stars; updatedProperties.Style = hotelModel.Style;[m
+[32m+[m[41m            [m
+[32m+[m[32m            _hotelPropertiesRepository.updateHotelProperties(updatedProperties);[m
+[32m+[m[32m            await _db.SaveChangesAsync();[m
+[32m+[m
+[32m+[m[32m            Hotel updatedHotel = await _hotelRepository.getHotel(hotelModel.Id);[m
+[32m+[m
+[32m+[m[32m            updatedHotel.Id = hotelModel.Id;[m
+[32m+[m[32m            updatedHotel.Name = hotelModel.Name;[m[41m [m
+             [m
+[31m-            _hotelPropertiesRepository.updateHotelProperties(hotelProperties);[m
+[31m-            _hotelRepository.updateHotel(hotel); [m
+[32m+[m[32m            _hotelRepository.updateHotel(updatedHotel);[m[41m [m
+             [m
+             await _db.SaveChangesAsync(); [m
+             [m
+[1mdiff --git a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.DAL.dll b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.DAL.dll[m
+[1mindex 4a30005..3d3f78f 100644[m
+Binary files a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.DAL.dll and b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.DAL.dll differ
+[1mdiff --git a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.DAL.pdb b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.DAL.pdb[m
+[1mindex f258367..ad8f9f6 100644[m
+Binary files a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.DAL.pdb and b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.DAL.pdb differ
+[1mdiff --git a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Domain.dll b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Domain.dll[m
+[1mindex 84b75ac..a999d21 100644[m
+Binary files a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Domain.dll and b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Domain.dll differ
+[1mdiff --git a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Domain.pdb b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Domain.pdb[m
+[1mindex acab36d..7058112 100644[m
+Binary files a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Domain.pdb and b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Domain.pdb differ
+[1mdiff --git a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Service.dll b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Service.dll[m
+[1mindex 9d3bd10..46983c7 100644[m
+Binary files a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Service.dll and b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Service.dll differ
+[1mdiff --git a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Service.pdb b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Service.pdb[m
+[1mindex 6122acf..ae06249 100644[m
+Binary files a/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Service.pdb and b/Tourfirm.Service/bin/Debug/net7.0/Tourfirm.Service.pdb differ
+[1mdiff --git a/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.csproj.AssemblyReference.cache b/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.csproj.AssemblyReference.cache[m
+[1mindex 29fc66d..988f247 100644[m
+Binary files a/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.csproj.AssemblyReference.cache and b/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.csproj.AssemblyReference.cache differ
+[1mdiff --git a/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.dll b/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.dll[m
+[1mindex 9d3bd10..46983c7 100644[m
+Binary files a/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.dll and b/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.dll differ
+[1mdiff --git a/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.pdb b/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.pdb[m
+[1mindex 6122acf..ae06249 100644[m
+Binary files a/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.pdb and b/Tourfirm.Service/obj/Debug/net7.0/Tourfirm.Service.pdb differ
+[1mdiff --git a/Tourfirm.Service/obj/Debug/net7.0/ref/Tourfirm.Service.dll b/Tourfirm.Service/obj/Debug/net7.0/ref/Tourfirm.Service.dll[m
+[1mindex 362791e..0adb2a8 100644[m
+Binary files a/Tourfirm.Service/obj/Debug/net7.0/ref/Tourfirm.Service.dll and b/Tourfirm.Service/obj/Debug/net7.0/ref/Tourfirm.Service.dll differ
+[1mdiff --git a/Tourfirm.Service/obj/Debug/net7.0/refint/Tourfirm.Service.dll b/Tourfirm.Service/obj/Debug/net7.0/refint/Tourfirm.Service.dll[m
+[1mindex 362791e..0adb2a8 100644[m
+Binary files a/Tourfirm.Service/obj/Debug/net7.0/refint/Tourfirm.Service.dll and b/Tourfirm.Service/obj/Debug/net7.0/refint/Tourfirm.Service.dll differ
+[1mdiff --git a/Tourfirm/Controllers/HotelController.cs b/Tourfirm/Controllers/HotelController.cs[m
+[1mindex 0aea78d..8aa936f 100644[m
+[1m--- a/Tourfirm/Controllers/HotelController.cs[m
+[1m+++ b/Tourfirm/Controllers/HotelController.cs[m
+[36m@@ -69,7 +69,7 @@[m [mpublic class HotelController : Controller[m
+             Name = hotel.Name,[m
+             AllBookings = new(await _bookingType.getBookingTypes(), nameof(BookingType.Id), nameof(BookingType.Name)),[m
+             Capacity = hotel.HotelProperties.Capacity, Classification = hotel.HotelProperties.Classification,[m
+[31m-            Food = hotel.HotelProperties.Food, Stars = hotel.HotelProperties.Stars, Style = hotel.HotelProperties.Style[m
+[32m+[m[32m            Food = hotel.HotelProperties.Food, Stars = hotel.HotelProperties.Stars, Style = hotel.HotelProperties.Style, HotelPropertiesId = hotel.HotelPropertiesId[m
+         };[m
+ [m
+         return View(hotelModel);[m
+[36m@@ -80,9 +80,13 @@[m [mpublic class HotelController : Controller[m
+     {[m
+         if (!ModelState.IsValid)[m
+         {[m
+[32m+[m[41m            [m
+             return View(hotelModel);[m
+         }[m
+ [m
+[32m+[m[32m        Hotel hotel = _hotelRepository.getAll().Include(h => h.HotelProperties).FirstOrDefault(h => h.Id == hotelModel.Id);[m
+[32m+[m
+[32m+[m[32m        hotelModel.HotelPropertiesId = hotel.HotelPropertiesId;[m[41m [m
+         var response = await _hotelService.UpdateHotel(hotelModel);[m
+ [m
+         if (response.StatusCode == Domain.Safety.StatusCode.OK)[m
+[36m@@ -122,4 +126,19 @@[m [mpublic class HotelController : Controller[m
+ [m
+         return View(await hotels.AsNoTracking().ToListAsync());[m
+     }[m
+[32m+[m[41m    [m
+[32m+[m[32m    [HttpGet][m
+[32m+[m[32m    public async Task<IActionResult> HotelDeleteConfirm(int id)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        return View(await _hotelRepository.getHotel(id));[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[41m    [m
+[32m+[m[32m    public async Task<IActionResult> HotelDelete(int id)[m
+[32m+[m[32m    {[m
+[32m+[m[32m        var response = await _hotelService.DeleteHotel(await _hotelRepository.getRoute(id));[m
+[32m+[m
+[32m+[m[32m        return RedirectToAction("HotelIndex", "Hotel", new { notification = response.Description});[m
+[32m+[m[41m        [m
+[32m+[m[32m    }[m
+ }[m
+\ No newline at end of file[m
+[1mdiff --git a/Tourfirm/Views/Hotel/HotelAdd.cshtml b/Tourfirm/Views/Hotel/HotelAdd.cshtml[m
+[1mindex 936ba20..6ece3d2 100644[m
+[1m--- a/Tourfirm/Views/Hotel/HotelAdd.cshtml[m
+[1m+++ b/Tourfirm/Views/Hotel/HotelAdd.cshtml[m
+[36m@@ -59,7 +59,7 @@[m
+         [m
+     </div>[m
+     <div class="container-fluid">[m
+[31m-        <button type="submit" class="btn btn-primary margin-md">Add Route</button>[m
+[32m+[m[32m        <button type="submit" class="btn btn-primary margin-md">Add Hotel</button>[m
+     </div>[m
+ </form>[m
+ [m
+[1mdiff --git a/Tourfirm/Views/Hotel/HotelUpdate.cshtml b/Tourfirm/Views/Hotel/HotelUpdate.cshtml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..a06f674[m
+[1m--- /dev/null[m
+[1m+++ b/Tourfirm/Views/Hotel/HotelUpdate.cshtml[m
+[36m@@ -0,0 +1,67 @@[m
+[32m+[m[32m@using Microsoft.AspNetCore.Mvc.TagHelpers[m
+[32m+[m[32m@model Tourfirm.Domain.ViewModels.HotelAddViewModel;[m[41m [m
+[32m+[m
+[32m+[m[32m@{[m
+[32m+[m[32m    ViewBag.Title = "Hotel Update";[m
+[32m+[m[32m    Layout = "_Layout";[m
+[32m+[m[32m}[m
+[32m+[m[32m<html lang="en">[m
+[32m+[m[32m<script type="text/javascript" charset="utf-8" id="zm-extension" src="chrome-extension://cnhbkkedmelfmalgjpkngiaoifpdfcnl/scripts/webrtc-patch.js" async=""></script>[m
+[32m+[m
+[32m+[m[32m<head>[m
+[32m+[m[32m    <meta charset="UTF-8">[m
+[32m+[m[32m    <title>Hotel</title>[m
+[32m+[m[32m <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>[m
+[32m+[m[32m <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>[m
+[32m+[m[32m</head>[m
+[32m+[m[32m<body>[m
+[32m+[m[41m [m
+[32m+[m[32m<form asp-controller="Hotel" asp-action="HotelUpdate" method="post" enctype="multipart/form-data">[m
+[32m+[m[32m<div class="alert alert-danger" asp-validation-summary="All"></div>[m
+[32m+[m[32m    <div class="form-row">[m
+[32m+[m[32m        <div class="form-group col-md-6">[m
+[32m+[m[32m            <label for="inputName"> Hotel's name </label>[m
+[32m+[m[32m            <input type="text" class="form-control" id="inputName" value="@Model.Name" asp-for="Name" placeholder="Saint place, Ragnarok"/>[m
+[32m+[m[32m            <span asp-validation-for="Name"></span>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m        <div class="form-group col-md-6">[m
+[32m+[m[32m            <label for="inputStars"> Stars </label>[m
+[32m+[m[32m            <input type="number" class="form-control" id="inputStars" value="@Model.Stars" asp-for="Stars" placeholder="3,4,5"/>[m
+[32m+[m[32m            <span asp-validation-for="Stars"></span>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m        <div class="form-group col-md-6">[m
+[32m+[m[32m            <label for="inputCapacity"> Capacity </label>[m
+[32m+[m[32m            <input type="number" class="form-control" id="inputCapacity"  value="@Model.Capacity" asp-for="Capacity" placeholder="100, 2000, 30000"/>[m
+[32m+[m[32m            <span asp-validation-for="Capacity"></span>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m        <div class="form-group col-md-6">[m
+[32m+[m[32m            <label for="inputClassification"> Classification </label>[m
+[32m+[m[32m            <input type="text" class="form-control" id="inputClassification" value="@Model.Classification" asp-for="Classification" placeholder="Motel, Hotel"/>[m
+[32m+[m[32m            <span asp-validation-for="Classification"></span>[m
+[32m+[m[32m        </div>[m
+[32m+[m[32m        <div class="form-group col-md-6">[m
+[32m+[m[32m            <label for="inputFood"> Food type </label>[m
+[32m+[m[32m            <input type="text" class="form-control" id="inputFood" value="@Model.Food" asp-for="Food" placeholder="BA, AI"/>[m
+[32m+[m[32m            <span asp-validation-for="Food"></span>[m
+[32m+[m[32m        </div>[m
+[32m+[m[41m        [m
+[32m+[m[32m        <div class="form-group col-md-6">[m
+[32m+[m[32m                    <label for="inputStyle"> Style </label>[m
+[32m+[m[32m                    <input type="text" class="form-control" id="inputStyle" value="@Model.Style" asp-for="Style" placeholder="AR-Deco, Modern"/>[m
+[32m+[m[32m                    <span asp-validation-for="Style"></span>[m
+[32m+[m[32m                </div>[m
+[32m+[m[41m          [m
+[32m+[m[32m        <div class="form-group">[m
+[32m+[m[32m                    <label for="inputBookingType"></label>[m
+[32m+[m[32m                    <select id="inputBookingType" asp-for="BookingTypeId" class="form-control" asp-items="@Model.AllBookings">[m
+[32m+[m[32m                    </select>[m
+[32m+[m[32m                </div>[m
+[32m+[m[41m        [m
+[32m+[m[32m    </div>[m
+[32m+[m[32m    <div class="container-fluid">[m
+[32m+[m[32m        <button type="submit" class="btn btn-primary margin-md">Update Hotel</button>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m</form>[m
+[32m+[m
+[32m+[m[32m</body>[m
+[32m+[m[32m</html>[m
+\ No newline at end of file[m
+[1mdiff --git a/Tourfirm/Views/Hotel/RouteDeleteConfirm.cshtml b/Tourfirm/Views/Hotel/RouteDeleteConfirm.cshtml[m
+[1mnew file mode 100644[m
+[1mindex 0000000..794bd77[m
+[1m--- /dev/null[m
+[1m+++ b/Tourfirm/Views/Hotel/RouteDeleteConfirm.cshtml[m
+[36m@@ -0,0 +1,20 @@[m
+[32m+[m[32m@model Tourfirm.Domain.Entity.Hotel[m
+[32m+[m
+[32m+[m[32m@{[m
+[32m+[m[32m    ViewBag.Title = "Delete Hotel confirmation";[m
+[32m+[m[32m    Layout = "_Layout";[m
+[32m+[m[32m}[m
+[32m+[m[32m<body class="bg-light">[m
+[32m+[m[32m<div class="container-fluid position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center">[m
+[32m+[m[32m    <div class="col-md-5 p-lg-5 mx-auto my-5">[m
+[32m+[m[32m        <h1 class="display-4 fw-normal">Are you sure?</h1>[m
+[32m+[m[32m        <p class="lead fw-normal">You want to delete a Hotel "@Model.Name" </p>[m
+[32m+[m[41m        [m
+[32m+[m[32m            <a asp-action="HotelDelete" asp-controller="Hotel" asp style="width:100%; padding: 10px;"  asp-route-id="@Model.Id" class="btn btn-danger"> Delete </a>[m
+[32m+[m[41m        [m
+[32m+[m[32m        <form asp-action="RouteIndex" asp-controller="Hotel" method="get">[m
+[32m+[m[32m            <input type="submit" style="width:100%; padding: 10px;" value="Back" class="btn btn-primary padding-md"/>[m
+[32m+[m[32m        </form>[m
+[32m+[m[32m    </div>[m
+[32m+[m[32m</div>[m
+[32m+[m[32m</body>[m
+[1mdiff --git a/Tourfirm/bin/Debug/net7.0/Tourfirm.API.dll b/Tourfirm/bin/Debug/net7.0/Tourfirm.API.dll[m
+[1mindex 9846cbe..ffb0376 100644[m
+Binary files a/Tourfirm/bin/Debug/net7.0/Tourfirm.API.dll and b/Tourfirm/bin/Debug/net7.0/Tourfirm.API.dll differ
+[1mdiff --git a/Tourfirm/bin/Debug/net7.0/Tourfirm.API.pdb b/Tourfirm/bin/Debug/net7.0/Tourfirm.API.pdb[m
+[1mindex 08ab1ee..9e6d99c 100644[m
+Binary files a/Tourfirm/bin/Debug/net7.0/Tourfirm.API.pdb and b/Tourfirm/bin/Debug/net7.0/Tourfirm.API.pdb differ
+[1mdiff --git a/Tourfirm/bin/Debug/net7.0/Tourfirm.DAL.dll b/Tourfirm/bin/Debug/net7.0/Tourfirm.DAL.dll[m
+[1mindex 4a30005..3d3f78f 100644[m
+Binary files a/Tourfirm/bin/Debug/net7.0/Tourfirm.DAL.dll and b/Tourfirm/bin/Debug/net7.0/Tourfirm.DAL.dll differ
+[1mdiff --git a/Tourfirm/bin/Debug/net7.0/Tourfirm.DAL.pdb b/Tourfirm/bin/Debug/net7.0/Tourfirm.DAL.pdb[m
+[1mindex f258367..ad8f9f6 100644[m
+Binary files a/Tourfirm/bin/Debug/net7.0/Tourfirm.DAL.pdb and b/Tourfirm/bin/Debug/net7.0/Tourfirm.DAL.pdb differ
+[1mdiff --git a/Tourfirm/bin/Debug/net7.0/Tourfirm.Domain.dll b/Tourfirm/bin/Debug/net7.0/Tourfirm.Domain.dll[m
+[1mindex 84b75ac..a999d21 100644[m
+Binary files a/Tourfirm/bin/Debug/net7.0/Tourfirm.Domain.dll and b/Tourfirm/bin/Debug/net7.0/Tourfirm.Domain.dll differ
+[1mdiff --git a/Tourfirm/bin/Debug/net7.0/Tourfirm.Domain.pdb b/Tourfirm/bin/Debug/net7.0/Tourfirm.Domain.pdb[m
+[1mindex acab36d..7058112 100644[m
+Binary files a/Tourfirm/bin/Debug/net7.0/Tourfirm.Domain.pdb and b/Tourfirm/bin/Debug/net7.0/Tourfirm.Domain.pdb differ
+[1mdiff --git a/Tourfirm/bin/Debug/net7.0/Tourfirm.Service.dll b/Tourfirm/bin/Debug/net7.0/Tourfirm.Service.dll[m
+[1mindex 9d3bd10..46983c7 100644[m
+Binary files a/Tourfirm/bin/Debug/net7.0/Tourfirm.Service.dll and b/Tourfirm/bin/Debug/net7.0/Tourfirm.Service.dll differ
+[1mdiff --git a/Tourfirm/bin/Debug/net7.0/Tourfirm.Service.pdb b/Tourfirm/bin/Debug/net7.0/Tourfirm.Service.pdb[m
+[1mindex 6122acf..ae06249 100644[m
+Binary files a/Tourfirm/bin/Debug/net7.0/Tourfirm.Service.pdb and b/Tourfirm/bin/Debug/net7.0/Tourfirm.Service.pdb differ
+[1mdiff --git a/Tourfirm/bin/Debug/net7.0/Tourfirm.dll b/Tourfirm/bin/Debug/net7.0/Tourfirm.dll[m
+[1mindex b62fe0f..ccf8a4b 100644[m
+Binary files a/Tourfirm/bin/Debug/net7.0/Tourfirm.dll and b/Tourfirm/bin/Debug/net7.0/Tourfirm.dll differ
+[1mdiff --git a/Tourfirm/bin/Debug/net7.0/Tourfirm.pdb b/Tourfirm/bin/Debug/net7.0/Tourfirm.pdb[m
+[1mindex 619f213..55b0f82 1006
