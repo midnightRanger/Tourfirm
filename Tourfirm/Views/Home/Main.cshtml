@@ -34,7 +34,11 @@
                       <form method="get" asp-action="TourInfo" asp-controller="Tour" asp-route-id="@item.Id">
                         <input type="submit" value="Info" class="btn btn-sm btn-outline-secondary">
                       </form>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Add to cart </button>
+                      
+                       <form method="get" asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.Id">
+                         <button type="submit" class="btn btn-sm btn-outline-secondary">Add to cart </button>
+                         </form>
+                      
                     </div>
                     <small class="text-muted"> @item.Country.Name </small>
                   </div>

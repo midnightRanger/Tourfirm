@@ -12,17 +12,16 @@ public class CartController : Controller
     private readonly ILogger<CartController> _logger;
     private readonly ApplicationContext _db;
     private readonly IUser _userRepository;
-    private List<User> _userList;
+    private readonly List<User> _userList;
     private readonly ICartService _cartService;
 
-    public CartController(ILogger<CartController> logger, ApplicationContext db, IUser userRepository, User user, List<User> userList, ICartService cartService)
+    public CartController(ILogger<CartController> logger, ApplicationContext db, IUser userRepository, ICartService cartService)
     {
         _logger = logger;
         _db = db;
         _userRepository = userRepository;
-        _userList = userList;
         _cartService = cartService;
-        _userList = userRepository.getAll().Include(u => u.Account).Include(u=>u.Cart).ToList();
+        _userList = userRepository.getAll().Include(u => u.Account).Include(u=>u.Cart).ThenInclude(c=>c.Tours).ToList();
     }
 
     [HttpGet]

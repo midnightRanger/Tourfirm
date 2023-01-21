@@ -11,16 +11,16 @@ namespace Tourfirm.Service.Implementations;
 public class CartService : ICartService
 {
     private readonly ICart _cartRepository;
-    private readonly ILogger<CartService> _logger;
     private readonly ITour _tourRepository;
     private readonly IUser _userRepository;
+    private readonly ILogger<CartService> _logger;
 
     public CartService(ICart cartRepository, ILogger<CartService> logger, ITour tourRepository, IUser userRepository)
     {
         _cartRepository = cartRepository;
-        _logger = logger;
         _tourRepository = tourRepository;
         _userRepository = userRepository;
+        _logger = logger;
     }
 
     public async Task<BaseResponse<bool>> DeleteFromCart(int? tourId, Cart cart)
