@@ -13,15 +13,17 @@ public class HotelFuncService : IHotelFuncService
 {
     private readonly IHotelProperties _hotelPropertiesRepository;
     private readonly IHotel _hotelRepository;
+    private readonly IHotelService _hotelService; 
     private readonly ILogger<HotelFuncService> _logger; 
     private readonly ApplicationContext _db;
 
-    public HotelFuncService(IHotel hotelRepository, ApplicationContext db, ILogger<HotelFuncService> logger, IHotelProperties hotelPropertiesRepository)
+    public HotelFuncService(IHotel hotelRepository, ApplicationContext db, ILogger<HotelFuncService> logger, IHotelProperties hotelPropertiesRepository, IHotelService hotelService1)
     {
         _hotelRepository = hotelRepository;
         _db = db;
         _logger = logger;
         _hotelPropertiesRepository = hotelPropertiesRepository;
+        _hotelService = hotelService1;
     }
 
     public async Task<BaseResponse<bool>> CreateHotel(HotelAddViewModel hotelAddViewModel)
@@ -137,6 +139,35 @@ public class HotelFuncService : IHotelFuncService
         catch (Exception ex)
         {
             _logger.LogError(ex, $"[Deleting Hotel Procedure]: {ex.Message}");
+            return new BaseResponse<bool>()
+            {
+                Description = ex.Message,
+                StatusCode = StatusCode.InternalServerError
+            };
+        }
+    }
+
+    public async Task<BaseResponse<bool>> CreateService(HotelServiceAddViewModel hotelModel)
+    {
+        try
+        {
+            HotelService hotelService = new()
+            {
+                Cost = hotelModel.Cost, HotelPropertiesId = hotelModel.HotelPropertiesId,
+                Name = hotelModel.Name
+            };
+            await _hotelService.addHotelService(hotelService);
+             
+            return new BaseResponse<bool>()
+            {
+                Data = true,
+                StatusCode = StatusCode.OK,
+                Description = "Hotel service creating procedure was successfully completed"
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"[Creating Hotel Service Procedure]: {ex.Message}");
             return new BaseResponse<bool>()
             {
                 Description = ex.Message,

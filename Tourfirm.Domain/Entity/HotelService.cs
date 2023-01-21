@@ -9,6 +9,6 @@ public class HotelService
     public string? Name { get; set; }
     public double Cost { get; set; }
     
-    public int HotelPropertiesId { get; set; }
+    public int? HotelPropertiesId { get; set; }
     public HotelProperties? HotelProperties { get; set; }
 }
