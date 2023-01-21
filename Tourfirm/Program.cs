@@ -41,6 +41,7 @@ builder.Services.AddScoped<ITourService, TourService>();
 builder.Services.AddScoped<IRouteService, RouteService>();
 builder.Services.AddScoped<ITourTypeService, TourTypeService>();
 builder.Services.AddScoped<IHotelFuncService, HotelFuncService>();
+builder.Services.AddScoped<ICartService, CartService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
