@@ -16,14 +16,16 @@ public class HotelController : Controller
     private readonly IHotel _hotelRepository;
     private readonly IBookingType _bookingType;
     private readonly IHotelFuncService _hotelService;
+    private readonly IHotelService _hotelServ; 
 
-    public HotelController(ILogger<HotelController> logger, ApplicationContext db, IHotel hotelRepository, IBookingType bookingType, IHotelFuncService hotelService)
+    public HotelController(ILogger<HotelController> logger, ApplicationContext db, IHotel hotelRepository, IBookingType bookingType, IHotelFuncService hotelService, IHotelService hotelServ)
     {
         _logger = logger;
         _db = db;
         _hotelRepository = hotelRepository;
         _bookingType = bookingType;
         _hotelService = hotelService;
+        _hotelServ = hotelServ;
     }
     
     [HttpGet]
@@ -140,5 +142,25 @@ public class HotelController : Controller
 
         return RedirectToAction("HotelIndex", "Hotel", new { notification = response.Description});
         
+    }
+    
+    
+    [HttpGet]
+    public async Task<IActionResult> HotelService(int id)
+    {
+        Hotel hotel = await _hotelRepository.getAll().Include(h => h.HotelProperties).ThenInclude(h => h.HotelServices).FirstOrDefaultAsync(h=>h.Id==id);
+        HotelServiceAddViewModel hotelService = new HotelServiceAddViewModel()
+        {
+            HotelServices = await _hotelServ.getAll().Where(h => h.HotelPropertiesId == hotel.HotelPropertiesId)
+                .ToListAsync(),
+            HotelId = id
+        };
+        return View(hotelService);
+    }
+    
+    public async Task<IActionResult> HotelServiceRemove(int id, int hotelId)
+    {
+        _hotelServ.deleteHotelService(id);
+        return RedirectToAction("HotelService", "Hotel", new {id = hotelId });
     }
 }
