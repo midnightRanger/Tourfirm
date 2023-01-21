@@ -29,53 +29,53 @@ public class RoleController: ControllerBase
     [HttpGet("{id}")]
     public async Task<ActionResult<Role>> Get(int id)
     {
-        var review = await Task.FromResult(await _IReview.getReview(id));
-        if (review == null)
+        var role = await Task.FromResult(await _IRole.getRole(id));
+        if (role == null)
             return NotFound();
-        return review; 
+        return role; 
     }
     
-    //post api/review
+    //post api/role
     [HttpPost]
-    public async Task<ActionResult<Review>> Post(Review review)
+    public async Task<ActionResult<Role>> Post(Role role)
     {
-        await _IReview.addReview(review);
-        return await Task.FromResult(review);
+        await _IRole.addRole(role);
+        return await Task.FromResult(role);
     }
     
-    // PUT api/review/5
+    // PUT api/role/5
     [HttpPut("{id}")]
-    public async Task<ActionResult<Review>> Put(int id, Review review)
+    public async Task<ActionResult<Role>> Put(int id, Role role)
     {
-        if (id != review.Id)
+        if (id != role.Id)
         {
             return BadRequest();
         }
         try
         {
-            _IReview.updateReview(review);
+            _IRole.updateRole(role);
         }
         catch (DbUpdateConcurrencyException)
         {
-            if (!ReviewExists(id))
+            if (!RoleExists(id))
             {
                 return NotFound();
             }
             throw;
         }
-        return await Task.FromResult(review);
+        return await Task.FromResult(role);
     }
-    // DELETE api/review/5
+    // DELETE api/role/5
     [HttpDelete("{id}")]
-    public async Task<ActionResult<Review>> Delete(int id)
+    public async Task<ActionResult<Role>> Delete(int id)
     {
-        var review = _IReview.deleteReview(id);
-        return await Task.FromResult(review);
+        var role = _IRole.deleteRole(id);
+        return await Task.FromResult(role);
     }
     
-    private bool ReviewExists(int id)
+    private bool RoleExists(int id)
     {
-        return _IReview.checkReview(id);
+        return _IRole.checkRole(id);
     }
     
     
