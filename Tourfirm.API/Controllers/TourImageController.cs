@@ -7,7 +7,7 @@ using Tourfirm.Domain.Entity;
 namespace Tourfirm.API.Controllers;
 
 [Authorize(AuthenticationSchemes = "Bearer")]
-[Route("api/tourtype")]
+[Route("api/tourimage")]
 [ApiController]
 public class TourImageController: ControllerBase
 {
