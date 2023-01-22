@@ -16,4 +16,12 @@ public class User
     public List<Review> Reviews { get; set; } = new();
     
     public Cart? Cart { get; set; }
+    
+    public enum SortState
+    {
+        IdAsc,
+        IdDesc,
+        LoginAsc,
+        LoginDesc
+    }
 }
