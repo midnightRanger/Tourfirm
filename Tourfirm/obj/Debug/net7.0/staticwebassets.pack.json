@@ -53,8 +53,16 @@
       "PackagePath": "staticwebassets\\images\\IDEF0СКЛАД.jpg.jpg"
     },
     {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\accept.png",
+      "PackagePath": "staticwebassets\\images\\accept.png"
+    },
+    {
       "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\bs3jpg.jpg",
       "PackagePath": "staticwebassets\\images\\bs3jpg.jpg"
+    },
+    {
+      "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\decline.png",
+      "PackagePath": "staticwebassets\\images\\decline.png"
     },
     {
       "Id": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\eg1.jpg",

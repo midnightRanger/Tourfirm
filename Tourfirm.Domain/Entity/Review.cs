@@ -15,4 +15,12 @@ public class Review
     
     public int TourId { get; set; }
     public Tour? Tour { get; set; }
+    
+    public enum SortState
+    {
+        IdAsc,
+        IdDesc,
+        TextAsc,
+        TextDesc
+    }
 }

@@ -24,8 +24,4 @@
       <ProjectReference Include="..\Tourfirm.Service\Tourfirm.Service.csproj" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="wwwroot\images" />
-    </ItemGroup>
-
 </Project>

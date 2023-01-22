@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "9t2s8hQ9aK1Y0O8u+vUP3LLCaSmeYKUY5C75gLdi8FU=",
+  "Hash": "Bki4MtLdLUbTnpJCDw9hMFB2WryJS6aVLb1HiKZhL54=",
   "Source": "Tourfirm",
   "BasePath": "_content/Tourfirm",
   "Mode": "Default",
@@ -187,6 +187,23 @@
       "OriginalItemSpec": "wwwroot\\images\\Диаграммаклассов.png"
     },
     {
+      "Identity": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\accept.png",
+      "SourceId": "Tourfirm",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\",
+      "BasePath": "_content/Tourfirm",
+      "RelativePath": "images/accept.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\accept.png"
+    },
+    {
       "Identity": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\BS1.jpg",
       "SourceId": "Tourfirm",
       "SourceType": "Discovered",
@@ -270,6 +287,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\DAS1.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\decline.png",
+      "SourceId": "Tourfirm",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\",
+      "BasePath": "_content/Tourfirm",
+      "RelativePath": "images/decline.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\decline.png"
     },
     {
       "Identity": "C:\\Users\\Лев\\RiderProjects\\Tourfirm\\Tourfirm\\wwwroot\\images\\eg1.jpg",
