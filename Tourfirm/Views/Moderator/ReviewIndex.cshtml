@@ -41,7 +41,7 @@
       }
        </td>
       <td><a asp-action="HotelDeleteConfirm" asp-controller="Hotel" asp-route-id="@item.Id">Delete</a></td>
-      <td><a asp-action="HotelUpdate" asp-controller="Hotel" asp-route-id="@item.Id">Change status</a></td>
+      <td><a asp-action="ReviewChange" asp-controller="Moderator" asp-route-id="@item.Id" >Change status</a></td>
     </tr>
   }
   </tbody>

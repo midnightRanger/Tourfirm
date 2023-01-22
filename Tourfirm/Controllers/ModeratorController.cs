@@ -55,4 +55,14 @@ public class ModeratorController : Controller
 
         return View("ReviewIndex", await reviews.AsNoTracking().ToListAsync());
     }
+
+    public async Task<IActionResult> ReviewChange(int id)
+    {
+        Review? review = await _reviewRepository.getReview(id);
+
+        review.IsAccept = !review.IsAccept;
+        _reviewRepository.updateReview(review);
+
+        return RedirectToAction("ReviewIndex", "Moderator", new { notification = "Review status was updated" });
+    } 
 }
