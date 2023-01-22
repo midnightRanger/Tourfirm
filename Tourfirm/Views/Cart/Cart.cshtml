@@ -4,20 +4,28 @@
     ViewBag.Title = Model.User.Account.Login + " - Cart";
     Layout = "_Layout";
 }
+
+<head>
+    <link href="~/css/site.css" rel="stylesheet"/>
+</head>
 @if (!ViewData.ModelState.IsValid)
 {
     <div class="validation alert alert-danger mb-md-5 padding-md" asp-validation-summary="All"></div>
 }
 <h2>title</h2>
-
+<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 @foreach (var item in Model.Tours)
 {
-    <div class="card" style="width: 18rem;">
-        <img class="card-img-top" src="..." alt="Card image cap">
-        <div class="card-body">
-            <h5 class="card-title">@item.Name</h5>
-            <p class="card-text">@item.Description</p>
-            <a href="#" class="btn btn-primary">Make order</a>
+    <div class="col" >
+        <div class="card" style="height:100%">
+            <img class="card-img-top" src=@Url.Content(item.TourImages[0].Path) style="height: 225px" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title">@item.Name</h5>
+                <p class="card-text" >@item.Description</p>
+                <a href="#" class="btn btn-primary">Make order</a>
+                    
+            </div>
         </div>
     </div>
 }   
+</div>

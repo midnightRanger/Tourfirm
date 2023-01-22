@@ -21,7 +21,7 @@ public class CartController : Controller
         _db = db;
         _userRepository = userRepository;
         _cartService = cartService;
-        _userList = userRepository.getAll().Include(u => u.Account).Include(u=>u.Cart).ThenInclude(c=>c.Tours).ToList();
+        _userList = userRepository.getAll().Include(u => u.Account).Include(u=>u.Cart).ThenInclude(c=>c.Tours).ThenInclude(c=>c.TourImages).ToList();
     }
 
     [HttpGet]

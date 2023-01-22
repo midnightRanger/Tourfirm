@@ -24,3 +24,9 @@ body {
 .close-icon {
   cursor: pointer;
 }
+
+.force-to-bottom {
+  position:absolute;
+  bottom: 5%;
+  width: 100%;
+}
