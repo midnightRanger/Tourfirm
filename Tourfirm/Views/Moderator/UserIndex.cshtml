@@ -18,7 +18,9 @@
     <th scope="col">Surname</th>
     <th scope="col">Age</th>
     <th scope="col">IsActive</th>
+    <th scope="col">Roles </th>
     <th scope="col">Change Status</th>
+    <th scope="col">Change Roles</th>
   </tr>
   </thead>
   <tbody>
@@ -32,16 +34,25 @@
       <td>@item.Surname</td>
       <td>@item.Age</td>
       <td>
-      @if (@item.Account.isActive)
-      {
-        <img src="~/images/accept.png" style="height:50px; width: 50px" alt="ACCEPT IMAGE"/> 
-      }
-      else
-      {
-        <img src="~/images/decline.png" style="height:50px; width: 50px" 50alt="DECLINE IMAGE"/> 
-      }
-       </td>
+        @if (@item.Account.isActive)
+        {
+          <img src="~/images/accept.png" style="height:50px; width: 50px" alt="ACCEPT IMAGE"/> 
+        }
+        else
+        {
+          <img src="~/images/decline.png" style="height:50px; width: 50px" 50alt="DECLINE IMAGE"/> 
+        }
+      </td>
+      <td>
+        <ul>
+        @foreach (var role in item.Account.Roles)
+        {
+          <li> @role.Name</li>
+        }
+        </ul>
+      </td>
       <td><a asp-action="UserChange" asp-controller="Moderator" asp-route-id="@item.Id" >Change status</a></td>
+      <td><a asp-action="UserRoleUpdate" asp-controller="Moderator" asp-route-id="@item.Id" >Change roles</a></td>
     </tr>
   }
   </tbody>

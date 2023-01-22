@@ -16,16 +16,18 @@ public class AuthService: IAuthService
     
     private readonly IAccount _accountRepository;
     private readonly IUser _userRepository;
-    private readonly ICart _cartRepository; 
-    private readonly ILogger<AuthService> _logger; 
+    private readonly ICart _cartRepository;
+    private readonly IRole _roleRepository;
+     private readonly ILogger<AuthService> _logger; 
     
     public AuthService(IAccount accountRepository,
-        ILogger<AuthService> logger, IUser userRepository, ICart cartRepository)
+        ILogger<AuthService> logger, IUser userRepository, ICart cartRepository, IRole roleRepository)
     {
         _accountRepository = accountRepository;
         _userRepository = userRepository;
         _logger = logger;
         _cartRepository = cartRepository;
+        _roleRepository = roleRepository;
 
         //TODO
         //_proFileRepository = proFileRepository;
@@ -44,19 +46,17 @@ public class AuthService: IAuthService
                 };
             }
 
-            List<Role> roles = new List<Role>()
-            {
-                new Role() { Name = "USER", Description = "Average USER",  }
-            };
-
+            List<Role> roles = new List<Role>();
+            Role? role = await _roleRepository.getRole(1); 
+            
             user = new Account()
             {
                 Login = model.Login,
                 Email = model.Email,
-                Roles = roles,
                 isActive = true,
                 Password = PasswordHasher.HashPassword(model.Password),
             };
+            user.Roles.Add(role);
 
             var userInfo = new User()
             {
@@ -120,6 +120,14 @@ public class AuthService: IAuthService
                 return new BaseResponse<ClaimsIdentity>()
                 {
                     Description = "Неверный пароль или логин"
+                };
+            }
+
+            if (user.isActive == false)
+            {
+                return new BaseResponse<ClaimsIdentity>()
+                {
+                    Description = "Sorry, your account was banned:("
                 };
             }
             var result = Authenticate(user);

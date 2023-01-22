@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Tourfirm.DAL;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.Domain.Entity;
+using Tourfirm.Domain.ViewModels;
 using Route = Microsoft.AspNetCore.Routing.Route;
 
 namespace Tourfirm.Controllers;
@@ -10,11 +12,15 @@ public class ModeratorController : Controller
 {
     private readonly IReview _reviewRepository;
     private readonly IUser _userRepository;
+    private readonly IRole _roleRepository;
+    private readonly ApplicationContext _db;
 
-    public ModeratorController(IReview reviewRepository, IUser userRepository)
+    public ModeratorController(IReview reviewRepository, IUser userRepository, IRole roleRepository, ApplicationContext db)
     {
         _reviewRepository = reviewRepository;
         _userRepository = userRepository;
+        _roleRepository = roleRepository;
+        _db = db;
     }
 
     [HttpGet]
@@ -85,7 +91,7 @@ public class ModeratorController : Controller
         ViewData["IdSort"] = sortUser == Domain.Entity.User.SortState.IdAsc ? Domain.Entity.User.SortState.IdDesc : Domain.Entity.User.SortState.IdAsc;
         ViewData["LoginSort"] = sortUser == Domain.Entity.User.SortState.LoginAsc ? Domain.Entity.User.SortState.LoginDesc : Domain.Entity.User.SortState.LoginAsc;
 
-        IQueryable<User> users = _userRepository.getAll().Include(u=>u.Account);
+        IQueryable<User> users = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles);
         
         switch (sortUser)
         {
@@ -125,4 +131,44 @@ public class ModeratorController : Controller
 
         return RedirectToAction("UserIndex", "Moderator", new { notification = "User status was updated" });
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> UserRoleUpdate(string? notification)
+    {
+        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u => u.Account.Login == User.Identity.Name);
+
+        if(notification != null)
+            ModelState.AddModelError("", notification);
+
+        UserRoleUpdateViewModel roleModel = new UserRoleUpdateViewModel();
+        roleModel.UserRoles = user.Account.Roles; 
+        roleModel.AllRoles = new(await _roleRepository.getRoles(), nameof(Role.Id), nameof(Role.Name));
+
+        return View(roleModel);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> UserRoleUpdate(UserRoleUpdateViewModel roleModel)
+    {
+        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u => u.Account.Login == User.Identity.Name);
+
+        Role? role = await _roleRepository.getRole(roleModel.Id);
+        user.Account.Roles.Add(role);
+        await _db.SaveChangesAsync(); 
+        
+        return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "User roles was updated" });
+
+    }
+    
+    public async Task<IActionResult> RoleRemove(int id)
+    {
+        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u => u.Account.Login == User.Identity.Name);
+        Role? role = await _roleRepository.getRole(id);
+        user.Account.Roles.Remove(role);
+        
+        await _db.SaveChangesAsync(); 
+        
+        return RedirectToAction("UserRoleUpdate", "Moderator", new {notification = "Role was successfully removed! " });
+    }
+    
 }
