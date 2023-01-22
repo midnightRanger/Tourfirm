@@ -221,7 +221,7 @@ public class TourController : Controller
     public async Task<IActionResult> ReviewAdd(Review review)
     {
         review.TourId = (int)TempData["TourId"];
-        review.IsAccept = true; 
+        review.IsAccept = false; 
         review.User = _userRepository.getAll().FirstOrDefault(u => u.Account.Login == User.Identity.Name);
         await _reviewRepository.addReview(review);
 
