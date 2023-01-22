@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tourfirm.DAL;
@@ -9,6 +10,7 @@ using Route = Tourfirm.Domain.Entity.Route;
 
 namespace Tourfirm.Controllers;
 
+[Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
 public class RouteController : Controller
 {
     private readonly ILogger<RouteController> _logger;

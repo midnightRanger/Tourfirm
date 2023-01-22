@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tourfirm.DAL;
@@ -7,6 +8,7 @@ using Tourfirm.Service.Interfaces;
 
 namespace Tourfirm.Controllers;
 
+[Authorize(Roles="USER,ADMIN,MODERATOR")]
 public class CartController : Controller
 {
     private readonly ILogger<CartController> _logger;

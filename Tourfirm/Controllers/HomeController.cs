@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tourfirm.DAL.Interfaces;
@@ -7,6 +8,7 @@ using Tourfirm.Models;
 
 namespace Tourfirm.Controllers;
 
+[Authorize(Roles="USER,ADMIN,MODERATOR")]
 public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;

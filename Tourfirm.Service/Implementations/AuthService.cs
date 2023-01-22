@@ -155,9 +155,14 @@ public class AuthService: IAuthService
         var accountRole = _accountRepository.getAll().Include(r => r.Roles).FirstOrDefault(a=>a.Id == account.Id);
         var claims = new List<Claim>
         {
-            new Claim(ClaimsIdentity.DefaultNameClaimType, account.Login),
-            new Claim(ClaimsIdentity.DefaultRoleClaimType, accountRole.Roles[0].Name)
+            new Claim(ClaimsIdentity.DefaultNameClaimType, account.Login)
         };
+
+        foreach (var role in accountRole.Roles)
+        {
+            claims.Add(new Claim(ClaimTypes.Role, role.Name));
+        }
+        
         return new ClaimsIdentity(claims, "ApplicationCookie",
             ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
     }

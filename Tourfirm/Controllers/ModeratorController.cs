@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Tourfirm.DAL;
@@ -7,7 +8,7 @@ using Tourfirm.Domain.ViewModels;
 using Route = Microsoft.AspNetCore.Routing.Route;
 
 namespace Tourfirm.Controllers;
-
+[Authorize(Roles="ADMIN,MODERATOR")]
 public class ModeratorController : Controller
 {
     private readonly IReview _reviewRepository;

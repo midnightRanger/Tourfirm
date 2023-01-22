@@ -1,5 +1,6 @@
 using System.Globalization;
 using CsvHelper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -16,6 +17,7 @@ using Route = Tourfirm.Domain.Entity.Route;
 
 namespace Tourfirm.Controllers;
 
+[Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
 public class TourController : Controller
 {
     private readonly ILogger<TourController> _logger;
