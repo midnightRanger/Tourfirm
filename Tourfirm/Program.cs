@@ -9,6 +9,7 @@ using Tourfirm.DAL;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.DAL.Repositories;
 using Tourfirm.Domain.Entity;
+using Tourfirm.Domain.ViewModels;
 using Tourfirm.Service.Implementations;
 using Tourfirm.Service.Interfaces;
 using IHotelService = Tourfirm.DAL.Interfaces.IHotelService;
@@ -70,7 +71,7 @@ builder.Services.AddMvc()
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
 {
-    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"),
+    options.UseNpgsql($"server={DbConnection.Server};User Id={DbConnection.UserId};Password={DbConnection.Password};Port={DbConnection.Port};Database={DbConnection.Database};",
         o => o.UseNodaTime());  
     options.LogTo(Console.WriteLine);
     options.EnableSensitiveDataLogging();   

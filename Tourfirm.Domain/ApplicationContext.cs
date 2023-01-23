@@ -7,7 +7,7 @@ public class ApplicationContext : DbContext
 {
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
-        //Database.EnsureDeleted(); 
+      
         Database.EnsureCreated();
     }
 
@@ -110,6 +110,14 @@ public class ApplicationContext : DbContext
                 new Tour() { Id = 2, Name = "Brazilian Sun", Description = "Let's have a fun in the hottest Country!", Cost = 130000, RouteId=2, HotelId = 2, TourTypeId = 1, CountryId = 2},
                 new Tour() { Id = 3, Name = "Deserts and Skorpions", Description = "Put your hat on your head - its really hot there", Cost = 90000, RouteId=3, HotelId = 3, TourTypeId = 2, CountryId = 3}
 
+            });
+
+            modelBuilder.Entity<Role>().HasData(new[]
+            {
+                new Role() {Id = 1, Name="USER", Description = "Average User with standard rights: login, reguster, add to cart, delete from cart, check tour info, add review"},
+                new Role() {Id = 2, Name="ADMIN", Description = "Administrator. Has the all rights that app can contain"},
+                new Role() {Id =3, Name="MANAGER", Description = "Manager. Can see stats, CRUD tours, hotels, routes"},
+                new Role() {Id =4, Name="MODERATOR", Description = "Can update review status, make users non-active"}
             });
             
             // modelBuilder.Entity<Review>().HasData(new[]

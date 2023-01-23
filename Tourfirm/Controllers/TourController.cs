@@ -17,7 +17,6 @@ using Route = Tourfirm.Domain.Entity.Route;
 
 namespace Tourfirm.Controllers;
 
-[Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
 public class TourController : Controller
 {
     private readonly ILogger<TourController> _logger;
@@ -46,12 +45,13 @@ public class TourController : Controller
         _tourService = tourService;
     }
 
+    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
     public async Task<IActionResult> ImageRemove(int id, int tourId)
     {
         _tourImageRepository.deleteTourImage(id);
         return RedirectToAction("TourUpdate", "Tour", new {id = tourId });
     }
-
+    
     [HttpGet]
     public async Task<IActionResult> TourIndex(string? notification, Tour.SortState sortTour = Tour.SortState.IdAsc)
     {
@@ -84,13 +84,14 @@ public class TourController : Controller
 
     }
 
+    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
     [HttpGet]
     public async Task<IActionResult> TourDeleteConfirm(int id)
     {
         return View(await _tourRepository.getTour(id));
     }
 
-    
+    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
     public async Task<IActionResult> TourDelete(int? id)
     {
         var response = await _tourService.DeleteTour(await _tourRepository.getTour(id));
@@ -99,6 +100,7 @@ public class TourController : Controller
         
     }
 
+    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
     [HttpGet]
     public async Task<IActionResult> TourUpdate(string? notification, int? id)
     {
@@ -128,6 +130,7 @@ public class TourController : Controller
         return View(tourUpdateViewModel);
     }
 
+    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
     [HttpPost]
     public async Task<IActionResult> TourUpdate(TourUpdateViewModel tourUpdateViewModel, Tour tour)
     {
@@ -156,6 +159,7 @@ public class TourController : Controller
 
     }
     
+    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
     [HttpGet]
     public async Task<IActionResult> TourAdd(string? notification)
     {
@@ -172,6 +176,7 @@ public class TourController : Controller
     }
     
 
+    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
     [HttpPost]
     public async Task<IActionResult> TourAdd(TourAddViewModel tourAddViewModel, Tour tour)
     {
@@ -230,6 +235,7 @@ public class TourController : Controller
         return RedirectToAction("TourInfo", "Tour", new { id = review.TourId });
     }
 
+    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
     public async Task<IActionResult> TourToCsv()
     {
         using var ms = new MemoryStream();
