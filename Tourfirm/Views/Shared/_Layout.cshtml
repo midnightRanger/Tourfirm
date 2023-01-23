@@ -13,7 +13,7 @@
 <body>
 <nav class="navbar navbar-expand-lg fixed-top navbar-dark bg-dark" aria-label="Main navigation">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Offcanvas navbar</a>
+    <a class="navbar-brand" href=@Url.Action("Main", "Home")>Heaven on Earth</a>
     <button class="navbar-toggler p-0 border-0" type="button" id="navbarSideCollapse" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -21,25 +21,35 @@
     <div class="navbar-collapse offcanvas-collapse" id="navbarsExampleDefault">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href=@Url.Action("Main", "Home") >Main </a>
+          <a class="nav-link" aria-current="page" href=@Url.Action("Main", "Home") >Main </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Notifications</a>
+          <a class="nav-link" href=@Url.Action("Cart", "Cart")>Cart</a>
         </li>
+        @if (User.IsInRole("ADMIN") || User.IsInRole("MANAGER"))
+        {
+          <li class="nav-item">
+            <a class="nav-link" href=@Url.Action("TourIndex", "Tour")>Tours</a>
+          </li>
+        }
+        @if (User.IsInRole("ADMIN") || User.IsInRole("MANAGER"))
+        {
+          <li class="nav-item">
+            <a class="nav-link" href=@Url.Action("TourTypeIndex", "TourType")>Tour types</a>
+          </li>
+        }
+        @* <li class="nav-item dropdown"> *@
+        @*   <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Settings</a> *@
+        @*   <ul class="dropdown-menu"> *@
+        @*     <li><a class="dropdown-item" href="#">Action</a></li> *@
+        @*     <li><a class="dropdown-item" href="#">Another action</a></li> *@
+        @*     <li><a class="dropdown-item" href="#">Something else here</a></li> *@
+        @*   </ul> *@
+        @* </li> *@
+        
         <li class="nav-item">
-          <a class="nav-link" href="#">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Switch account</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" aria-expanded="false">Settings</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
+                  <a class="nav-link" href=@Url.Action("Logout", "Auth") >Log Out</a>
+          </li>
       </ul>
       <form method="get" asp-action="Main" asp-controller="Home" class="d-flex" role="search">
         <input name="keyword" value="@ViewData["keyword"]" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
@@ -49,23 +59,29 @@
   </div>
 </nav>
 
-<div class="nav-scroller bg-body shadow-sm">
-  <nav class="nav" aria-label="Secondary navigation">
-    <a class="nav-link active" aria-current="page" href="#">Dashboard</a>
-    <a class="nav-link" href="#">
-      Friends
-      <span class="badge text-bg-light rounded-pill align-text-bottom">27</span>
-    </a>
-    <a class="nav-link" href="#">Explore</a>
-    <a class="nav-link" href="#">Suggestions</a>
-    <a class="nav-link" href="#">Link</a>
-    <a class="nav-link" href="#">Link</a>
-    <a class="nav-link" href="#">Link</a>
-    <a class="nav-link" href="#">Link</a>
-    <a class="nav-link" href="#">Link</a>
-  </nav>
-</div>
+@if(User.IsInRole("ADMIN") || User.IsInRole("MANAGER") || User.IsInRole("MODERATOR"))
+  {
+    <div class="nav-scroller bg-body shadow-sm">
+      <nav class="nav" aria-label="Secondary navigation">
+        <a class="nav-link active" aria-current="page" href="#">Panel</a>
+        @if (User.IsInRole("ADMIN") || User.IsInRole("MANAGER"))
+        {
+          <a class="nav-link" href=@Url.Action("MainStats", "Stats")>Stats</a>
 
+          <a class="nav-link" href=@Url.Action("RouteIndex", "Route")>Routes</a>
+        }
+        @if (User.IsInRole("ADMIN") || User.IsInRole("MODERATOR"))
+        {
+          <a class="nav-link" href=@Url.Action("UserIndex", "Moderator")>Users</a>
+          <a class="nav-link" href=@Url.Action("ReviewIndex", "Moderator")>Reviews</a>
+        }
+        @if (User.IsInRole("ADMIN"))
+        {
+          <a class="nav-link" href=@Url.Action("PostgreSqlDump", "Admin")>Admin panel</a>
+        }
+      </nav>
+    </div>
+  }
 <div class="container">
     <main role="main" class="pb-3">
         @RenderBody()

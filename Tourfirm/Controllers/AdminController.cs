@@ -3,6 +3,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
+using Tourfirm.Domain.ViewModels;
 
 
 namespace Tourfirm.Controllers;
@@ -108,9 +109,9 @@ public class AdminController : Controller
         string user,
         string password = "123")
     {
-        outFile = $"C:\\db.sql"; 
+        outFile = $"D:\\db.sql"; 
         string dumpCommand =
-            $"pg_dump" + " -Fc" + " -h " + "127.0.0.1" + " -p " + "5432" + " -d " + "Tourfirm" + " -U " + "postgres" + "";
+            $"pg_dump" + " -Fc" + " -h " + $"{DbConnection.Server}" + " -p " + $"{DbConnection.Port}" + " -d " + $"{DbConnection.Database}" + " -U " + $"{DbConnection.UserId}" + "";
 
         string batchContent = "" + dumpCommand + "  > " + "\"" + outFile + "\"" + "\n";
 //        if (System.IO.File.Exists(outFile)) System.IO.File.Delete(outFile);

@@ -4,6 +4,13 @@
     Layout = "_Layout";
 }
 
+<div class="text-center">
+
+<h3 class="display-4 fw-normal"> DB Functions</h3>
 <form asp-action="PostgreSqlDump" asp-controller="Admin">
-    <input type="submit" class="btn btn-primary" value="Make Dump"/>
+    <input type="submit" class="btn btn-primary" style="width:100%; margin-top: 1em" value="Make Dump"/>
 </form>
+    <form asp-action="PostgreSqlDump" asp-controller="Admin">
+        <input type="submit" class="btn btn-primary" style="width:100%; margin-top: 1em" value="Restore backup"/>
+    </form>
+</div>
