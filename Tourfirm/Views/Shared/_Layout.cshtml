@@ -47,14 +47,17 @@
         @*   </ul> *@
         @* </li> *@
         
-        <li class="nav-item">
-                  <a class="nav-link" href=@Url.Action("Logout", "Auth") >Log Out</a>
-          </li>
+  <li class="nav-item">
+          <a class="nav-link" href=@Url.Action("Logout", "Auth") >Log Out</a>
+        </li>
       </ul>
-      <form method="get" asp-action="Main" asp-controller="Home" class="d-flex" role="search">
-        <input name="keyword" value="@ViewData["keyword"]" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+      @if (ViewBag.IsHome == "true")
+      {
+        <form method="get" asp-action="Main" asp-controller="Home" class="d-flex" role="search">
+          <input name="keyword" value="@ViewData["keyword"]" class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      }
     </div>
   </div>
 </nav>
@@ -67,7 +70,7 @@
         @if (User.IsInRole("ADMIN") || User.IsInRole("MANAGER"))
         {
           <a class="nav-link" href=@Url.Action("MainStats", "Stats")>Stats</a>
-
+          <a class="nav-link" href=@Url.Action("HotelIndex", "Hotel")>Hotels</a>
           <a class="nav-link" href=@Url.Action("RouteIndex", "Route")>Routes</a>
         }
         @if (User.IsInRole("ADMIN") || User.IsInRole("MODERATOR"))

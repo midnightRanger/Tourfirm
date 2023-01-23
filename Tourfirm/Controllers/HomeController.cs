@@ -57,6 +57,7 @@ public class HomeController : Controller
                 => t.Name != null && t.Name.Contains(keyword));
         else tourList = _allTours;
 
+        ViewBag.IsHome = "true";  
         return View(tourList); 
     }
 }
