@@ -12,6 +12,11 @@
 
 <p>Country stats</p>
 <canvas id="countryChart"></canvas>
+
+<hr/>
+
+<p>Tours in carts</p>
+<canvas id="lineChart"></canvas>
   
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -37,14 +42,14 @@
     }
   });
   
-  const pie = document.getElementById('pieChart');
+  const pie = document.getElementById('countryChart');
        new Chart(pie, {
          type: 'doughnut',
         data: {
-        labels: @Html.Raw(ViewBag.platformNames),
+        labels: @Html.Raw(ViewBag.countryNames),
         datasets: [{
-          label: 'Games',
-          data: [@ViewBag.platformGames],
+          label: 'Tours',
+          data: [@ViewBag.tourValues],
           backgroundColor: [
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)',
@@ -60,6 +65,25 @@
         }]
        } 
        });
-  
+       
+   const line = document.getElementById('lineChart');    
+  new Chart(line, {
+      type: 'line',
+      data: {
+        labels: @Html.Raw(ViewBag.productNameList),
+        datasets: [{
+          label: '# Carts',
+          data: [@ViewBag.inCartValues],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
 </script>
 </body>
