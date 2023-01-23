@@ -17,6 +17,11 @@
 
 <p>Tours in carts</p>
 <canvas id="lineChart"></canvas>
+
+<hr/>
+
+<p>User's roles</p>
+<canvas id="polarAreaChart"></canvas>
   
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -74,6 +79,27 @@
         datasets: [{
           label: '# Carts',
           data: [@ViewBag.inCartValues],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+  
+  const polarArea = document.getElementById('polarAreaChart');
+  
+    new Chart(polarArea, {
+      type: 'polarArea',
+      data: {
+        labels: @Html.Raw(ViewBag.userRoles),
+        datasets: [{
+          label: '# of Users',
+          data: [@ViewBag.userRolesValue],
           borderWidth: 1
         }]
       },

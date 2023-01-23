@@ -11,10 +11,12 @@ public class StatsController : Controller
 {
     private readonly ITour _tourRepository;
     private readonly ICountry _countryRepository;
-    public StatsController(ITour tourRepository, ICountry countryRepository)
+    private readonly IRole _roleRepository;
+    public StatsController(ITour tourRepository, ICountry countryRepository, IRole roleRepository)
     {
         _tourRepository = tourRepository;
         _countryRepository = countryRepository;
+        _roleRepository = roleRepository;
     }
 
     public async Task<IActionResult> MainStats()
@@ -33,7 +35,13 @@ public class StatsController : Controller
 
         List<int> inCart = _tourRepository.getAll().Include(t => t.Carts).Select(c => c.Carts.Count).ToList(); 
         ViewBag.inCartValues = string.Join(",", inCart);
-        
+
+        List<string?> userRoles = _roleRepository.getAll().Select(r => r.Name).ToList();
+        List<int> userRolesValue =
+            _roleRepository.getAll().Include(r => r.Accounts).Select(r => r.Accounts.Count).ToList();
+
+        ViewBag.userRoles = JsonSerializer.Serialize(userRoles);
+        ViewBag.userRolesValue = string.Join(",", userRolesValue);
         return View(); 
     }
 }
