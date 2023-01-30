@@ -31,7 +31,10 @@ public class TourController : Controller
     private readonly ITourImage? _tourImageRepository;
   
 
-    public TourController(ILogger<TourController> logger, ITour tourRepository, IUser userRepository, IReview reviewRepository, IHotel hotelRepository, ITourType tourTypeRepository, ICountry countryRepository, IRoute routeRepository, ITourImage tourImageRepository, ITourService tourService)
+    public TourController(ILogger<TourController> logger, ITour tourRepository,
+        IUser userRepository, IReview reviewRepository, IHotel hotelRepository, 
+        ITourType tourTypeRepository, ICountry countryRepository, IRoute routeRepository,
+        ITourImage tourImageRepository, ITourService tourService)
     {
         _logger = logger;
         _tourRepository = tourRepository;

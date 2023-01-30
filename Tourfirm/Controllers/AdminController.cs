@@ -10,9 +10,7 @@ namespace Tourfirm.Controllers;
 
 public class AdminController : Controller
 {
-
     string Set = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "set " : "export ";
-
     public async Task PostgreSqlRestore(
         string inputFile,
         string host,
@@ -39,7 +37,6 @@ public class AdminController : Controller
     {
         return Task.Run(() =>
         {
-
             string batFilePath = Path.Combine(Path.GetTempPath(), $"{Guid.NewGuid()}." + (RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "bat" : "sh"));
             try
             {
@@ -123,5 +120,4 @@ public class AdminController : Controller
         
         return File(fileBytes,System.Net.Mime.MediaTypeNames.Text.Plain, fileName );
     }
-
 }

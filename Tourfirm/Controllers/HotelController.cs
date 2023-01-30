@@ -19,7 +19,9 @@ public class HotelController : Controller
     private readonly IHotelFuncService _hotelService;
     private readonly IHotelService _hotelServ; 
 
-    public HotelController(ILogger<HotelController> logger, ApplicationContext db, IHotel hotelRepository, IBookingType bookingType, IHotelFuncService hotelService, IHotelService hotelServ)
+    public HotelController(ILogger<HotelController> logger, ApplicationContext db,
+        IHotel hotelRepository, IBookingType bookingType, 
+        IHotelFuncService hotelService, IHotelService hotelServ)
     {
         _logger = logger;
         _db = db;
