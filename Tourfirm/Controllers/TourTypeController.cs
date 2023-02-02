@@ -17,7 +17,8 @@ public class TourTypeController: Controller
     private readonly ITourType _tourTypeRepository;
     private readonly ITourTypeService _tourTypeService;
 
-    public TourTypeController(ILogger<TourTypeController> logger, ApplicationContext db, ITourType tourTypeRepository, ITourTypeService tourTypeService)
+    public TourTypeController(ILogger<TourTypeController> logger, ApplicationContext db, 
+        ITourType tourTypeRepository, ITourTypeService tourTypeService)
     {
         _logger = logger;
         _db = db;
