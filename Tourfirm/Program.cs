@@ -43,6 +43,7 @@ builder.Services.AddScoped<IRouteService, RouteService>();
 builder.Services.AddScoped<ITourTypeService, TourTypeService>();
 builder.Services.AddScoped<IHotelFuncService, HotelFuncService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<ICountryService, CountryService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();

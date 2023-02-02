@@ -12,4 +12,18 @@ public class Country
     public double MidTemp { get; set; }
     
     public List<Tour> Tours { get; set; } = new();
+    
+    public enum SortState
+    {
+        IdAsc,
+        IdDesc,
+        ClimateAsc,
+        ClimateDesc, 
+        LanguageAsc,
+        LanguageDesc, 
+        MidTempAsc,
+        MidTempDesc,
+        NameAsc,
+        NameDesc
+    }
 }
