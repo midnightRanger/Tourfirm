@@ -117,4 +117,34 @@ public class CountryController : Controller
         ModelState.AddModelError("", response.Description);
         return RedirectToAction("CountryIndex", "Country", new { notification = response.Description });
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> CountryUpdate(string? notification, int id)
+    {
+        var country = await _countryRepository.getCountry(id);
+        
+        if(notification != null)
+            ModelState.AddModelError("", notification);
+
+        return View(country);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> CountryUpdate(Country country)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(country);
+        }
+
+        var response = await _countryService.UpdateCountry(country);
+
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+        {
+            return RedirectToAction("CountryIndex", "Country", new { notification = response.Description });
+        }
+        ModelState.AddModelError("", response.Description);
+        return RedirectToAction("CountryIndex", "Country", new { notification = response.Description });
+
+    }
 }

@@ -31,13 +31,13 @@
       <td>@item.MidTemp</td>
       <td>@item.Climate</td>
       <td><a asp-action="RouteDeleteConfirm" asp-controller="Route" asp-route-id="@item.Id">Delete</a></td>
-      <td><a asp-action="RouteUpdate" asp-controller="Route" asp-route-id="@item.Id">Update</a></td>
+      <td><a asp-action="CountryUpdate" asp-controller="Country" asp-route-id="@item.Id">Update</a></td>
     </tr>
   }
   </tbody>
 </table>
 
-<form asp-action="RouteAdd" method="get"  asp-controller="Route">
+<form asp-action="CountryAdd" method="get"  asp-controller="Country">
 <div class="container-fluid">
   <input type="submit" value="Add country" class="btn btn-primary" style="width:100%"/>
 </div>
