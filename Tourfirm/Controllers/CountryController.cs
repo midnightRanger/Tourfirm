@@ -9,5 +9,6 @@ public class CountryController : ControllerBase
 {
     private readonly ILogger<CountryController> _logger;
     private readonly ICountry _countryRepository;
+    private readonly ICountryService _countryService; 
 
 }
