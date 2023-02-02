@@ -9,23 +9,23 @@ namespace Tourfirm.API.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/hotelproperties")]
 [ApiController]
+//Контроллер для работы с апи, данные - Характеристики отеля
 public class HotelPropertiesController: ControllerBase
 {
     private readonly IHotelProperties _IHotelProperties;
-    
-    
     
     public HotelPropertiesController(IHotelProperties iHotelProperties)
     {
         _IHotelProperties = iHotelProperties;
     }
+    //Получение всех элементов
     //get api/hotelproperties
     [HttpGet]
     public async Task<ActionResult<IEnumerable<HotelProperties>>> Get()
     {
         return await Task.FromResult(await _IHotelProperties.getHotelProperties()); 
     }
-    
+    //Получение элемента
     //get api/hotelproperties/5 
     [HttpGet("{id}")]
     public async Task<ActionResult<HotelProperties>> Get(int id)
@@ -35,7 +35,7 @@ public class HotelPropertiesController: ControllerBase
             return NotFound();
         return hotelProperties; 
     }
-    
+    //Добавление элемента
     //post api/hotelproperties
     [HttpPost]
     public async Task<ActionResult<HotelProperties>> Post(HotelProperties hotelProperties)
@@ -43,7 +43,7 @@ public class HotelPropertiesController: ControllerBase
         await _IHotelProperties.addHotelProperties(hotelProperties);
         return await Task.FromResult(hotelProperties);
     }
-    
+    //Обновление элемента
     // PUT api/hotelproperties/5
     [HttpPut("{id}")]
     public async Task<ActionResult<HotelProperties>> Put(int id, HotelProperties hotelProperties)
@@ -66,6 +66,7 @@ public class HotelPropertiesController: ControllerBase
         }
         return await Task.FromResult(hotelProperties);
     }
+    //Удаление элемента
     // DELETE api/hotelproperties/5
     [HttpDelete("{id}")]
     public async Task<ActionResult<HotelProperties>> Delete(int id)
@@ -74,6 +75,7 @@ public class HotelPropertiesController: ControllerBase
         return await Task.FromResult(hotelProperties);
     }
     
+    //Существует ли
     private bool HotelPropertiesExists(int id)
     {
         return _IHotelProperties.checkHotelProperties(id);

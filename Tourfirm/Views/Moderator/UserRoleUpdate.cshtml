@@ -5,7 +5,7 @@
     Layout = "_Layout";
 }
 
-<form asp-controller="Moderator" asp-action="UserRoleUpdate" method="post" enctype="multipart/form-data">
+<form asp-controller="Moderator" asp-action="UserRoleUpdate" method="post" asp-route-userId="@Model.UserId" enctype="multipart/form-data">
 <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
     <div class="form-row">
         <div class="form-group">
@@ -21,11 +21,11 @@
                                  {
                                      <div class="card" style="margin-top: 0.5em">
                                          <div class="card-header">
-                                             Role Info
+                                             @role.Name
                                          </div>
                                          <div class="card-body">
                                              <p class="card-text"> @role.Description </p>
-                                            <a asp-action="RoleRemove" asp-controller="Moderator" asp-route-id="@role.Id" style="padding: 10px; width: 100%" class="btn btn-danger"> Delete </a>
+                                            <a asp-action="RoleRemove" asp-controller="Moderator" asp-route-userId="@Model.UserId" asp-route-id="@role.Id" style="padding: 10px; width: 100%" class="btn btn-danger"> Delete </a>
                                          </div>
                                      </div>
                                  }

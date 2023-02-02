@@ -125,8 +125,14 @@ public class ModeratorController : Controller
     
     public async Task<IActionResult> UserChange(int id)
     {
-        User? user = await _userRepository.getAll().Include(u => u.Account).FirstOrDefaultAsync(u => u.Id == id);
+        User? user = await _userRepository.getAll().Include(u => u.Account).ThenInclude(r=>r.Roles).FirstOrDefaultAsync(u => u.Id == id);
 
+        if (user.Account.Login == User.Identity.Name)
+            return RedirectToAction("UserIndex", "Moderator", new { notification = "You cant ban yourself!" });
+        if (user.Account.Roles.Contains( await _roleRepository.getRole(2)))  
+            return RedirectToAction("UserIndex", "Moderator", new { notification = "You cant ban admin!" });
+
+        
         user.Account.isActive = !user.Account.isActive;
         _userRepository.updateUser(user);
 
@@ -134,9 +140,9 @@ public class ModeratorController : Controller
     }
     
     [HttpGet]
-    public async Task<IActionResult> UserRoleUpdate(string? notification)
+    public async Task<IActionResult> UserRoleUpdate(string? notification, int id)
     {
-        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u => u.Account.Login == User.Identity.Name);
+        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u=>u.Id == id);
 
         if(notification != null)
             ModelState.AddModelError("", notification);
@@ -144,32 +150,45 @@ public class ModeratorController : Controller
         UserRoleUpdateViewModel roleModel = new UserRoleUpdateViewModel();
         roleModel.UserRoles = user.Account.Roles; 
         roleModel.AllRoles = new(await _roleRepository.getRoles(), nameof(Role.Id), nameof(Role.Name));
-
+        roleModel.UserId = user.Id;
         return View(roleModel);
     }
 
     [HttpPost]
-    public async Task<IActionResult> UserRoleUpdate(UserRoleUpdateViewModel roleModel)
+    public async Task<IActionResult> UserRoleUpdate(UserRoleUpdateViewModel roleModel, int userId)
     {
-        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u => u.Account.Login == User.Identity.Name);
-
+        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u => u.Id == userId);
         Role? role = await _roleRepository.getRole(roleModel.Id);
+        
+        if (user.Account.Login == User.Identity.Name)
+            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "You cant do any actions with your account",  id=userId });
+
+        
         user.Account.Roles.Add(role);
         await _db.SaveChangesAsync(); 
         
-        return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "User roles was updated" });
+        return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "User roles was updated" , id=userId });
 
     }
     
-    public async Task<IActionResult> RoleRemove(int id)
+    public async Task<IActionResult> RoleRemove(int id, int userId)
     {
-        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u => u.Account.Login == User.Identity.Name);
+        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u => u.Id == userId);
         Role? role = await _roleRepository.getRole(id);
+        
+        //Проверка если АДМИН
+        if (user.Account.Roles.Contains(await _roleRepository.getRole(2))) 
+            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "You cant remove roles from Admin ", id=userId });
+        if (user.Account.Roles.Count == 1)
+            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "Please, leave a user at least one role",  id=userId });
+        if (user.Account.Login == User.Identity.Name)
+            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "You cant do any actions with your account",  id=userId });
+        
         user.Account.Roles.Remove(role);
         
         await _db.SaveChangesAsync(); 
         
-        return RedirectToAction("UserRoleUpdate", "Moderator", new {notification = "Role was successfully removed! " });
+        return RedirectToAction("UserRoleUpdate", "Moderator", new {notification = "Role was successfully removed! ", id=userId});
     }
     
 }

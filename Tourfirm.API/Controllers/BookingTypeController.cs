@@ -6,6 +6,7 @@ using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.API.Controllers;
 
+//Контроллер для работы с апи, данные - Типы бронирования
 [Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/bookingtype")]
 [ApiController]
@@ -17,14 +18,15 @@ public class BookingTypeController: ControllerBase
     {
         _IBookingType = iBookingType;
     }
-
+    
+    //получение всех элементов
     //get api/bookingtype
     [HttpGet]
     public async Task<ActionResult<IEnumerable<BookingType>>> Get()
     {
         return await Task.FromResult(await _IBookingType.getBookingTypes()); 
     }
-    
+    //получение конкретного элемента
     //get api/bookingtype/5 
     [HttpGet("{id}")]
     public async Task<ActionResult<BookingType>> Get(int id)
@@ -35,6 +37,7 @@ public class BookingTypeController: ControllerBase
         return bookingType; 
     }
     
+    //добавление нового элемента
     //post api/bookingtype
     [HttpPost]
     public async Task<ActionResult<BookingType>> Post(BookingType bookingType)
@@ -42,7 +45,7 @@ public class BookingTypeController: ControllerBase
         await _IBookingType.addBookingType(bookingType);
         return await Task.FromResult(bookingType);
     }
-    
+    //обновление элемента
     // PUT api/bookingtype/5
     [HttpPut("{id}")]
     public async Task<ActionResult<BookingType>> Put(int id, BookingType bookingType)
@@ -65,6 +68,7 @@ public class BookingTypeController: ControllerBase
         }
         return await Task.FromResult(bookingType);
     }
+    //удаление  элемента
     // DELETE api/bookingtype/5
     [HttpDelete("{id}")]
     public async Task<ActionResult<BookingType>> Delete(int id)
@@ -73,6 +77,7 @@ public class BookingTypeController: ControllerBase
         return await Task.FromResult(bookingType);
     }
 
+    //проверка существует ли 
     private bool BookingTypeExists(int id)
     {
         return _IBookingType.checkBookingType(id);

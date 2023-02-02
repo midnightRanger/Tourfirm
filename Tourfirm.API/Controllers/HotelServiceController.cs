@@ -9,13 +9,11 @@ namespace Tourfirm.API.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/hotelservice")]
 [ApiController]
+//Контроллер для работы с апи, данные - Услуги отеля
 public class HotelServiceController: ControllerBase
 {
     private readonly IHotelService _IHotelService;
-    
-    
-    
-    
+
     public HotelServiceController(IHotelService iHotelService)
     {
         _IHotelService = iHotelService;

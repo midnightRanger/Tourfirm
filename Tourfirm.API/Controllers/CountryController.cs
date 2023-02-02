@@ -9,6 +9,7 @@ namespace Tourfirm.API.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/country")]
 [ApiController]
+//Контроллер для работы с апи, данные - Страны
 public class CountryController: ControllerBase
 {
     private readonly ICountry _ICountry;
@@ -18,7 +19,7 @@ public class CountryController: ControllerBase
         _ICountry = iCountry;
     }
 
-    
+    //Получение элемента
     //get api/route 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Country>>> Get()
@@ -26,6 +27,7 @@ public class CountryController: ControllerBase
         return await Task.FromResult(await _ICountry.getCountries()); 
     }
     
+    //Получение элементов
     //get api/country/5 
     [HttpGet("{id}")]
     public async Task<ActionResult<Country>> Get(int id)
@@ -36,6 +38,7 @@ public class CountryController: ControllerBase
         return country; 
     }
     
+    //Добавление элемента
     //post api/country
     [HttpPost]
     public async Task<ActionResult<Country>> Post(Country country)
@@ -44,6 +47,7 @@ public class CountryController: ControllerBase
         return await Task.FromResult(country);
     }
     
+    //Обновление элемента
     // PUT api/country/5
     [HttpPut("{id}")]
     public async Task<ActionResult<Country>> Put(int id, Country country)
@@ -66,6 +70,7 @@ public class CountryController: ControllerBase
         }
         return await Task.FromResult(country);
     }
+    //Удаление элемента
     // DELETE api/country/5
     [HttpDelete("{id}")]
     public async Task<ActionResult<Country>> Delete(int id)
@@ -73,7 +78,7 @@ public class CountryController: ControllerBase
         var country = _ICountry.deleteCountry(id);
         return await Task.FromResult(country);
     }
-    
+    //Существует ли
     private bool CountryExists(int id)
     {
         return _ICountry.checkCountry(id);

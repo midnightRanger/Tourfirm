@@ -147,4 +147,19 @@ public class CountryController : Controller
         return RedirectToAction("CountryIndex", "Country", new { notification = response.Description });
 
     }
+    
+    [HttpGet]
+    public async Task<IActionResult> CountryDeleteConfirm(int id)
+    {
+        return View(await _countryRepository.getCountry(id));
+    }
+
+    
+    public async Task<IActionResult> CountryDelete(int id)
+    {
+        var response = await _countryService.DeleteCountry(await _countryRepository.getCountry(id));
+
+        return RedirectToAction("CountryIndex", "Country", new { notification = response.Description});
+        
+    }
 }

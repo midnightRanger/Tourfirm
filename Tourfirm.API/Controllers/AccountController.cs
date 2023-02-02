@@ -6,6 +6,7 @@ using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.API.Controllers;
 
+//Контроллер для работы с апи, данные - Аккаунт
 [Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/account")]
 [ApiController]
@@ -18,6 +19,7 @@ public class AccountController: ControllerBase
         _IAccount = IAccount; 
     }
     
+    //Получение элемента
     //get api/account 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<Account>>> Get()
@@ -25,6 +27,7 @@ public class AccountController: ControllerBase
         return await Task.FromResult(_IAccount.getAccounts()); 
     }
     
+    //Получение элементов
     //get api/account/5 
     [HttpGet("{id}")]
     public async Task<ActionResult<Account>> Get(int id)
@@ -35,6 +38,7 @@ public class AccountController: ControllerBase
         return accounts; 
     }
     
+    //добавление нового элемента
     //post api/account
     [HttpPost]
     public async Task<ActionResult<Account>> Post(Account account)
@@ -43,6 +47,7 @@ public class AccountController: ControllerBase
         return await Task.FromResult(account);
     }
     
+    //обновление элемента
     // PUT api/account/5
     [HttpPut("{id}")]
     public async Task<ActionResult<Account>> Put(int id, Account account)
@@ -68,6 +73,7 @@ public class AccountController: ControllerBase
         }
         return await Task.FromResult(account);
     }
+    //удаление элемента
     // DELETE api/account/5
     [HttpDelete("{id}")]
     public async Task<ActionResult<Account>> Delete(int id)
@@ -75,6 +81,7 @@ public class AccountController: ControllerBase
         var account = _IAccount.deleteAccount(id);
         return await Task.FromResult(account);
     }
+    //проверка существует ли
     private bool AccountExists(int id)
     {
         return _IAccount.checkAccount(id);
