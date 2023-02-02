@@ -96,4 +96,25 @@ public class CountryController : Controller
 
         return View("CountryIndex", await countries.AsNoTracking().ToListAsync());
     }
+    
+    [HttpGet]
+    public IActionResult CountryAdd() => View();
+
+    [HttpPost]
+    public async Task<IActionResult> CountryAdd(Country country)
+    {
+        if (!ModelState.IsValid)
+        {
+            return View(country);
+        }
+
+        var response = await _countryService.CreateCountry(country);
+
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+        {
+            return RedirectToAction("CountryIndex", "Country", new { notification = response.Description });
+        }
+        ModelState.AddModelError("", response.Description);
+        return RedirectToAction("CountryIndex", "Country", new { notification = response.Description });
+    }
 }
