@@ -12,11 +12,11 @@
 <table class="table">
   <thead>
   <tr>
-    <th scope="col"> <a asp-action="CountryIndex" asp-controller="Country" asp-country-sortCountry="@ViewBag.IdSort"> ID </a> </th>
-    <th scope="col"> <a asp-action="CountryIndex" asp-controller="Country" asp-country-sortCountry="@ViewBag.NameSort"> Name </a> </th>
-    <th scope="col"><a asp-action="CountryIndex" asp-controller="Country" asp-country-sortCountry="@ViewBag.LanguageSort"> Language </a></th>
-    <th scope="col"><a asp-action="CountryIndex" asp-controller="Country" asp-country-sortCountry="@ViewBag.MidTempSort"> Mid temp </a></th>
-    <th scope="col"><a asp-action="CountryIndex" asp-controller="Country" asp-country-sortCountry="@ViewBag.ClimateSort"> Climate </a></th>
+    <th scope="col"> <a asp-action="CountryIndex" asp-controller="Country" asp-route-sortCountry="@ViewBag.IdSort"> ID </a> </th>
+    <th scope="col"> <a asp-action="CountryIndex" asp-controller="Country" asp-route-sortCountry="@ViewBag.NameSort"> Name </a> </th>
+    <th scope="col"><a asp-action="CountryIndex" asp-controller="Country" asp-route-sortCountry="@ViewBag.LanguageSort"> Language </a></th>
+    <th scope="col"><a asp-action="CountryIndex" asp-controller="Country" asp-route-sortCountry="@ViewBag.MidTempSort"> Mid temp </a></th>
+    <th scope="col"><a asp-action="CountryIndex" asp-controller="Country" asp-route-sortCountry="@ViewBag.ClimateSort"> Climate </a></th>
     <th scope="col">Delete</th>
     <th scope="col">Update</th>
   </tr>
