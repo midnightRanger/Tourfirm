@@ -81,8 +81,27 @@ public class CountryService: ICountryService
         } 
     }
 
-    public Task<BaseResponse<bool>> DeleteCountry(Country country)
+    public async Task<BaseResponse<bool>> DeleteCountry(Country country)
     {
-        throw new NotImplementedException();
+        try
+        {
+            _countryRepository.deleteCountry(country.Id);
+             
+            return new BaseResponse<bool>()
+            {
+                Data = true,
+                StatusCode = StatusCode.OK,
+                Description = "Country delete procedure was successfully completed"
+            };
+        }
+        catch (Exception ex)
+        {
+            _logger.LogError(ex, $"[Deleting Country Procedure]: {ex.Message}");
+            return new BaseResponse<bool>()
+            {
+                Description = ex.Message,
+                StatusCode = StatusCode.InternalServerError
+            };
+        }
     }
 }
