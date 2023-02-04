@@ -1,7 +1,7 @@
 
 
 using Tourfirm.Domain.Entity;
-
+//интерфейс для CRUD функций  с маршрутами
 namespace Tourfirm.DAL.Interfaces;
 
 public interface IRoute

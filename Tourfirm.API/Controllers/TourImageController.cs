@@ -9,6 +9,7 @@ namespace Tourfirm.API.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/tourimage")]
 [ApiController]
+//Контроллер для работы с апи, данные - изображения тура
 public class TourImageController: ControllerBase
 {
     private readonly ITourImage _tourImage;

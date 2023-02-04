@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Tourfirm.Models;
 
 namespace Tourfirm.Domain.ViewModels;
-
+//добавление нового тура
 public class TourAddViewModel : ResponseModel.ReponseModel
 {
     [Required(ErrorMessage = "Fill the name field!")]

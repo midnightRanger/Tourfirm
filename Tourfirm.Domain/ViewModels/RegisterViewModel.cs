@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace Tourfirm.DAL.ViewModels;
-
+//модель для регистрации
 public class RegisterViewModel
 {
     [Required(ErrorMessage = "Fill the login field!")]

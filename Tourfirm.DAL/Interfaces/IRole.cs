@@ -1,7 +1,7 @@
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.DAL.Interfaces;
-
+//интерфейс для CRUD функций с ролями
 public interface IRole
 {
     public Task addRole(Role role);

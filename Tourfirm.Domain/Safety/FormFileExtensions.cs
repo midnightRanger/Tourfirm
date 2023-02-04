@@ -2,7 +2,7 @@ using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Http;
 
 namespace Tourfirm.Domain.Safety;
-
+//проверка корректности изображения
 public static class FormFileExtensions
 {
     public const int ImageMinimumBytes = 512;

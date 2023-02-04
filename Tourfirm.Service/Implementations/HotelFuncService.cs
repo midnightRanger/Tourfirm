@@ -8,7 +8,7 @@ using Tourfirm.Domain.ViewModels;
 using Tourfirm.Service.Interfaces;
 
 namespace Tourfirm.Service.Implementations;
-
+//Сервис для взаимодействия с отелями
 public class HotelFuncService : IHotelFuncService
 {
     private readonly IHotelProperties _hotelPropertiesRepository;

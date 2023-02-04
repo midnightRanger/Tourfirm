@@ -9,6 +9,7 @@ namespace Tourfirm.API.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/tourtype")]
 [ApiController]
+//Контроллер для работы с апи, данные - типы тура
 public class TourTypeController: ControllerBase
 {
     private readonly ITourType _tourType;

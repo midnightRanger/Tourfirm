@@ -23,6 +23,9 @@
                 <h5 class="card-title">@item.Name</h5>
                 <p class="card-text" >@item.Description</p>
                 <a href="#" class="btn btn-primary">Make order</a>
+                 <form method="get" asp-action="DeleteFromCart" asp-controller="Cart" asp-route-id="@item.Id">
+                                         <button type="submit" class="btn btn-sm btn-outline-secondary">Remove from cart </button>
+                                         </form>
                     
             </div>
         </div>

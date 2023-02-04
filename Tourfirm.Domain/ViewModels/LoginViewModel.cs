@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 
 namespace Tourfirm.DAL.ViewModels;
-
+//модель для входа в аккаунт 
 public class LoginViewModel
 {
     [Required(ErrorMessage = "Please, insert your email ")]

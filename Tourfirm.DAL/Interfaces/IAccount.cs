@@ -2,6 +2,7 @@ using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.DAL.Interfaces;
 
+//интерфейс для CRUD функций 
 public interface IAccount
 {
     public Task addAccount(Account account);

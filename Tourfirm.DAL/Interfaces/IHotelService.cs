@@ -1,7 +1,7 @@
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.DAL.Interfaces;
-
+//интерфейс для CRUD функций с услугами отеля
 public interface IHotelService
 {
     public Task addHotelService(HotelService hotel);

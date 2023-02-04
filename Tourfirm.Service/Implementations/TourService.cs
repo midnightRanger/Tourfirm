@@ -10,7 +10,7 @@ using Tourfirm.Domain.ViewModels;
 using Tourfirm.Service.Interfaces;
 
 namespace Tourfirm.Service.Implementations;
-
+//Сервис с функциями для туров 
 public class TourService : ITourService
 {
     private readonly ILogger<TourService> _logger;

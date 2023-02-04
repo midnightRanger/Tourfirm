@@ -1,7 +1,7 @@
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.Domain.ViewModels;
-
+//добавление услуг отеля
 public class HotelServiceAddViewModel
 {
     public int HotelPropertiesId { get; set; }

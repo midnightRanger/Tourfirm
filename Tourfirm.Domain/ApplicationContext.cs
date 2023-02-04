@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.DAL;
-
+//класс для взаимодействия с сущностями в БД
 public class ApplicationContext : DbContext
 {
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)

@@ -11,6 +11,7 @@ namespace Tourfirm.Controllers;
 public class AdminController : Controller
 {
     string Set = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "set " : "export ";
+   //Создание бэкапа
     public async Task PostgreSqlRestore(
         string inputFile,
         string host,
@@ -32,7 +33,7 @@ public class AdminController : Controller
 
         await Execute(dumpCommand);
     }
-    
+    //Запуск скрипта
     private Task Execute(string dumpCommand)
     {
         return Task.Run(() =>
@@ -98,6 +99,7 @@ public class AdminController : Controller
     {
         return View("Admin"); 
     }
+    //Создание бэкапа
     public async Task<FileResult> PostgreSqlDump(
         string outFile,
         string host,

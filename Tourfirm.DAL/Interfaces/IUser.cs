@@ -1,7 +1,7 @@
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.DAL.Interfaces;
-
+//интерфейс для CRUD функций с пользователями
 public interface IUser
 {
     public Task addUser(User user);

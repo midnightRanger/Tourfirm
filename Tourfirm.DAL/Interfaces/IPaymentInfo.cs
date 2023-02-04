@@ -1,7 +1,7 @@
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.DAL.Interfaces;
-
+//интерфейс для CRUD функций с платежной информацией 
 public interface IPaymentInfo
 {
     public Task addPaymentInfo(PaymentInfo paymentInfo);

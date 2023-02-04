@@ -7,7 +7,7 @@ using Tourfirm.Domain.Safety;
 using Tourfirm.Service.Interfaces;
 
 namespace Tourfirm.Service.Implementations;
-
+//Сервис для взаимодействия с корзинами
 public class CartService : ICartService
 {
     private readonly ICart _cartRepository;

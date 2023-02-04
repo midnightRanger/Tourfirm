@@ -7,7 +7,7 @@ using Tourfirm.Domain.Safety;
 using Tourfirm.Service.Interfaces;
 
 namespace Tourfirm.Service.Implementations;
-
+//Сервис с функциями для типов туров 
 public class TourTypeService : ITourTypeService
 {
     private readonly ITourType _tourTypeRepository;

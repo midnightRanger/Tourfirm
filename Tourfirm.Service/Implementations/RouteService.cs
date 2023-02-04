@@ -7,7 +7,7 @@ using Tourfirm.Domain.Safety;
 using Tourfirm.Service.Interfaces;
 
 namespace Tourfirm.Service.Implementations;
-
+//Сервис с функциями для маршрута
 public class RouteService : IRouteService
 {
     private readonly ILogger<RouteService> _logger;

@@ -3,7 +3,7 @@ using Tourfirm.DAL.Interfaces;
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.DAL.Repositories;
-
+//репозиторий, имплементирующий интерфейс
 public class PaymentInfoRepository : IPaymentInfo
 {
     private ApplicationContext _db = new();

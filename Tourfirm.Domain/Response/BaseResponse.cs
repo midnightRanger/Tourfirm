@@ -2,7 +2,7 @@ using GameStop;
 using Tourfirm.Domain.Safety;
 
 namespace Tourfirm.Domain.Response;
-
+//Обертка для вывода нормального ответа
 public class BaseResponse<T> : IBaseResponse<T>
 {
     public string Description { get; set; }        

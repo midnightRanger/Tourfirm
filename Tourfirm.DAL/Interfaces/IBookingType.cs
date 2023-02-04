@@ -2,6 +2,7 @@ using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.DAL.Interfaces;
 
+//интерфейс для CRUD функций - типы бронирования
 public interface IBookingType
 {
     public Task addBookingType(BookingType bookingType);

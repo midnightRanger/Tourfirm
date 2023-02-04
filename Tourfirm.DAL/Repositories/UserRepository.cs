@@ -3,7 +3,7 @@ using Tourfirm.DAL.Interfaces;
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.DAL.Repositories;
-
+//репозиторий, имплементирующий интерфейс
 public class UserRepository : IUser
 {
     private readonly ApplicationContext _db = new();

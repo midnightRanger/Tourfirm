@@ -10,7 +10,7 @@ using Tourfirm.Domain.Response;
 using Tourfirm.Domain.Safety;
 
 namespace Tourfirm.Service.Implementations;
-
+//Сервис для взаимодействия с аккаунтами
 public class AuthService: IAuthService
 {
     

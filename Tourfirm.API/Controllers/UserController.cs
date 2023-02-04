@@ -9,6 +9,7 @@ namespace Tourfirm.API.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/user")]
 [ApiController]
+//Контроллер для работы с апи, данные - пользователи
 public class UserController: ControllerBase
 {
     private readonly IUser _IUser;

@@ -1,5 +1,5 @@
 namespace Tourfirm.Domain.Safety;
-
+//список статус-кодов
 public enum StatusCode
 {
     UserNotFound = 0,

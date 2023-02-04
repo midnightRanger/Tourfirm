@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.Domain.ViewModels;
-
+//модель для изменения нового тура
 public class TourUpdateViewModel
 {
     public int? Id { get; set; }

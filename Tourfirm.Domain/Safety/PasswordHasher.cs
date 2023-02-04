@@ -3,7 +3,7 @@ using System.Security.Cryptography;
 using System.Text;
 
 namespace GameStop.Models.Safety;
-
+//хэширование паролей
 public static class PasswordHasher
 {
    public static string HashPassword(string password)

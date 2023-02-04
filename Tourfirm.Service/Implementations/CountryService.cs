@@ -7,7 +7,7 @@ using Tourfirm.Domain.Safety;
 using Tourfirm.Service.Interfaces;
 
 namespace Tourfirm.Service.Implementations;
-
+//Сервис для взаимодействия со странами
 public class CountryService: ICountryService
 {
     private readonly ICountry _countryRepository;

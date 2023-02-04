@@ -13,7 +13,7 @@ using Tourfirm.Service.Interfaces;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
 namespace Tourfirm.UnitTests.ViewTests;
-
+//Тест на отображение представления и проверку модели
 [TestClass]
 public class TourControllerTest
 {

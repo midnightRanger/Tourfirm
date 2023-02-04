@@ -2,7 +2,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.Domain.ViewModels;
-
+//модель для изменения роли
 public class UserRoleUpdateViewModel
 {
     public int Id {get; set; }

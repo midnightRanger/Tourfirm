@@ -1,7 +1,7 @@
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.DAL.Interfaces;
-
+//интерфейс для CRUD функций с изображениями туров
 public interface ITourImage
 {
     public Task addTourImage(TourImage tourImage);

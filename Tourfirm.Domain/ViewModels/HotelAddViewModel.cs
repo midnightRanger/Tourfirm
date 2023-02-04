@@ -2,7 +2,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Tourfirm.Domain.ViewModels;
-
+//модель для добавления отеля
 public class HotelAddViewModel
 {
     public int Id { get; set; }
