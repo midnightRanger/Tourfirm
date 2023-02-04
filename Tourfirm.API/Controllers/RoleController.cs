@@ -9,6 +9,7 @@ namespace Tourfirm.API.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/role")]
 [ApiController]
+//Контроллер для работы с апи, данные - Роли
 public class RoleController: ControllerBase
 {
     private readonly IRole _IRole;

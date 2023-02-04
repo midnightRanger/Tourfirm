@@ -72,6 +72,7 @@
           <a class="nav-link" href=@Url.Action("MainStats", "Stats")>Stats</a>
           <a class="nav-link" href=@Url.Action("HotelIndex", "Hotel")>Hotels</a>
           <a class="nav-link" href=@Url.Action("RouteIndex", "Route")>Routes</a>
+          <a class="nav-link" href=@Url.Action("CountryIndex", "Country")>Countries</a>
         }
         @if (User.IsInRole("ADMIN") || User.IsInRole("MODERATOR"))
         {
@@ -82,6 +83,7 @@
         {
           <a class="nav-link" href=@Url.Action("PostgreSqlDump", "Admin")>Admin panel</a>
         }
+        
       </nav>
     </div>
   }

@@ -13,6 +13,7 @@ namespace Tourfirm.API.Controllers;
 
 [Route("api/token")]
 [ApiController]
+//Контроллер для работы с апи, данные - Токены
 public class TokenController : ControllerBase
 {
     

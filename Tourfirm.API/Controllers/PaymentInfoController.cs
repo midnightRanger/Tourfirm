@@ -9,6 +9,7 @@ namespace Tourfirm.API.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/paymentinfo")]
 [ApiController]
+//Контроллер для работы с апи, данные - Платежная информация
 public class PaymentInfoController: ControllerBase
 {
     private readonly IPaymentInfo _IPaymentInfo;

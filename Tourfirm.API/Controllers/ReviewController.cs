@@ -9,6 +9,7 @@ namespace Tourfirm.API.Controllers;
 [Authorize(AuthenticationSchemes = "Bearer")]
 [Route("api/review")]
 [ApiController]
+//Контроллер для работы с апи, данные - Обзоры
 public class ReviewController: ControllerBase
 {
     private readonly IReview _IReview;
