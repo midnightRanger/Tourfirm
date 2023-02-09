@@ -27,9 +27,13 @@ public class CartController : Controller
     }
 
     [HttpGet]
-    public async Task<IActionResult> Cart()
+    public async Task<IActionResult> Cart(string? notification)
     {
+        if(notification != null)
+            ModelState.AddModelError("", notification);
+
         User? user = _userList.FirstOrDefault(u => u.Account?.Login == User.Identity.Name);
+        
         return View(user.Cart); 
     }
     

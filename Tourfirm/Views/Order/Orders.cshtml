@@ -1,0 +1,36 @@
+@model IEnumerable<Tourfirm.Domain.Entity.Cheque>
+
+@{
+    ViewBag.Title = "Cheque";
+    Layout = "_Layout";
+}
+
+<head>
+    <link href="~/css/grid.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    @if (!ViewData.ModelState.IsValid)
+        {
+          <div class="validation alert alert-info mb-md-5 padding-md" asp-validation-summary="All"></div>
+        }
+    <h1 class="display-1">Your orders here</h1>
+
+
+    @foreach (var item in Model)
+    {
+        <p class="lead">Cheque - @item.DateTime </p>
+        <p class="lead">Sum: @item.Sum </p>
+        @foreach (var tour in item.Tours)
+        {
+            <div class="row">
+                <div class="col-4">@tour.Name </div>
+                <div class="col-4">@tour.Description</div>
+            </div>
+        }
+        <hr/>
+    }
+
+</div>
+
+</body>

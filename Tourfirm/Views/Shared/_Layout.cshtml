@@ -26,6 +26,9 @@
         <li class="nav-item">
           <a class="nav-link" href=@Url.Action("Cart", "Cart")>Cart</a>
         </li>
+        <li class="nav-item">
+                  <a class="nav-link" aria-current="page" href=@Url.Action("Orders", "Order") >Cheques </a>
+                </li>
         @if (User.IsInRole("ADMIN") || User.IsInRole("MANAGER"))
         {
           <li class="nav-item">

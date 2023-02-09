@@ -29,6 +29,12 @@
             <textarea class="form-control" id="inputDescription" name="Description" placeholder="Description"></textarea>
             <span asp-validation-for="Description"></span>
         </div>
+        
+         <div class="form-group col-md-6">
+                    <label for="inputCost">Cost</label>
+                    <input type="number" step="0.1" class="form-control" id="inputCost" asp-for="Cost" name="Cost" placeholder="Cost">
+                    <span asp-validation-for="Cost"></span>
+                </div>
     </div>
     <div class="form-row">
         <div class="form-group">

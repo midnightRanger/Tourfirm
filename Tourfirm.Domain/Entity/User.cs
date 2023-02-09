@@ -12,6 +12,7 @@ public class User
     public double? Balance { get; set; }
     public int AccountId { get; set; }
     public Account? Account { get; set;  }
+    public List<Cheque> Cheques { get; set; } = new();
 
     public List<Review> Reviews { get; set; } = new();
     

@@ -36,6 +36,7 @@ builder.Services.AddTransient<ITour, TourRepository>();
 builder.Services.AddTransient<ITourImage, TourImageRepository>();
 builder.Services.AddTransient<ITourType, TourTypeRepository>();
 builder.Services.AddTransient<IBookingType, BookingRepository>();
+builder.Services.AddTransient<ICheque, ChequeRepository>();
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITourService, TourService>();
@@ -44,6 +45,7 @@ builder.Services.AddScoped<ITourTypeService, TourTypeService>();
 builder.Services.AddScoped<IHotelFuncService, HotelFuncService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddScoped<ICountryService, CountryService>();
+builder.Services.AddScoped<IOrderService, OrderService>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthorization();
@@ -88,7 +90,7 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
         options.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/Auth/Login");
         
     });
-
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -123,7 +125,7 @@ app.Use(async (context, next) =>
     context.Response.Headers.Add("X-Frame-Options", "ALLOW-FROM https://www.youtube.com/");
     await next.Invoke();
 });
-AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
 
 app.MapControllerRoute(
     name: "default",

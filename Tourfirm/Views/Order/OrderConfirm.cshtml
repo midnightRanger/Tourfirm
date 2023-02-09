@@ -1,0 +1,31 @@
+@model Tourfirm.Domain.Entity.Cart
+
+@{
+    ViewBag.Title = "Confirm order";
+    Layout = "_Layout";
+}
+<head>
+    <link href="~/css/grid.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    @if (!ViewData.ModelState.IsValid)
+    {
+      <div class="validation alert alert-info mb-md-5 padding-md" asp-validation-summary="All"></div>
+    }
+    <h1 class="display-1">Please, check the order description</h1>
+
+
+    @foreach (var item in Model.Tours)
+    {
+        <div class="row">
+            <div class="col-4">@item.Name </div>
+            <div class="col-4">@item.Cost</div>
+        </div>
+    }
+    <form method="post" asp-action="MakeOrder" asp-controller="Order">
+        <button type="submit" class="btn btn-sm btn-outline-secondary" style="margin-top: 1em; width: 100%"> Confirm Order </button>
+    </form>
+</div>
+
+</body>

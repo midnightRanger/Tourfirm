@@ -12,23 +12,31 @@
 {
     <div class="validation alert alert-danger mb-md-5 padding-md" asp-validation-summary="All"></div>
 }
-<h2>title</h2>
+
+<h2 class="lead" style="padding-top: 1em">Your cart: </h2>
+<hr/>
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-@foreach (var item in Model.Tours)
-{
-    <div class="col" >
-        <div class="card" style="height:100%">
-            <img class="card-img-top" src=@Url.Content(item.TourImages[0].Path) style="height: 225px" alt="Card image cap">
-            <div class="card-body">
-                <h5 class="card-title">@item.Name</h5>
-                <p class="card-text" >@item.Description</p>
-                <a href="#" class="btn btn-primary">Make order</a>
-                 <form method="get" asp-action="DeleteFromCart" asp-controller="Cart" asp-route-id="@item.Id">
-                                         <button type="submit" class="btn btn-sm btn-outline-secondary">Remove from cart </button>
-                                         </form>
+    @foreach (var item in Model.Tours)
+    {
+        <div class="col" >
+            <div class="card" style="height:100%">
+                <img class="card-img-top" src=@Url.Content(item.TourImages[0].Path) style="height: 225px" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text" >@item.Description</p>
                     
+                    <form method="get" asp-action="DeleteFromCart" asp-controller="Cart" asp-route-id="@item.Id">
+                        <button type="submit" class="btn btn-sm btn-outline-secondary" style="width:100%;" >Remove from cart </button>
+                    </form>
+                
+                
+                    
+                </div>
             </div>
         </div>
-    </div>
-}   
+    }   
 </div>
+
+<form method="get" asp-action="OrderConfirm" asp-controller="Order">
+    <button type="submit" class="btn btn-sm btn-outline-secondary" style="margin-top: 1em; width: 100%"> Make order </button>
+</form>

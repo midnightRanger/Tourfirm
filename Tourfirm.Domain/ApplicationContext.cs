@@ -7,7 +7,7 @@ public class ApplicationContext : DbContext
 {
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
-      
+        
         Database.EnsureCreated();
     }
 
@@ -145,5 +145,6 @@ public class ApplicationContext : DbContext
     public DbSet<TourImage> TourImage { get; set; } = null!;
     public DbSet<TourType> TourType { get; set; } = null!;
     public DbSet<User> User { get; set; } = null!;
-    public DbSet<BookingType> BookingType { get; set; } = null!; 
+    public DbSet<BookingType> BookingType { get; set; } = null!;
+    public DbSet<Cheque> Cheque { get; set; } = null!; 
 }
