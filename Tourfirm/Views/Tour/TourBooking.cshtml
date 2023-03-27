@@ -9,27 +9,63 @@
 
 @* <form asp-controller="Hotel" asp-action="HotelService" asp-route-id="@Model.HotelId" method="post" enctype="multipart/form-data"> *@
 <div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
-
-<div class="row">
+<form asp-action="TourBookingServiceAdd" asp-controller="Tour">
     
-        <div class="col">
-            <div class="form-group col-md-6">
-                <label for="inputService"> Service name </label>
-                <select id="inputService" name="serviceId" class="form-control" asp-items="@Model.AllService"></select>
-            </div>
-            <div class="form-group col-md-6">
-                <label for="inputCost"> Cost </label>
-                @* <input type="number" step="0.1" class="form-control" id="inputCost" asp-for="Cost" placeholder="3000.0, 2000.0"/> *@
-                @* <span asp-validation-for="Cost"></span> *@
-            </div>
-            <div style="margin-top: 1em">
-                <button type="submit" class="btn btn-primary margin-md w-100">Add Service</button>
-            </div>
-        </div>
-        <div class="col">
-            <p> HIII</p>
-        </div>
+    <div class="text-center">
+        <h3> Toor Booking</h3>
     </div>
+    <div class="row">
+    <div class="col">
+        <div class="form-group col-md-6">
+            <label for="inputService"> Service name </label>
+            <select id="inputService" name="serviceId" asp-for="ServiceId" class="form-control" asp-items="@Model.AllService"></select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputCost"> Cost </label>
+            @* <input type="number" step="0.1" class="form-control" id="inputCost" asp-for="Cost" placeholder="3000.0, 2000.0"/> *@
+            @* <span asp-validation-for="Cost"></span> *@
+        </div>
+        
+        @if (Model.SelectedServices.Count != 0)
+                {
+                    @foreach (var service in Model.SelectedServices)
+                    {
+                        <div class="card" style="margin-top: 0.5em">
+                            <div class="card-header">
+                                Service:
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text"> @service.Name - @service.Cost</p>
+                                <a asp-action="TourBookingServiceRemove" asp-controller="Tour" asp-route-id="@service.Id" style="padding: 10px; width: 100%" class="btn btn-danger"> Delete </a>
+                            </div>
+                        </div>
+                    }
+                }
+                else
+                {
+                    <div>
+                        Choose the hotel service upper! 
+                    </div>
+                }
+        
+        <h1 class="display-4">Total Cost for Services: @Model.TotalServiceCost </h1> 
+        
+        <div style="margin-top: 1em">
+            <button type="submit" class="btn btn-primary margin-md w-100">Add Service</button>
+        </div>
+        
+    </div>
+        
+    <div class="col">
+        <label for="arrivalInput" class="form-label"> Arrival time </label>
+        <input type="date" id="arrivalInput" name="ArrivalTime" asp-for="ArrivalTime" class="form-control" >
+        
+        <label for="inputSleepingPlaceValue" class="form-label"> Sleep Place's Value </label>
+        <input type="number" id="inputSleepingPlaceValue" name="Sleep" asp-for="SleepingPlaceValue"  min="1" max="10" class="form-control" >
+    </div>
+    
+</div>
+</form>
     @* @if (Model.HotelServices.Count == 0) *@
     @*                { *@
     @*                  <div> There are no services:(</div> *@
@@ -40,17 +76,17 @@
     @* *@
     @*                 @foreach (var service in Model.HotelServices) *@
     @*                 { *@
-    @*                     <div class="card" style="margin-top: 0.5em"> *@
-    @*                         <div class="card-header"> *@
-    @*                             Update this service *@
-    @*                         </div> *@
-    @*                         <div class="card-body"> *@
-    @*                             <p class="card-text"> @service.Name - @service.Cost</p> *@
-    @*                            <a asp-action="HotelServiceRemove" asp-controller="Hotel" asp-route-hotelId="@Model.HotelId" asp-route-id="@service.Id" style="padding: 10px; width: 100%" class="btn btn-danger"> Delete </a> *@
-    @*                             <a asp-action="HotelServiceUpdate" asp-controller="Hotel" methods="get" asp-route-id="@service.Id" style="padding: 10px; width: 100%; margin-top: 0.5em" class="btn btn-secondary"> Update </a> *@
-    @*                                                           *@
-    @*                             </div> *@
-    @*                     </div> *@
+    @* <div class="card" style="margin-top: 0.5em"> *@
+    @*     <div class="card-header"> *@
+    @*         Update this service *@
+    @*     </div> *@
+    @*     <div class="card-body"> *@
+    @*         <p class="card-text"> @service.Name - @service.Cost</p> *@
+    @*        <a asp-action="HotelServiceRemove" asp-controller="Hotel" asp-route-hotelId="@Model.HotelId" asp-route-id="@service.Id" style="padding: 10px; width: 100%" class="btn btn-danger"> Delete </a> *@
+    @*         <a asp-action="HotelServiceUpdate" asp-controller="Hotel" methods="get" asp-route-id="@service.Id" style="padding: 10px; width: 100%; margin-top: 0.5em" class="btn btn-secondary"> Update </a> *@
+    @* *@
+    @*         </div> *@
+    @* </div> *@
     @*                 } *@
     @*             </div> *@
     @*         }   *@

@@ -21,4 +21,5 @@ public class TourBooking
     
     public bool IsConfirmed { get; set; }
     
+    
 }

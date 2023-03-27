@@ -37,6 +37,7 @@ builder.Services.AddTransient<ITourImage, TourImageRepository>();
 builder.Services.AddTransient<ITourType, TourTypeRepository>();
 builder.Services.AddTransient<IBookingType, BookingRepository>();
 builder.Services.AddTransient<ICheque, ChequeRepository>();
+builder.Services.AddTransient<ITourBooking, TourBookingRepository>(); 
 
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<ITourService, TourService>();

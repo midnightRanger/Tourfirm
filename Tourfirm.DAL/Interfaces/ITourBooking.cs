@@ -1,15 +1,17 @@
+using Tourfirm.Domain.Entity;
+
 namespace Tourfirm.DAL.Interfaces;
 
 public interface ITourBooking
 {
-    public Task addBookingType(BookingType bookingType);
-    public void updateBookingType(BookingType bookingType);
-    public BookingType deleteBookingType(in int id);
+    public Task addTourBooking(TourBooking tourBooking);
+    public void updateTourBooking(TourBooking tourBooking);
+    public TourBooking deleteTourBooking(in int id);
     
-    public bool checkBookingType(int id);
+    public bool checkTourBooking(int id);
 
-    public Task<List<BookingType>> getBookingTypes();
-    public Task<BookingType> getBookingType(int id);
+    public Task<List<TourBooking>> getTourBookings();
+    public Task<TourBooking> getTourBooking(int id);
     
-    public IQueryable<BookingType> getAll(); 
+    public IQueryable<TourBooking> getQuery(); 
 }

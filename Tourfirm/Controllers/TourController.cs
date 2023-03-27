@@ -1,5 +1,6 @@
 using System.Globalization;
 using CsvHelper;
+using CsvHelper.Configuration.Attributes;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
@@ -29,13 +30,14 @@ public class TourController : Controller
     private readonly IRoute? _routeRepository;
     private readonly ITourService? _tourService;
     private readonly ITourImage? _tourImageRepository;
-    private readonly IHotelService _hotelService; 
+    private readonly IHotelService _hotelService;
+    private readonly ITourBooking _tourBookingRepository;
   
 
     public TourController(ILogger<TourController> logger, ITour tourRepository,
         IUser userRepository, IReview reviewRepository, IHotel hotelRepository, 
         ITourType tourTypeRepository, ICountry countryRepository, IRoute routeRepository,
-        ITourImage tourImageRepository, ITourService tourService, IHotelService hotelService)
+        ITourImage tourImageRepository, ITourService tourService, IHotelService hotelService, ITourBooking tourBookingRepository)
     {
         _logger = logger;
         _tourRepository = tourRepository;
@@ -48,6 +50,7 @@ public class TourController : Controller
         _tourImageRepository = tourImageRepository;
         _tourService = tourService;
         _hotelService = hotelService;
+        _tourBookingRepository = tourBookingRepository;
     }
 
     [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
@@ -258,18 +261,66 @@ public class TourController : Controller
                     return File(result, "application/force-download", "tours.csv");
     }
 
+    public async Task<IActionResult> TourBookingServiceAdd(TourBookingViewModel tourBookingViewModel)
+    {
+        TourBooking tourBooking = await _tourBookingRepository.getQuery()
+            .SingleOrDefaultAsync(t => t.TourId == (int)TempData["tourId"]);
+        
+        tourBooking.HotelServices.Add(await _hotelService.getHotelService(tourBookingViewModel.ServiceId));
+       
+        _tourBookingRepository.updateTourBooking(tourBooking);
+
+        return RedirectToAction("TourBooking", "Tour", new { id = (int)TempData["tourId"] });
+    }
+
+    public async Task<IActionResult> TourBookingServiceRemove(int id)
+    {
+        TourBooking tourBooking = await _tourBookingRepository.getQuery()
+            .SingleOrDefaultAsync(t => t.TourId == (int)TempData["tourId"]);
+        
+        tourBooking.HotelServices.Remove(await _hotelService.getHotelService(id));
+       
+        _tourBookingRepository.updateTourBooking(tourBooking);
+        
+        return RedirectToAction("TourBooking", "Tour", new { id = (int)TempData["tourId"] });
+    }
+
     public async Task<IActionResult> TourBooking(int id)
     {
+        bool isTourBookingExist = false;
         Tour tour = await _tourRepository.getAll().Include(t => t.Hotel).ThenInclude(t => t.HotelProperties)
             .ThenInclude(t => t.HotelServices).Where(t=>t.Id == id).SingleOrDefaultAsync();
         
         TourBookingViewModel model = new TourBookingViewModel();
         model.AllService = new(tour.Hotel.HotelProperties.HotelServices, nameof(HotelService.Id), nameof(HotelService.Name));
+
+
+
+        var  user = await _userRepository.getAll().Include(u => u.TourBookings).ThenInclude(t=>t.HotelServices).Include(u=>u.Account).SingleOrDefaultAsync(u=>u.Account.Login == User.Identity.Name);
+
+        foreach (var tourBooking in user.TourBookings)
+        {
+            if (tourBooking.TourId == id);
+            {
+                model.SelectedServices = tourBooking.HotelServices;
+                isTourBookingExist = true;
+                break; 
+            }
+        }
+
+        if (isTourBookingExist == false)
+        {
+            await _tourBookingRepository.addTourBooking(new TourBooking()
+            {
+                UserId = user.Id, TourId = id
+            }); 
+        }
+
+        foreach (var service in model.SelectedServices)
+            model.TotalServiceCost += service.Cost; 
         
-        TourBooking? tourBooking = _
-        if ()
+        TempData["tourId"] = id;
         
-            
         return View(model); 
     }
 }

@@ -146,5 +146,6 @@ public class ApplicationContext : DbContext
     public DbSet<TourType> TourType { get; set; } = null!;
     public DbSet<User> User { get; set; } = null!;
     public DbSet<BookingType> BookingType { get; set; } = null!;
-    public DbSet<Cheque> Cheque { get; set; } = null!; 
+    public DbSet<Cheque> Cheque { get; set; } = null!;
+    public DbSet<TourBooking> TourBooking { get; set; } = null!; 
 }
