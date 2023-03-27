@@ -1,0 +1,55 @@
+@model Tourfirm.Domain.ViewModels.TourBookingViewModel
+
+@{
+    ViewBag.Title = "Tour Booking";
+    Layout = "_Layout";
+}
+
+<body>
+ 
+@* <form asp-controller="Hotel" asp-action="HotelService" asp-route-id="@Model.HotelId" method="post" enctype="multipart/form-data"> *@
+<div class="alert alert-danger" asp-validation-summary="ModelOnly"></div>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <label for="inputService"> Service name </label>
+             <select id="inputService" name="serviceId" class="form-control" asp-items="@Model.AllService"></select>
+        </div>
+        <div class="form-group col-md-6">
+            <label for="inputCost"> Cost </label>
+            @* <input type="number" step="0.1" class="form-control" id="inputCost" asp-for="Cost" placeholder="3000.0, 2000.0"/> *@
+            @* <span asp-validation-for="Cost"></span> *@
+        </div>
+        <div style="margin-top: 1em">
+                <button type="submit" class="btn btn-primary margin-md w-100">Add Service</button>
+            </div>
+       
+         @* @if (Model.HotelServices.Count == 0) *@
+         @*                { *@
+         @*                  <div> There are no services:(</div> *@
+         @*                } *@
+         @*         else *@
+         @*         { *@
+         @*             <div > *@
+         @* *@
+         @*                 @foreach (var service in Model.HotelServices) *@
+         @*                 { *@
+         @*                     <div class="card" style="margin-top: 0.5em"> *@
+         @*                         <div class="card-header"> *@
+         @*                             Update this service *@
+         @*                         </div> *@
+         @*                         <div class="card-body"> *@
+         @*                             <p class="card-text"> @service.Name - @service.Cost</p> *@
+         @*                            <a asp-action="HotelServiceRemove" asp-controller="Hotel" asp-route-hotelId="@Model.HotelId" asp-route-id="@service.Id" style="padding: 10px; width: 100%" class="btn btn-danger"> Delete </a> *@
+         @*                             <a asp-action="HotelServiceUpdate" asp-controller="Hotel" methods="get" asp-route-id="@service.Id" style="padding: 10px; width: 100%; margin-top: 0.5em" class="btn btn-secondary"> Update </a> *@
+         @*                                                           *@
+         @*                             </div> *@
+         @*                     </div> *@
+         @*                 } *@
+         @*             </div> *@
+         @*         }   *@
+        
+        
+    </div>
+@* </form> *@
+
+</body>

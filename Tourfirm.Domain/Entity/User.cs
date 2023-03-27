@@ -15,6 +15,7 @@ public class User
     public List<Cheque> Cheques { get; set; } = new();
 
     public List<Review> Reviews { get; set; } = new();
+    public List<TourBooking> TourBookings { get; set; } = new();
     
     public Cart? Cart { get; set; }
     

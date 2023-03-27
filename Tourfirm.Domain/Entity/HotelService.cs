@@ -11,4 +11,6 @@ public class HotelService
     
     public int HotelPropertiesId { get; set; }
     public HotelProperties? HotelProperties { get; set; }
+
+    public List<TourBooking> TourBookings { get; set; } = new(); 
 }

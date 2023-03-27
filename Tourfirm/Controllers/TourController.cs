@@ -29,12 +29,13 @@ public class TourController : Controller
     private readonly IRoute? _routeRepository;
     private readonly ITourService? _tourService;
     private readonly ITourImage? _tourImageRepository;
+    private readonly IHotelService _hotelService; 
   
 
     public TourController(ILogger<TourController> logger, ITour tourRepository,
         IUser userRepository, IReview reviewRepository, IHotel hotelRepository, 
         ITourType tourTypeRepository, ICountry countryRepository, IRoute routeRepository,
-        ITourImage tourImageRepository, ITourService tourService)
+        ITourImage tourImageRepository, ITourService tourService, IHotelService hotelService)
     {
         _logger = logger;
         _tourRepository = tourRepository;
@@ -46,6 +47,7 @@ public class TourController : Controller
         _routeRepository = routeRepository;
         _tourImageRepository = tourImageRepository;
         _tourService = tourService;
+        _hotelService = hotelService;
     }
 
     [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
@@ -254,5 +256,16 @@ public class TourController : Controller
                     var result = ms.ToArray();
                     ms.Close();
                     return File(result, "application/force-download", "tours.csv");
+    }
+
+    public async Task<IActionResult> TourBooking(int id)
+    {
+        Tour tour = await _tourRepository.getAll().Include(t => t.Hotel).ThenInclude(t => t.HotelProperties)
+            .ThenInclude(t => t.HotelServices).Where(t=>t.Id == id).SingleOrDefaultAsync();
+        
+        TourBookingViewModel model = new TourBookingViewModel();
+        model.AllService = new(tour.Hotel.HotelProperties.HotelServices, nameof(HotelService.Id), nameof(HotelService.Name));
+
+        return View(model); 
     }
 }
