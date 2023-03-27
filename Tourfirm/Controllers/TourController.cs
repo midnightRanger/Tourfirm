@@ -265,7 +265,11 @@ public class TourController : Controller
         
         TourBookingViewModel model = new TourBookingViewModel();
         model.AllService = new(tour.Hotel.HotelProperties.HotelServices, nameof(HotelService.Id), nameof(HotelService.Name));
-
+        
+        TourBooking? tourBooking = _
+        if ()
+        
+            
         return View(model); 
     }
 }
