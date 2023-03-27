@@ -29,7 +29,9 @@
                         <button type="submit" class="btn btn-sm btn-outline-secondary" style="width:100%;" >Remove from cart </button>
                     </form>
                     
-                    <form 
+                    <form method="get" asp-action="TourBooking" asp-controller="Tour" asp-route-id="@item.Id">
+                         <button type="submit" class="btn btn-sm btn-outline-secondary" style="width:100%;" >Book this! </button>
+                    </form>
                 
                 
                     
