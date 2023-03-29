@@ -20,6 +20,7 @@ public class TourBooking
     public int  SleepingPlaceValue { get; set; }
     
     public bool IsConfirmed { get; set; }
+    public bool IsOnModerate { get; set; }
     
     
 }

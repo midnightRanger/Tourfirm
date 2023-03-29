@@ -9,6 +9,7 @@ public class Hotel
     public string? Name { get; set; }
     public double Rate { get; set; }
     
+    public double CostForBed { get; set; }
     public int HotelPropertiesId { get; set; }
     public HotelProperties? HotelProperties { get; set; }
 

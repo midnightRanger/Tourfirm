@@ -84,9 +84,9 @@ public class ApplicationContext : DbContext
             
             modelBuilder.Entity<Hotel>().HasData(new[]
             {
-               new Hotel() { Id = 1, Name = "Volga", Rate = 3.3, HotelPropertiesId = 1}, 
-               new Hotel() {Id=2, Name = "El Sapacho", Rate = 4.4, HotelPropertiesId = 2},
-               new Hotel() {Id=3, Name="HeavyHeaven", Rate = 2.0, HotelPropertiesId = 3}
+               new Hotel() { Id = 1, Name = "Volga", Rate = 3.3, HotelPropertiesId = 1, CostForBed = 1000}, 
+               new Hotel() {Id=2, Name = "El Sapacho", Rate = 4.4, HotelPropertiesId = 2, CostForBed = 1000},
+               new Hotel() {Id=3, Name="HeavyHeaven", Rate = 2.0, HotelPropertiesId = 3, CostForBed = 1000}
             });
             
             modelBuilder.Entity<TourType>().HasData(new[]

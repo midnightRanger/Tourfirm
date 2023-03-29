@@ -67,6 +67,4 @@ public class CartController : Controller
         }
         return RedirectToAction("Main", "Home", new { error = "User is null!"  });
     }
-    
-    
 }

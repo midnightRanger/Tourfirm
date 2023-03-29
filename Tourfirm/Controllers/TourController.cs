@@ -275,7 +275,7 @@ public class TourController : Controller
 
     public async Task<IActionResult> TourBookingServiceRemove(int id)
     {
-        TourBooking tourBooking = await _tourBookingRepository.getQuery()
+        TourBooking tourBooking = await _tourBookingRepository.getQuery().Include(t=>t.HotelServices)
             .SingleOrDefaultAsync(t => t.TourId == (int)TempData["tourId"]);
         
         tourBooking.HotelServices.Remove(await _hotelService.getHotelService(id));
@@ -285,39 +285,65 @@ public class TourController : Controller
         return RedirectToAction("TourBooking", "Tour", new { id = (int)TempData["tourId"] });
     }
 
+    public async Task<IActionResult> MakeTourBooking(TourBookingViewModel model)
+    {
+        TourBooking tourBooking = await _tourBookingRepository.getQuery().Include(t=>t.HotelServices)
+            .SingleOrDefaultAsync(t => t.TourId == (int)TempData["tourId"]);
+        tourBooking.IsConfirmed = false;
+        tourBooking.IsOnModerate = true;
+
+        tourBooking.BookingTime = DateTime.Now;
+        tourBooking.ArrivalTime = model.ArrivalTime;
+        tourBooking.SleepingPlaceValue = model.SleepingPlaceValue; 
+        
+        _tourBookingRepository.updateTourBooking(tourBooking);
+
+        return RedirectToAction("Main", "Home",new { notification = "Please, wait while our personal accept your request" });
+    } 
+    
     public async Task<IActionResult> TourBooking(int id)
     {
         bool isTourBookingExist = false;
         Tour tour = await _tourRepository.getAll().Include(t => t.Hotel).ThenInclude(t => t.HotelProperties)
             .ThenInclude(t => t.HotelServices).Where(t=>t.Id == id).SingleOrDefaultAsync();
         
+        
+        
         TourBookingViewModel model = new TourBookingViewModel();
         model.AllService = new(tour.Hotel.HotelProperties.HotelServices, nameof(HotelService.Id), nameof(HotelService.Name));
 
 
 
-        var  user = await _userRepository.getAll().Include(u => u.TourBookings).ThenInclude(t=>t.HotelServices).Include(u=>u.Account).SingleOrDefaultAsync(u=>u.Account.Login == User.Identity.Name);
+        var user = await _userRepository.getAll().Include(u => u.TourBookings).ThenInclude(t=>t.HotelServices).Include(u=>u.Account).SingleOrDefaultAsync(u=>u.Account.Login == User.Identity.Name);
 
+        
         foreach (var tourBooking in user.TourBookings)
         {
             if (tourBooking.TourId == id);
             {
                 model.SelectedServices = tourBooking.HotelServices;
                 isTourBookingExist = true;
+
+                if (tourBooking.IsOnModerate)
+                    return RedirectToAction("Cart", "Cart", new { notification = "Sorry, you request to book this is in proccessing now!" });
                 break; 
             }
         }
 
-        if (isTourBookingExist == false)
+        if (!isTourBookingExist)
         {
             await _tourBookingRepository.addTourBooking(new TourBooking()
             {
                 UserId = user.Id, TourId = id
             }); 
         }
+        
+        
 
         foreach (var service in model.SelectedServices)
-            model.TotalServiceCost += service.Cost; 
+            model.TotalServiceCost += service.Cost;
+
+        model.CostForBed = tour.Hotel.CostForBed; 
         
         TempData["tourId"] = id;
         
