@@ -22,5 +22,7 @@ public class TourBooking
     public bool IsConfirmed { get; set; }
     public bool IsOnModerate { get; set; }
     
+    public double TotalCost { get; set; }
+    
     
 }

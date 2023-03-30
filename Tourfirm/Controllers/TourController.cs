@@ -291,12 +291,20 @@ public class TourController : Controller
     {
         TourBooking tourBooking = await _tourBookingRepository.getQuery().Include(t=>t.HotelServices)
             .SingleOrDefaultAsync(t => t.TourId == (int)TempData["tourId"]);
+        Tour tour = await _tourRepository.getAll().Include(t => t.Hotel)
+            .SingleOrDefaultAsync(t => t.Id == tourBooking.TourId);
         tourBooking.IsConfirmed = false;
         tourBooking.IsOnModerate = true;
 
         tourBooking.BookingTime = DateTime.Now;
         tourBooking.ArrivalTime = model.ArrivalTime;
-        tourBooking.SleepingPlaceValue = model.SleepingPlaceValue; 
+        tourBooking.SleepingPlaceValue = model.SleepingPlaceValue;
+
+        double totalServiceCost = 0.0;
+        foreach (var service in tourBooking.HotelServices)
+            totalServiceCost += service.Cost;;
+        
+        tourBooking.TotalCost = model.SleepingPlaceValue * tour.Hotel.CostForBed + tour.Cost + totalServiceCost;  
         
         _tourBookingRepository.updateTourBooking(tourBooking);
 
