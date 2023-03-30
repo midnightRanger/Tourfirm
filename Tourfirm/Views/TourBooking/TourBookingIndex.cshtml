@@ -18,8 +18,9 @@
     <th scope="col">Booking Time</th>
     <th scope="col">Sleeping place value</th>
     <th scope="col">Is On Moderate</th>
+    <th scope="col">Total Cost</th>
     <th scope="col">Name/Surname</th>
-    <th scope="col">Moderated</th>
+    <th scope="col">Confirmed</th>
     <th scope="col">Delete</th>
     <th scope="col">Change Status</th>
   </tr>
@@ -34,6 +35,7 @@
       <td>@item.BookingTime</td>
       <td>@item.SleepingPlaceValue</td>
       <td>@item.IsOnModerate</td>
+      <td>@item.TotalCost</td>
       <td>@item.User.Name - @item.User.Surname</td>
       <td>
                   @if (@item.IsConfirmed)
