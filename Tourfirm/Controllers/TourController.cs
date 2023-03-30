@@ -32,12 +32,13 @@ public class TourController : Controller
     private readonly ITourImage? _tourImageRepository;
     private readonly IHotelService _hotelService;
     private readonly ITourBooking _tourBookingRepository;
-  
+
+    private readonly ITourBookingService _tourBookingService;
 
     public TourController(ILogger<TourController> logger, ITour tourRepository,
         IUser userRepository, IReview reviewRepository, IHotel hotelRepository, 
         ITourType tourTypeRepository, ICountry countryRepository, IRoute routeRepository,
-        ITourImage tourImageRepository, ITourService tourService, IHotelService hotelService, ITourBooking tourBookingRepository)
+        ITourImage tourImageRepository, ITourService tourService, IHotelService hotelService, ITourBooking tourBookingRepository, ITourBookingService tourBookingService)
     {
         _logger = logger;
         _tourRepository = tourRepository;
@@ -51,6 +52,7 @@ public class TourController : Controller
         _tourService = tourService;
         _hotelService = hotelService;
         _tourBookingRepository = tourBookingRepository;
+        _tourBookingService = tourBookingService;
     }
 
     [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
@@ -265,25 +267,19 @@ public class TourController : Controller
 
     public async Task<IActionResult> TourBookingServiceAdd(TourBookingViewModel tourBookingViewModel)
     {
-        TourBooking tourBooking = await _tourBookingRepository.getQuery()
-            .SingleOrDefaultAsync(t => t.TourId == (int)TempData["tourId"]);
+        var response = await _tourBookingService.AddServiceToBooking(tourBookingViewModel, (int)TempData["tourId"]);
         
-        tourBooking.HotelServices.Add(await _hotelService.getHotelService(tourBookingViewModel.ServiceId));
-       
-        _tourBookingRepository.updateTourBooking(tourBooking);
-
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+             return RedirectToAction("TourBooking", "Tour", new { id = (int)TempData["tourId"] });
         return RedirectToAction("TourBooking", "Tour", new { id = (int)TempData["tourId"] });
     }
 
     public async Task<IActionResult> TourBookingServiceRemove(int id)
     {
-        TourBooking tourBooking = await _tourBookingRepository.getQuery().Include(t=>t.HotelServices)
-            .SingleOrDefaultAsync(t => t.TourId == (int)TempData["tourId"]);
+        var response = await _tourBookingService.DeleteServiceFromBooking((int)TempData["tourId"], id);
         
-        tourBooking.HotelServices.Remove(await _hotelService.getHotelService(id));
-       
-        _tourBookingRepository.updateTourBooking(tourBooking);
-        
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
+            return RedirectToAction("TourBooking", "Tour", new { id = (int)TempData["tourId"] });
         return RedirectToAction("TourBooking", "Tour", new { id = (int)TempData["tourId"] });
     }
 

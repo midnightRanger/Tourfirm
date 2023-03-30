@@ -49,4 +49,34 @@ public class TourBookingService : ITourBookingService
          };
       }
    }
+
+   public async Task<BaseResponse<bool>> DeleteServiceFromBooking(int tourId, int hotelServiceId)
+   {
+      try
+      {
+         TourBooking tourBooking = await _tourBookingRepository.getQuery().Include(t=>t.HotelServices)
+            .SingleOrDefaultAsync(t => t.TourId == tourId);
+        
+         tourBooking.HotelServices.Remove(await _hotelService.getHotelService(hotelServiceId));
+       
+         _tourBookingRepository.updateTourBooking(tourBooking);
+
+         return new BaseResponse<bool>()
+         {
+            Data = true,
+            StatusCode = StatusCode.OK,
+            Description = "Service was successfully removed from booking!"
+         };
+      }   catch(Exception ex)
+      {
+         _logger.LogError(ex, $"[Tour Booking Service]: {ex.Message}");
+         return new BaseResponse<bool>()
+         {
+            Description = ex.Message,
+            StatusCode = StatusCode.InternalServerError
+         };
+      }
+   }
+
+   
 }
