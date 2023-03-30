@@ -30,7 +30,6 @@ public class TourController : Controller
     private readonly IRoute? _routeRepository;
     private readonly ITourService? _tourService;
     private readonly ITourImage? _tourImageRepository;
-    private readonly IHotelService _hotelService;
     private readonly ITourBooking _tourBookingRepository;
 
     private readonly ITourBookingService _tourBookingService;
@@ -38,7 +37,7 @@ public class TourController : Controller
     public TourController(ILogger<TourController> logger, ITour tourRepository,
         IUser userRepository, IReview reviewRepository, IHotel hotelRepository, 
         ITourType tourTypeRepository, ICountry countryRepository, IRoute routeRepository,
-        ITourImage tourImageRepository, ITourService tourService, IHotelService hotelService, ITourBooking tourBookingRepository, ITourBookingService tourBookingService)
+        ITourImage tourImageRepository, ITourService tourService, ITourBooking tourBookingRepository, ITourBookingService tourBookingService)
     {
         _logger = logger;
         _tourRepository = tourRepository;
@@ -50,7 +49,6 @@ public class TourController : Controller
         _routeRepository = routeRepository;
         _tourImageRepository = tourImageRepository;
         _tourService = tourService;
-        _hotelService = hotelService;
         _tourBookingRepository = tourBookingRepository;
         _tourBookingService = tourBookingService;
     }

@@ -9,6 +9,7 @@ using Moq;
 using Tourfirm.Controllers;
 using Tourfirm.DAL.Interfaces;
 using Tourfirm.Domain.Entity;
+using Tourfirm.Service.Implementations;
 using Tourfirm.Service.Interfaces;
 using Assert = Microsoft.VisualStudio.TestTools.UnitTesting.Assert;
 
@@ -80,9 +81,11 @@ public class TourControllerTest
         var routeRepository = new Mock<IRoute>();
         var tourService = new Mock<ITourService>();
         var tourImageRepository = new Mock<ITourImage>();
+        var tourBookingRepository = new Mock<ITourBooking>();
+        var tourBookingService = new Mock<TourBookingService>();
          
         var controller = new TourController(  _logger,  tourRepository.Object,userRepository.Object, reviewRepository.Object,
-            hotelRepository.Object,tourTypeRepository.Object,countryRepository.Object,routeRepository.Object,tourImageRepository.Object,tourService.Object);
+            hotelRepository.Object,tourTypeRepository.Object,countryRepository.Object,routeRepository.Object,tourImageRepository.Object,tourService.Object,tourBookingRepository.Object, tourBookingService.Object );
         var result =  await controller.TourIndex("testing") as ViewResult;
         var model = result.Model as IEnumerable<Tour>; 
         Assert.AreEqual("TourIndex", result.ViewName);
