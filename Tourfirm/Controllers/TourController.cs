@@ -281,7 +281,7 @@ public class TourController : Controller
 
     public async Task<IActionResult> MakeTourBooking(TourBookingViewModel model)
     {
-        var response = await _tourBookingService.CreateTourBooking((int)TempData["tourId"], model);
+        var response = await _tourBookingService.CreateTourBooking((int)TempData["tourId"]);
         
         return RedirectToAction("Main", "Home",new { notification = response.Description });
     } 

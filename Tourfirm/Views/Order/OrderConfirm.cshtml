@@ -1,4 +1,4 @@
-@model Tourfirm.Domain.Entity.Cart
+@model Tourfirm.Domain.Entity.TourBooking
 
 @{
     ViewBag.Title = "Confirm order";
@@ -16,13 +16,19 @@
     <h1 class="display-1">Please, check the order description</h1>
 
 
-    @foreach (var item in Model.Tours)
-    {
-        <div class="row">
-            <div class="col-4">@item.Name </div>
-            <div class="col-4">@item.Cost</div>
-        </div>
-    }
+    <div class="row">
+        <div class="col-4">Tour Name: @Model.Tour.Name </div>
+        <div class="col-4">Total Cost: @Model.TotalCost </div>
+    </div>
+    <div class="row">
+        <div class="col-4">Arrival Time: @Model.ArrivalTime </div>
+        <div class="col-4">Booking Time: @Model.BookingTime </div>
+    </div>
+    <div class="row">
+                    <div class="col">Sleep Places: @Model.SleepingPlaceValue </div>
+                    >
+                </div>
+    
     <form method="post" asp-action="MakeOrder" asp-controller="Order">
         <button type="submit" class="btn btn-sm btn-outline-secondary" style="margin-top: 1em; width: 100%"> Confirm Order </button>
     </form>

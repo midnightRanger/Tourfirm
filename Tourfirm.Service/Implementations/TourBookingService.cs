@@ -81,7 +81,7 @@ public class TourBookingService : ITourBookingService
       }
    }
 
-   public async Task<BaseResponse<bool>> CreateTourBooking(int tourId, TourBookingViewModel tourBookingViewModel)
+   public async Task<BaseResponse<bool>> CreateTourBooking(int tourId)
    {
       try
       {
@@ -94,16 +94,7 @@ public class TourBookingService : ITourBookingService
          tourBooking.IsOnModerate = true;
 
          tourBooking.BookingTime = DateTime.Now;
-         tourBooking.ArrivalTime = tourBookingViewModel.ArrivalTime;
-         tourBooking.SleepingPlaceValue = tourBookingViewModel.SleepingPlaceValue;
-
-         double totalServiceCost = 0.0;
-         foreach (var service in tourBooking.HotelServices)
-            totalServiceCost += service.Cost;
-         ;
-
-         tourBooking.TotalCost = tourBookingViewModel.SleepingPlaceValue * tour.Hotel.CostForBed + tour.Cost + totalServiceCost;
-
+         
          _tourBookingRepository.updateTourBooking(tourBooking);
          
          return new BaseResponse<bool>()
