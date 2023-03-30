@@ -18,6 +18,8 @@
 <div class="text-center">
     <h3 class="display-1"> Toor Booking</h3>
 </div>
+
+<hr/>
 <div class="row">
     <form asp-action="TourBookingServiceAdd" asp-controller="Tour" class="col">
     
@@ -25,11 +27,7 @@
             <label for="inputService" class="form-label"> Service name </label>
             <select id="inputService" name="serviceId" asp-for="ServiceId" class="form-control" asp-items="@Model.AllService"></select>
         </div>
-        <div class="form-group col-md-6">
-            <label for="inputCost"> Cost </label>
-            @* <input type="number" step="0.1" class="form-control" id="inputCost" asp-for="Cost" placeholder="3000.0, 2000.0"/> *@
-            @* <span asp-validation-for="Cost"></span> *@
-        </div>
+        
         
         @if (Model.SelectedServices.Count != 0)
         {
