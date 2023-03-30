@@ -261,6 +261,8 @@ public class TourController : Controller
                     return File(result, "application/force-download", "tours.csv");
     }
 
+    
+
     public async Task<IActionResult> TourBookingServiceAdd(TourBookingViewModel tourBookingViewModel)
     {
         TourBooking tourBooking = await _tourBookingRepository.getQuery()
@@ -303,34 +305,31 @@ public class TourController : Controller
     
     public async Task<IActionResult> TourBooking(int id)
     {
-        bool isTourBookingExist = false;
         Tour tour = await _tourRepository.getAll().Include(t => t.Hotel).ThenInclude(t => t.HotelProperties)
             .ThenInclude(t => t.HotelServices).Where(t=>t.Id == id).SingleOrDefaultAsync();
-        
-        
         
         TourBookingViewModel model = new TourBookingViewModel();
         model.AllService = new(tour.Hotel.HotelProperties.HotelServices, nameof(HotelService.Id), nameof(HotelService.Name));
 
-
+        TourBooking? existTourBooking = null; 
 
         var user = await _userRepository.getAll().Include(u => u.TourBookings).ThenInclude(t=>t.HotelServices).Include(u=>u.Account).SingleOrDefaultAsync(u=>u.Account.Login == User.Identity.Name);
 
         
         foreach (var tourBooking in user.TourBookings)
         {
-            if (tourBooking.TourId == id);
+            if (tourBooking.TourId == id)
             {
                 model.SelectedServices = tourBooking.HotelServices;
-                isTourBookingExist = true;
-
-                if (tourBooking.IsOnModerate)
+                existTourBooking = tourBooking;
+                if (existTourBooking.IsOnModerate)
                     return RedirectToAction("Cart", "Cart", new { notification = "Sorry, you request to book this is in proccessing now!" });
-                break; 
+
+                break;
             }
         }
 
-        if (!isTourBookingExist)
+        if (existTourBooking == null)
         {
             await _tourBookingRepository.addTourBooking(new TourBooking()
             {
@@ -338,8 +337,7 @@ public class TourController : Controller
             }); 
         }
         
-        
-
+            
         foreach (var service in model.SelectedServices)
             model.TotalServiceCost += service.Cost;
 

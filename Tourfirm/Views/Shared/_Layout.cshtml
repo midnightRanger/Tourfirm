@@ -76,6 +76,7 @@
           <a class="nav-link" href=@Url.Action("HotelIndex", "Hotel")>Hotels</a>
           <a class="nav-link" href=@Url.Action("RouteIndex", "Route")>Routes</a>
           <a class="nav-link" href=@Url.Action("CountryIndex", "Country")>Countries</a>
+          <a class="nav-link" href=@Url.Action("TourBookingIndex", "TourBooking")>User's Bookings</a>                                                              
         }
         @if (User.IsInRole("ADMIN") || User.IsInRole("MODERATOR"))
         {

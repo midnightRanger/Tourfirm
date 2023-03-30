@@ -1,0 +1,55 @@
+@model IEnumerable<Tourfirm.Domain.Entity.TourBooking>
+
+@{
+    ViewBag.Title = "Tour Booking";
+    Layout = "_Layout";
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+  <div class="validation alert alert-danger mb-md-5 padding-md" asp-validation-summary="All"></div>
+}
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col"> <a asp-action="ReviewIndex" asp-controller="Moderator" asp-route-sortReview="@ViewBag.IdSort"> ID </a> </th>
+    <th scope="col">Tour name</th>
+    <th scope="col">Arrival Time</th>
+    <th scope="col">Booking Time</th>
+    <th scope="col">Sleeping place value</th>
+    <th scope="col">Is On Moderate</th>
+    <th scope="col">Name/Surname</th>
+    <th scope="col">Moderated</th>
+    <th scope="col">Delete</th>
+    <th scope="col">Change Status</th>
+  </tr>
+  </thead>
+  <tbody>
+  @foreach (var item in Model)
+  {
+    <tr>
+      <th scope="row">@item.Id</th>         
+      <td>@item.Tour.Name</td>
+      <td>@item.ArrivalTime</td>
+      <td>@item.BookingTime</td>
+      <td>@item.SleepingPlaceValue</td>
+      <td>@item.IsOnModerate</td>
+      <td>@item.User.Name - @item.User.Surname</td>
+      <td>
+                  @if (@item.IsConfirmed)
+                  {
+                    <img src="~/images/accept.png" style="height:50px; width: 50px" alt="ACCEPT IMAGE"/> 
+                  }
+                  else
+                  {
+                    <img src="~/images/decline.png" style="height:50px; width: 50px" alt="DECLINE IMAGE"/> 
+                  }
+              </td>
+      <td><a asp-action="ReviewDelete" asp-controller="Moderator" asp-route-id="@item.Id">Delete</a></td>
+      <td><a asp-action="ReviewChange" asp-controller="Moderator" asp-route-id="@item.Id" >Change status</a></td>
+    </tr>
+  }
+  </tbody>
+</table>
+
+
