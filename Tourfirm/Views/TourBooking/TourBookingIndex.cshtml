@@ -47,8 +47,8 @@
                     <img src="~/images/decline.png" style="height:50px; width: 50px" alt="DECLINE IMAGE"/> 
                   }
               </td>
-      <td><a asp-action="ReviewDelete" asp-controller="Moderator" asp-route-id="@item.Id">Delete</a></td>
-      <td><a asp-action="ReviewChange" asp-controller="Moderator" asp-route-id="@item.Id" >Change status</a></td>
+      <td><a asp-action="DeleteTourBooking" asp-controller="TourBooking" asp-route-id="@item.Id">Delete</a></td>
+      <td><a asp-action="ConfirmTourBooking" asp-controller="TourBooking" asp-route-id="@item.Id" >Confirm</a></td>
     </tr>
   }
   </tbody>

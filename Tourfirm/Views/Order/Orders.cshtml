@@ -21,13 +21,7 @@
     {
         <p class="lead">Cheque - @item.DateTime </p>
         <p class="lead">Sum: @item.Sum </p>
-        @foreach (var tour in item.Tours)
-        {
-            <div class="row">
-                <div class="col-4">@tour.Name </div>
-                <div class="col-4">@tour.Description</div>
-            </div>
-        }
+        <p class="lead">Tour: @item.Tour.Name</p>
         <hr/>
     }
 

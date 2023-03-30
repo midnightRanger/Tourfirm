@@ -5,5 +5,5 @@ namespace Tourfirm.Service.Interfaces;
 
 public interface IOrderService
 {
-    Task<BaseResponse<bool>> MakeOrder(User user, Cart cart);
+    Task<BaseResponse<bool>> MakeOrder(TourBooking tourBooking, Cart cart);
 }

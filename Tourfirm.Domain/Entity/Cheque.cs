@@ -8,7 +8,8 @@ public class Cheque
     public int Id { get; set; }
     public double Sum { get; set; }
     public DateTime DateTime { get; set; }
-    public List<Tour> Tours { get; set; } = new();
+    public int TourId { get; set; }
+    public Tour? Tour { get; set; }
     
     public int UserId { get; set; }
     public User? User { get; set; }

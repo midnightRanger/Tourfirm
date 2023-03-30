@@ -26,43 +26,24 @@ public class OrderService : IOrderService
         _chequeRepository = chequeRepository;
     }
 
-    public async Task<BaseResponse<bool>> MakeOrder(User user, Cart cart)
+    public async Task<BaseResponse<bool>> MakeOrder(TourBooking tourBooking, Cart cart)
     {
         try
         {
-            double sum = 0;
-            
-            if (cart.Tours.Count == 0)
-            {
-                return new BaseResponse<bool>()
-                {
-                    Data = true,
-                    StatusCode = StatusCode.InternalServerError,
-                    Description = "There are no items in cart! "
-                };
-            }
-            
-            foreach (var item in cart.Tours)
-            {
-                sum += item.Cost;
-            }
-            
-            
 
             Cheque cheque = new Cheque()
             {
-                Sum = sum,
-                Tours = cart.Tours.ToList(),
+                Sum = tourBooking.TotalCost,
+                TourId = tourBooking.TourId,
+                Tour = tourBooking.Tour,
                 DateTime = DateTime.Now,
-                UserId = user.Id
+                UserId = tourBooking.UserId
             };
                 
-            cart.Tours.Clear();
+            cart.Tours.Remove(tourBooking.Tour);
             _cartRepository.updateCart(cart);
 
             await _chequeRepository.addCheque(cheque);
-            
-            
             
             return new BaseResponse<bool>()
             {

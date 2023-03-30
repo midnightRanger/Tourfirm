@@ -37,5 +37,12 @@ public class TourBookingController: Controller
 
         return RedirectToAction("TourBookingIndex", "TourBooking", new { notification = response.Description });
     }
+
+    public async Task<IActionResult> ConfirmTourBooking(int id)
+    {
+        var response = await _tourBookingService.ConfirmTourBooking(id); 
+        
+        return RedirectToAction("TourBookingIndex", "TourBooking", new { notification = response.Description });
+    }
     
 }
