@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using Tourfirm.Domain.Entity;
 
 namespace Tourfirm.DAL;
@@ -7,14 +8,18 @@ public class ApplicationContext : DbContext
 {
     public ApplicationContext(DbContextOptions<ApplicationContext> options) : base(options)
     {
-        // Database.EnsureDeleted();
-        Database.EnsureCreated();
+        Database.EnsureCreated();  // Создаёт заново
     }
 
     public ApplicationContext()
-    { 
+    {
     }
-    
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    {
+        optionsBuilder
+        .EnableSensitiveDataLogging()
+        .LogTo(Console.WriteLine, LogLevel.Trace);  // Используем Trace
+    }
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         //
@@ -42,93 +47,93 @@ public class ApplicationContext : DbContext
         //     new User() { Id = 1, AccountId = 1, Age = 19, Balance = 0.00, Name = "semen", Surname = "kuznetsov"}
         // });
 
-        
+
         modelBuilder.Entity<BookingType>().HasData(new[]
         {
             new BookingType() { Id = 1, Name="Garanteed", Description = "Typical garanteed booking"},
             new BookingType() { Id=2, Name="Non-garanteed", Description = "Non-garanteed booking"},
             new BookingType() { Id=3, Name="Super garanteed", Description = "Super Garanteed booking"}
         });
-        
-            modelBuilder.Entity<Country>().HasData(new[]
-            {
+
+        modelBuilder.Entity<Country>().HasData(new[]
+        {
                 new Country() {Id = 1, Name = "Russia", Climate = "Mild", Language = "Russian", Tours = null, MidTemp = 18},
                 new Country() {Id = 2, Name = "Brazil", Climate = "Tropical", Language = "Portugal", Tours = null, MidTemp = 26},
                 new Country() {Id = 3, Name = "Israel", Climate = "Subtropical", Language = "Hebrew", Tours = null, MidTemp = 30}
             });
-            
-            modelBuilder.Entity<Route>().HasData(new[]
-            {
+
+        modelBuilder.Entity<Route>().HasData(new[]
+        {
                 new Route() {Id = 1, Hours = 4, StartPos = "Moscow", EndPost = "Sochi", Type = "Train", Tours = null},
                 new Route() {Id = 2, Hours = 26, StartPos = "Moscow", EndPost = "Brasilia", Type = "Plane", Tours = null},
                 new Route() {Id = 3, Hours = 15, StartPos = "Moscow", EndPost = "Jerusalem", Type = "Plane", Tours = null},
-                
+
             });
-            
-            modelBuilder.Entity<HotelProperties>().HasData(new[]
-            {
+
+        modelBuilder.Entity<HotelProperties>().HasData(new[]
+        {
                 new HotelProperties() {Id = 1, BookingTypeId = 1, Capacity = 300, Classification = "Hotel", Food = "BB", Stars = 5, Style = "Modern"},
                 new HotelProperties() {Id = 2, BookingTypeId = 1, Capacity = 200, Classification = "Motel", Food = "AI", Stars =4, Style = "AR-Deco"},
                 new HotelProperties() {Id = 3, BookingTypeId = 1, Capacity = 500, Classification = "Hotel", Food = "AI", Stars =5, Style = "Retro"},
 
             });
 
-            modelBuilder.Entity<HotelService>().HasData(new[]
-            {
+        modelBuilder.Entity<HotelService>().HasData(new[]
+        {
                 new HotelService() {Id=1, Cost = 300, Name = "Taxi calling", HotelPropertiesId = 1},
                 new HotelService() {Id = 2, Cost = 500, Name = "Auto sharing", HotelPropertiesId = 1},
-                new HotelService() {Id = 3, Cost = 3200, Name = "Cloth Cleaning", HotelPropertiesId = 2}, 
+                new HotelService() {Id = 3, Cost = 3200, Name = "Cloth Cleaning", HotelPropertiesId = 2},
                 new HotelService() {Id = 4, Cost = 120, Name = "Flowers delivery", HotelPropertiesId = 3}
             });
-            
-            
-            modelBuilder.Entity<Hotel>().HasData(new[]
-            {
-               new Hotel() { Id = 1, Name = "Volga", Rate = 3.3, HotelPropertiesId = 1, CostForBed = 1000}, 
+
+
+        modelBuilder.Entity<Hotel>().HasData(new[]
+        {
+               new Hotel() { Id = 1, Name = "Volga", Rate = 3.3, HotelPropertiesId = 1, CostForBed = 1000},
                new Hotel() {Id=2, Name = "El Sapacho", Rate = 4.4, HotelPropertiesId = 2, CostForBed = 1000},
                new Hotel() {Id=3, Name="HeavyHeaven", Rate = 2.0, HotelPropertiesId = 3, CostForBed = 1000}
             });
-            
-            modelBuilder.Entity<TourType>().HasData(new[]
-            {
-                new TourType() { Id = 1, Name = "Oversea"}, 
-                new TourType() {Id=2, Name = "Internally"} 
+
+        modelBuilder.Entity<TourType>().HasData(new[]
+        {
+                new TourType() { Id = 1, Name = "Oversea"},
+                new TourType() {Id=2, Name = "Internally"}
             });
 
-            
 
-            modelBuilder.Entity<TourImage>().HasData(new[]
-            {
+
+        modelBuilder.Entity<TourImage>().HasData(new[]
+        {
                 new TourImage() { Id = 1, Path = "~/images/FRWL1.jpg", TourId = 1 },
                 new TourImage() { Id = 2, Path = "~/images/BS1.jpg", TourId = 2 },
                 new TourImage() { Id = 3, Path = "~/images/DAS1.jpg", TourId = 3 },
             });
-            
-            modelBuilder.Entity<Tour>().HasData(new[]
-            {
+
+        modelBuilder.Entity<Tour>().HasData(new[]
+        {
                 new Tour() { Id = 1, Name = "From Russia with love", Description = "Average tour on Russian", Cost = 30000, RouteId=1, HotelId = 1, TourTypeId = 2, CountryId = 1},
                 new Tour() { Id = 2, Name = "Brazilian Sun", Description = "Let's have a fun in the hottest Country!", Cost = 130000, RouteId=2, HotelId = 2, TourTypeId = 1, CountryId = 2},
                 new Tour() { Id = 3, Name = "Deserts and Skorpions", Description = "Put your hat on your head - its really hot there", Cost = 90000, RouteId=3, HotelId = 3, TourTypeId = 2, CountryId = 3}
 
             });
 
-            modelBuilder.Entity<Role>().HasData(new[]
-            {
+        modelBuilder.Entity<Role>().HasData(new[]
+        {
                 new Role() {Id = 1, Name="USER", Description = "Average User with standard rights: login, reguster, add to cart, delete from cart, check tour info, add review"},
                 new Role() {Id = 2, Name="ADMIN", Description = "Administrator. Has the all rights that app can contain"},
                 new Role() {Id =3, Name="MANAGER", Description = "Manager. Can see stats, CRUD tours, hotels, routes"},
                 new Role() {Id =4, Name="MODERATOR", Description = "Can update review status, make users non-active"}
             });
-            
-            // modelBuilder.Entity<Review>().HasData(new[]
-            // {
-            //     new Review() { Id = 1, Text = "Отличный тур! Все понравилось", UserId = 1, IsAccept = true, TourId = 2 },
-            //     new Review() { Id = 2, Text = "Были огрехи, но в целом все хорошо", UserId = 1, IsAccept = true, TourId = 2 },
-            // });
+
+        // modelBuilder.Entity<Review>().HasData(new[]
+        // {
+        //     new Review() { Id = 1, Text = "Отличный тур! Все понравилось", UserId = 1, IsAccept = true, TourId = 2 },
+        //     new Review() { Id = 2, Text = "Были огрехи, но в целом все хорошо", UserId = 1, IsAccept = true, TourId = 2 },
+        // });
 
 
 
-            base.OnModelCreating(modelBuilder);
+        base.OnModelCreating(modelBuilder);
     }
 
     public DbSet<Role> Role { get; set; } = null!;
@@ -147,5 +152,6 @@ public class ApplicationContext : DbContext
     public DbSet<User> User { get; set; } = null!;
     public DbSet<BookingType> BookingType { get; set; } = null!;
     public DbSet<Cheque> Cheque { get; set; } = null!;
-    public DbSet<TourBooking> TourBooking { get; set; } = null!; 
+    public DbSet<TourBooking> TourBooking { get; set; } = null!;
+
 }

@@ -9,15 +9,15 @@ using Route = Microsoft.AspNetCore.Routing.Route;
 
 namespace Tourfirm.Controllers;
 
-[Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
-public class TourTypeController: Controller
+[Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
+public class TourTypeController : Controller
 {
-     private readonly ILogger<TourTypeController> _logger;
+    private readonly ILogger<TourTypeController> _logger;
     private readonly ApplicationContext _db;
     private readonly ITourType _tourTypeRepository;
     private readonly ITourTypeService _tourTypeService;
 
-    public TourTypeController(ILogger<TourTypeController> logger, ApplicationContext db, 
+    public TourTypeController(ILogger<TourTypeController> logger, ApplicationContext db,
         ITourType tourTypeRepository, ITourTypeService tourTypeService)
     {
         _logger = logger;
@@ -46,70 +46,70 @@ public class TourTypeController: Controller
         ModelState.AddModelError("", response.Description);
         return RedirectToAction("TourTypeIndex", "TourType", new { notification = response.Description });
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> TourTypeDeleteConfirm(int id)
     {
         return View(await _tourTypeRepository.getTourType(id));
     }
 
-    
+
     public async Task<IActionResult> TourTypeDelete(int id)
     {
         var response = await _tourTypeService.DeleteTourType(await _tourTypeRepository.getTourType(id));
 
-        return RedirectToAction("TourTypeIndex", "TourType", new { notification = response.Description});
-        
+        return RedirectToAction("TourTypeIndex", "TourType", new { notification = response.Description });
+
     }
 
     [HttpGet]
     public async Task<IActionResult> TourTypeIndex(string? notification, TourType.SortState sortTourType = TourType.SortState.IdAsc)
     {
-        if(notification != null)
+        if (notification != null)
             ModelState.AddModelError("", notification);
-        
+
         // ReSharper disable once HeapView.BoxingAllocation
         ViewData["IdSort"] = sortTourType == TourType.SortState.IdAsc ? TourType.SortState.IdDesc : TourType.SortState.IdAsc;
         ViewData["NameSort"] = sortTourType == TourType.SortState.NameAsc ? TourType.SortState.NameDesc : TourType.SortState.NameAsc;
 
         IQueryable<TourType> tourTypes = _tourTypeRepository.getAll();
-        
+
         switch (sortTourType)
         {
             case TourType.SortState.IdAsc:
-            {
-                tourTypes = tourTypes.OrderBy(p => p.Id);
-                break;
-            }
+                {
+                    tourTypes = tourTypes.OrderBy(p => p.Id);
+                    break;
+                }
 
             case TourType.SortState.IdDesc:
-            {
-                tourTypes = tourTypes.OrderByDescending(p => p.Id);
-                break;
-            }
-            
+                {
+                    tourTypes = tourTypes.OrderByDescending(p => p.Id);
+                    break;
+                }
+
             case TourType.SortState.NameAsc:
-            {
-                tourTypes = tourTypes.OrderBy(p => p.Name);
-                break;
-            }
+                {
+                    tourTypes = tourTypes.OrderBy(p => p.Name);
+                    break;
+                }
 
             case TourType.SortState.NameDesc:
-            {
-                tourTypes = tourTypes.OrderByDescending(p => p.Name);
-                break;
-            }
+                {
+                    tourTypes = tourTypes.OrderByDescending(p => p.Name);
+                    break;
+                }
         }
 
         return View(await tourTypes.AsNoTracking().ToListAsync());
     }
-    
-     [HttpGet]
+
+    [HttpGet]
     public async Task<IActionResult> TourTypeUpdate(string? notification, int id)
     {
         var tourType = await _tourTypeRepository.getTourType(id);
-        
-        if(notification != null)
+
+        if (notification != null)
             ModelState.AddModelError("", notification);
 
         return View(tourType);

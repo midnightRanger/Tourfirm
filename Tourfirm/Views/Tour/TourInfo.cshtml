@@ -6,123 +6,130 @@
 }
 
 <head>
-  <script defer="" src="https://cdn.usefathom.com/script.js" data-site="ITUSEYJG"></script>
-  <script id="_carbonads_projs" type="text/javascript" src="https://srv.carbonads.net/ads/CKYIKKJL.json?segment=placement:getbootstrapcom&amp;callback=_carbonads_go"></script>
-  <link href="~/css/product.css" rel="stylesheet"/>
-  <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/product/">
-  </head>
+    <script defer="" src="https://cdn.usefathom.com/script.js" data-site="ITUSEYJG"></script>
+    <script id="_carbonads_projs" type="text/javascript" src="https://srv.carbonads.net/ads/CKYIKKJL.json?segment=placement:getbootstrapcom&amp;callback=_carbonads_go"></script>
+    <link href="~/css/product.css" rel="stylesheet" />
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/product/">
+</head>
 <main>
 
-  <div class=" container-fluid position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-      <h1 class="display-4 fw-normal">Tour - @Model.Name</h1>
-      <p class="lead fw-normal">@Model.Description.</p>
-      <a class="btn btn-outline-secondary" href="#">Add to cart</a>
-    </div>
-  
-  </div>
-   @if (Model.TourImages.Count == 0)
-                  {
-                    <div> There are no pics:(</div>
-                  }
-   else
-   {
-     <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-       <div class="carousel-inner">
-         <div class="carousel-item active">
-           <img src=@Url.Content(Model.TourImages[0].Path) class="d-block w-100" alt="...">
-         </div>
-         @foreach (var image in Model.TourImages)
-         {
-           <div class="carousel-item">
-             <img src=@Url.Content(image.Path) class="d-block w-100" alt="...">
-           </div>
-         }
-       </div>
-       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-         <span class="visually-hidden">Previous</span>
-       </button>
-       <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-         <span class="carousel-control-next-icon" aria-hidden="true"></span>
-         <span class="visually-hidden">Next</span>
-       </button>
-     </div>
-   }
-   
-  <div class="d-md-flex flex-md-equal w-100 my-md-3 ps-md-3">
-    <div class="text-bg-dark me-md-3 pt-3 px-3 pt-md-5 px-md-5  overflow-hidden">
-      <div class="my-3 py-3">
-        <div class="text-center"> 
-          <h2 class="display-5">Hotel - @Model.Hotel.Name</h2>
-          <p class="lead">User's rate - @Model.Hotel.Rate</p>
+    <div class=" container-fluid position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-4 fw-normal">Tour - @Model.Name</h1>
+            <p class="lead fw-normal">@Model.Description.</p>
+            <a class="btn btn-outline-secondary" href="#">Добавить в корзину</a>
         </div>
-        <ul>
-          <li> Booking - @Model.Hotel.HotelProperties.BookingType.Name </li>
-          <li> Capacity - @Model.Hotel.HotelProperties.Capacity </li>
-          <li> Classification - @Model.Hotel.HotelProperties.Classification </li>
-          <li> Food type - @Model.Hotel.HotelProperties.Food </li>
-          <li> Stars - @Model.Hotel.HotelProperties.Stars </li>
-          <li> Style - @Model.Hotel.HotelProperties.Style </li>
-        </ul>
-        <p class="lead">Services:</p>
-        <ul>
-          @foreach (var service in @Model.Hotel.HotelProperties.HotelServices)
-          {
-            <li> @service.Name - @service.Cost</li>
-          }
-        </ul>
-      </div>
+
     </div>
-    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5  overflow-hidden">
-      <div class="my-3 p-3">
-        <div class="text-center">
-          <h2 class="display-5">Route Info</h2>
-          <p class="lead"> Your journey starts here</p>
+
+    <div class="d-flex flex-md-row flex-column w-100 my-md-3 ps-md-3">
+        @if (Model.TourImages.Count == 0)
+        {
+            <div>There are no pics:(</div>
+        }
+        else
+        {
+
+
+            <!-- Блок с изображением -->
+            <div class="flex-shrink-0 me-md-3 w-50">
+                <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img src=@Url.Content(Model.TourImages[0].Path) class="d-block w-100" alt="...">
+                        </div>
+                        @foreach (var image in Model.TourImages)
+                        {
+                            <div class="carousel-item">
+                                <img src=@Url.Content(image.Path) class="d-block w-100" alt="...">
+                            </div>
+                        }
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+            </div>
+        }
+
+        <!-- Блок с текстом и описанием -->
+        <div class="flex-grow-1 text-bg-dark pt-3 px-3 pt-md-5 px-md-5 overflow-hidden">
+            <div class="my-3 py-3">
+                <div class="text-center">
+                    <h2 class="display-5">Отель: @Model.Hotel.Name</h2>
+                    <p class="lead">Пользовательский рейтинг: @Model.Hotel.Rate</p>
+                </div>
+                <ul>
+                    <li>Тип бронирования: @Model.Hotel.HotelProperties.BookingType.Name</li>
+                    <li>Класс отеля: @Model.Hotel.HotelProperties.Classification</li>
+                    <li>Тип питания: @Model.Hotel.HotelProperties.Food</li>
+                    <li>Кол-во звезд: @Model.Hotel.HotelProperties.Stars</li>
+                    <li>Стиль: @Model.Hotel.HotelProperties.Style</li>
+                </ul>
+                <p class="lead">Сервис:</p>
+                <ul>
+                    @foreach (var service in Model.Hotel.HotelProperties.HotelServices)
+                    {
+                        <li>Наименование сервиса: @service.Name ; Стоимость: @service.Cost рублей</li>
+                    }
+                </ul>
+            </div>
         </div>
-        <ul>
-          <li> Hours - @Model.Route.Hours </li>
-          <li> Type - @Model.Route.Type </li>
-          <li> Start position - @Model.Route.StartPos </li>
-          <li> End position - @Model.Route.EndPost </li>
-        </ul>
-      </div>
     </div>
-  
-  
-  </div>
-  
-  @foreach (var review in Model.Reviews)
+
+    <div class="d-flex flex-md-row flex-column w-100 my-md-3 ps-md-3">
+        <div class="flex-grow-1 bg-light pt-3 px-3 pt-md-5 px-md-5 overflow-hidden">
+            <div class="my-3 p-3">
+                <div class="text-center">
+                    <h2 class="display-5">Маршрут</h2>
+                    <p class="lead">Ваше путешествие начинается здесь...</p>
+                </div>
+                <ul>
+                    <li>Кол-во часов: @Model.Route.Hours</li>
+                    <li>Тип маршрута: @Model.Route.Type</li>
+                    <li>Начало: @Model.Route.StartPos</li>
+                    <li>Конец: @Model.Route.EndPost</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    @foreach (var review in Model.Reviews)
     {
-      <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5  overflow-hidden">
-        <div class="my-3 p-3">
-          <div class="text-center">
-            <h2 class="display-5">Author: @review.User.Name  </h2>
-            <p class="lead"> @review.Text</p>
-          </div>
-          <ul>
-            <li> Is Recommend? - @review.IsRecommend </li>
-          </ul>
+        <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5  overflow-hidden">
+            <div class="my-3 p-3">
+                <div class="text-center">
+                    <h2 class="display-5">Пользователь: @review.User.Name  </h2>
+                    <p class="lead"> @review.Text</p>
+                </div>
+                <ul>
+                    <li> Рекомендую? - @review.IsRecommend </li>
+                </ul>
+            </div>
         </div>
-      </div> 
     }
-  
-  <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 my-md-3 ps-md-3 overflow-hidden">
-    <div class="my-3 p-3">
-      <div class="text-center">
-        <h2 class="display-5">Add your review here </h2>
-      </div>
-      <form asp-action="ReviewAdd" asp-controller="Tour">
-        <div class="form-group">
-          <label for="textArea">Text: </label>
-          <textarea name="Text" class="form-control" id="textArea" rows="3"></textarea>
-          <div class="form-group row">
-            <label for="recommendArea" class="col-sm-2 col-form-label"> Recommend:  </label>
-            <input name="IsRecommend" class="form-check-input position-static col-sm-2" type="checkbox" id="IsRecommend" value="true" aria-label="...">
-          </div>
-          <input type="submit" value="Add review" class="btn btn-dark">
+
+    <div class="bg-light me-md-3 pt-3 px-3 pt-md-5 px-md-5 my-md-3 ps-md-3 overflow-hidden">
+        <div class="my-3 p-3">
+            <div class="text-center">
+                <h2 class="display-5">Оставьте свой отзыв </h2>
+            </div>
+            <form asp-action="ReviewAdd" asp-controller="Tour">
+                <div class="form-group">
+                    <textarea name="Text" class="form-control" id="textArea" rows="3"></textarea>
+                    <div class="form-group row">
+                        <label for="recommendArea" class="col-sm-2 col-form-label"> Рекомендую?  </label>
+                        <input name="IsRecommend" class="form-check-input position-static col-sm-2" type="checkbox" id="IsRecommend" value="true" aria-label="...">
+                    </div>
+                    <input type="submit" value="Оставить отзыв" class="btn btn-dark">
+                </div>
+            </form>
         </div>
-      </form>
     </div>
-  </div>
 </main>

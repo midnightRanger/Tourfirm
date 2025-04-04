@@ -1,57 +1,86 @@
-@model IEnumerable<Tourfirm.Domain.Entity.Tour>
+﻿@model IEnumerable<Tourfirm.Domain.Entity.Tour>
 
 @{
     ViewBag.Title = "Main";
     Layout = "_Layout";
 }
 
+@{
+    var sort = ViewBag.CurrentSort as string;
+    var sortText = sort switch
+    {
+        "Hotter" => "Температура ↑",
+        "Colder" => "Температура ↓",
+        "Cheaper" => "Цена ↑",
+        "Expensively" => "Цена ↓",
+        "LessPopular" => "Популярность ↓",
+        "MorePopular" => "Популярность ↑",
+        _ => "Сортировать"
+    };
+}
+
 <body class="bg-light">
-<div class="alert alert-success margin-md" asp-validation-summary="ModelOnly"> </div>
+    <div class="alert alert-success margin-md" asp-validation-summary="ModelOnly"> </div>
 
-<div class="album py-5 bg-light">
-    <div class="container">
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <form method="get" asp-controller="Home" asp-action="Main">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+                        @sortText
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <li><a class="dropdown-item" href="?sort=Hotter">Температура ↑</a></li>
+                        <li><a class="dropdown-item" href="?sort=Colder">Температура ↓</a></li>
+                        <li><a class="dropdown-item" href="?sort=MorePopular">Популярные ↑</a></li>
+                        <li><a class="dropdown-item" href="?sort=LessPopular">Популярные ↓</a></li>
+                        <li><a class="dropdown-item" href="?sort=Cheaper">Дешевле</a></li>
+                        <li><a class="dropdown-item" href="?sort=Expensively">Дороже</a></li>
+                    </ul>
+                </div>
+            </form>
 
-      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
-        @if (Model.Count() != 0)
-        {
-          @foreach (var item in Model)
-          {
-            <div class="col">
-              <div class="card shadow-sm">
-                @if (item.TourImages.Count == 0)
+
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                @if (Model.Count() != 0)
                 {
-                  <img class="bd-placeholder-img card-img-top" src="~/images/notfound.jpg" alt="Photo" width="100%" height="225" role="img" preserveAspectRatio="xMidYMid slice" focusable="false"/>
+                    @foreach (var item in Model)
+                    {
+                        <div class="col">
+                            <div class="card shadow-sm h-100" style="min-height: 300px;">
+                                @if (item.TourImages.Count == 0)
+                                {
+                                    <img class="bd-placeholder-img card-img-top" src="~/images/notfound.jpg" alt="Photo" width="100%" height="225" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" />
+                                }
+                                else
+                                {
+                                    <img class="bd-placeholder-img card-img-top" src=@Url.Content(item.TourImages[0].Path) alt="Photo" width="100%" height="225" role="img" preserveAspectRatio="xMidYMid slice" focusable="false" />
+                                }
+                                <div class="card-body">
+                                    <p class="card-text"> @item.Name </p>
+                                    <p class="card-text text-muted mt-2"> @item.Description </p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group gap-2">
+                                            <a asp-action="TourInfo" asp-controller="Tour" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">
+                                                Подробнее
+                                            </a>
+
+                                            <a asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.Id" class="btn btn-sm btn-outline-secondary">
+                                                Добавить в корзину
+                                            </a>
+                                        </div>
+                                        <small class="text-muted"> @item.Country.Name </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
                 }
                 else
                 {
-                  <img class="bd-placeholder-img card-img-top" src=@Url.Content(item.TourImages[0].Path) alt="Photo" width="100%" height="225" role="img" preserveAspectRatio="xMidYMid slice" focusable="false"/>
+                    <p> Undefined :(</p>
                 }
-                <div class="card-body">
-                  <p class="card-text"> @item.Name </p>
-                  <p class="card-text"> @item.Description </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <form method="get" asp-action="TourInfo" asp-controller="Tour" asp-route-id="@item.Id">
-                        <input type="submit" value="Info" class="btn btn-sm btn-outline-secondary">
-                      </form>
-                      
-                       <form method="get" asp-action="AddToCart" asp-controller="Cart" asp-route-id="@item.Id">
-                         <button type="submit" class="btn btn-sm btn-outline-secondary">Add to cart </button>
-                         </form>
-                      
-                    </div>
-                    <small class="text-muted"> @item.Country.Name </small>
-                  </div>
-                </div>
-              </div>
             </div>
-          }
-        }
-        else
-        {
-          <p> Undefined :(</p>  
-        }
-      </div>
+        </div>
     </div>
-  </div>
 </body>

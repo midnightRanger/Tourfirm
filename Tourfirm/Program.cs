@@ -76,7 +76,8 @@ builder.Services.AddMvc()
 
 builder.Services.AddDbContext<ApplicationContext>(options =>
 {
-    options.UseNpgsql($"server={DbConnection.Server};User Id={DbConnection.UserId};Password={DbConnection.Password};Port={DbConnection.Port};Database={DbConnection.Database};",
+    options.UseNpgsql($"server={DbConnection.Server};User Id={DbConnection.UserId};" +
+                      $"Password={DbConnection.Password};Port={DbConnection.Port};Database={DbConnection.Database};",
         o => o.UseNodaTime());  
     options.LogTo(Console.WriteLine);
     options.EnableSensitiveDataLogging();   

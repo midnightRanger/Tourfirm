@@ -23,17 +23,17 @@ public class StatsController : Controller
     {
         List<String> tourName = _tourRepository.getAll().Select(u => u.Name).ToList();
         List<Double> price = _tourRepository.getAll().Select(u => u.Cost).ToList();
-        
+
         ViewBag.productNameList = JsonSerializer.Serialize(tourName);
         ViewBag.productPriceList = string.Join(",", price);
-        
-        List<string?> countries = _countryRepository.getAll().Select(c=>c.Name).ToList();
-        List<int> countryTours = _countryRepository.getAll().Include(c => c.Tours).Select(c => c.Tours.Count).ToList(); 
+
+        List<string?> countries = _countryRepository.getAll().Select(c => c.Name).ToList();
+        List<int> countryTours = _countryRepository.getAll().Include(c => c.Tours).Select(c => c.Tours.Count).ToList();
 
         ViewBag.countryNames = JsonSerializer.Serialize(countries);
         ViewBag.tourValues = string.Join(",", countryTours);
 
-        List<int> inCart = _tourRepository.getAll().Include(t => t.Carts).Select(c => c.Carts.Count).ToList(); 
+        List<int> inCart = _tourRepository.getAll().Include(t => t.Carts).Select(c => c.Carts.Count).ToList();
         ViewBag.inCartValues = string.Join(",", inCart);
 
         List<string?> userRoles = _roleRepository.getAll().Select(r => r.Name).ToList();
@@ -42,6 +42,6 @@ public class StatsController : Controller
 
         ViewBag.userRoles = JsonSerializer.Serialize(userRoles);
         ViewBag.userRolesValue = string.Join(",", userRolesValue);
-        return View(); 
+        return View();
     }
 }

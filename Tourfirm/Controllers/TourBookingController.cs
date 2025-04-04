@@ -7,11 +7,11 @@ using Tourfirm.Service.Interfaces;
 
 namespace Tourfirm.Controllers;
 
-public class TourBookingController: Controller
+public class TourBookingController : Controller
 {
     private readonly ILogger<TourBookingController> _logger;
     private readonly ITourBooking _tourBookingRepository;
-    private readonly ITourBookingService _tourBookingService; 
+    private readonly ITourBookingService _tourBookingService;
 
     public TourBookingController(ILogger<TourBookingController> logger, ITourBooking tourBookingRepository, ITourBookingService tourBookingService)
     {
@@ -23,9 +23,9 @@ public class TourBookingController: Controller
     [Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
     public async Task<IActionResult> TourBookingIndex(string? notification)
     {
-        if(notification != null)
+        if (notification != null)
             ModelState.AddModelError("", notification);
-        
+
         List<TourBooking> tourBookings = await _tourBookingRepository.getQuery().Include(t => t.Tour).Include(t => t.User).ToListAsync();
 
         return View(tourBookings);
@@ -40,9 +40,9 @@ public class TourBookingController: Controller
 
     public async Task<IActionResult> ConfirmTourBooking(int id)
     {
-        var response = await _tourBookingService.ConfirmTourBooking(id); 
-        
+        var response = await _tourBookingService.ConfirmTourBooking(id);
+
         return RedirectToAction("TourBookingIndex", "TourBooking", new { notification = response.Description });
     }
-    
+
 }

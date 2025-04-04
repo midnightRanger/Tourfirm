@@ -6,26 +6,26 @@
 <body>
 
     <p>Prices</p>
-<canvas id="myChart"></canvas>
+    <canvas id="myChart"></canvas>
 
-<hr/>
+    <hr />
 
-<p>Country stats</p>
-<canvas id="countryChart"></canvas>
+    <p>Country stats</p>
+    <canvas id="countryChart"></canvas>
 
-<hr/>
+    <hr />
 
-<p>Tours in carts</p>
-<canvas id="lineChart"></canvas>
+    <p>Tours in carts</p>
+    <canvas id="lineChart"></canvas>
 
-<hr/>
+    <hr />
 
-<p>User's roles</p>
-<canvas id="polarAreaChart"></canvas>
-  
+    <p>User's roles</p>
+    <canvas id="polarAreaChart"></canvas>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
   const ctx = document.getElementById('myChart');
 
   new Chart(ctx, {
@@ -46,7 +46,7 @@
       }
     }
   });
-  
+
   const pie = document.getElementById('countryChart');
        new Chart(pie, {
          type: 'doughnut',
@@ -58,20 +58,20 @@
           backgroundColor: [
                 'rgb(255, 99, 132)',
                 'rgb(54, 162, 235)',
-                'rgb(255, 205, 86)', 
+                'rgb(255, 205, 86)',
                 'rgb(244, 2, 255)',
                 'rgb(100, 205, 86)',
                 'rgb(10, 50, 86)',
                 'rgb(255, 205, 86)',
-                'rgb(255, 1, 66)', 
+                'rgb(255, 1, 66)',
                 'rgb(120, 122, 1)'
            ],
           hoverOffset: 4
         }]
-       } 
+       }
        });
-       
-   const line = document.getElementById('lineChart');    
+
+   const line = document.getElementById('lineChart');
   new Chart(line, {
       type: 'line',
       data: {
@@ -90,9 +90,9 @@
         }
       }
     });
-  
+
   const polarArea = document.getElementById('polarAreaChart');
-  
+
     new Chart(polarArea, {
       type: 'polarArea',
       data: {
@@ -111,5 +111,5 @@
         }
       }
     });
-</script>
+    </script>
 </body>

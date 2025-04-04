@@ -46,7 +46,7 @@ public class OrderController : Controller
 
         var tourId = (int)TempData["tourId"];
 
-        TempData["tourId"] = tourId; 
+        TempData["tourId"] = tourId;
 
         var tour = await _tourRepository.getAll().Include(t => t.Hotel).SingleOrDefaultAsync(t => t.Id == tourId);
         var existTourBooking =

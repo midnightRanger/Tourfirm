@@ -9,22 +9,20 @@
     <link href="~/css/grid.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    @if (!ViewData.ModelState.IsValid)
+    <div class="container">
+        @if (!ViewData.ModelState.IsValid)
         {
-          <div class="validation alert alert-info mb-md-5 padding-md" asp-validation-summary="All"></div>
+            <div class="validation alert alert-info mb-md-5 padding-md" asp-validation-summary="All"></div>
         }
-    <h1 class="display-1">Your orders here</h1>
+        <h1 class="display-1">Your orders here</h1>
 
-
-    @foreach (var item in Model)
-    {
-        <p class="lead">Cheque - @item.DateTime </p>
-        <p class="lead">Sum: @item.Sum </p>
-        <p class="lead">Tour: @item.Tour.Name</p>
-        <hr/>
-    }
-
-</div>
+        @foreach (var item in Model)
+        {
+            <p class="lead">Cheque - @item.DateTime </p>
+            <p class="lead">Sum: @item.Sum </p>
+            <p class="lead">Tour: @item.Tour.Name</p>
+            <hr />
+        }
+    </div>
 
 </body>

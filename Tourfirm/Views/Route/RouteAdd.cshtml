@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model Tourfirm.Domain.Entity.Route; 
+@model Tourfirm.Domain.Entity.Route;
 
 @{
     ViewBag.Title = "Route Add";
@@ -11,40 +11,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
- <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
- <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
- 
-<form asp-controller="Route" asp-action="RouteAdd" method="post" enctype="multipart/form-data">
-<div class="alert alert-danger" asp-validation-summary="All"></div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputStartPos"> Start position </label>
-            <input type="text" class="form-control" id="inputStartPos" asp-for="StartPos" placeholder="Moscow, Saint-Petersburg"/>
-            <span asp-validation-for="StartPos"></span>
+
+    <form asp-controller="Route" asp-action="RouteAdd" method="post" enctype="multipart/form-data">
+        <div class="alert alert-danger" asp-validation-summary="All"></div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputStartPos"> Start position </label>
+                <input type="text" class="form-control" id="inputStartPos" asp-for="StartPos" placeholder="Moscow, Saint-Petersburg" />
+                <span asp-validation-for="StartPos"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputEndPost"> End position </label>
+                <input type="text" class="form-control" id="inputEndPost" asp-for="EndPost" placeholder="Brasil, Jerusalem, New-York" />
+                <span asp-validation-for="EndPost"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputHours"> Hours </label>
+                <input type="number" class="form-control" id="inputHours" asp-for="Hours" placeholder="11, 25, 5" />
+                <span asp-validation-for="Hours"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputHours"> Type </label>
+                <input type="text" class="form-control" id="inputType" asp-for="Type" placeholder="Plane, train, subway" />
+                <span asp-validation-for="Type"></span>
+            </div>
+
         </div>
-        <div class="form-group col-md-6">
-            <label for="inputEndPost"> End position </label>
-            <input type="text" class="form-control" id="inputEndPost" asp-for="EndPost" placeholder="Brasil, Jerusalem, New-York"/>
-            <span asp-validation-for="EndPost"></span>
+        <div class="container-fluid">
+            <button type="submit" class="btn btn-primary margin-md">Add Route</button>
         </div>
-        <div class="form-group col-md-6">
-            <label for="inputHours"> Hours </label>
-            <input type="number" class="form-control" id="inputHours" asp-for="Hours" placeholder="11, 25, 5"/>
-            <span asp-validation-for="Hours"></span>
-        </div>
-          <div class="form-group col-md-6">
-                    <label for="inputHours"> Type </label>
-                    <input type="text" class="form-control" id="inputType" asp-for="Type" placeholder="Plane, train, subway"/>
-                    <span asp-validation-for="Type"></span>
-                    </div>
-        
-    </div>
-    <div class="container-fluid">
-        <button type="submit" class="btn btn-primary margin-md">Add Route</button>
-    </div>
-</form>
+    </form>
 
 </body>
 </html>

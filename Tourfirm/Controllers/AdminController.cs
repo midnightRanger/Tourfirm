@@ -7,11 +7,10 @@ using Tourfirm.Domain.ViewModels;
 
 
 namespace Tourfirm.Controllers;
-
 public class AdminController : Controller
 {
     string Set = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "set " : "export ";
-   //Создание бэкапа
+    //Создание бэкапа
     public async Task PostgreSqlRestore(
         string inputFile,
         string host,
@@ -26,9 +25,9 @@ public class AdminController : Controller
                              $"createdb -h " + host + " -p " + port + " -U " + user + $" {database}\n" +
                              "pg_restore -h " + host + " -p " + port + " -d " + database + " -U " + user + "";
 
-//psql command disconnect database
-//dropdb and createdb  remove database and create.
-//pg_restore restore database with file create with pg_dump command
+        //psql command disconnect database
+        //dropdb and createdb  remove database and create.
+        //pg_restore restore database with file create with pg_dump command
         dumpCommand = $"{dumpCommand} {inputFile}";
 
         await Execute(dumpCommand);
@@ -67,7 +66,7 @@ public class AdminController : Controller
             }
         });
     }
-    
+
     private static ProcessStartInfo ProcessInfoByOS(string batFilePath)
     {
         ProcessStartInfo info;
@@ -97,7 +96,7 @@ public class AdminController : Controller
     [HttpGet]
     public async Task<IActionResult> PostgreSqlDump()
     {
-        return View("Admin"); 
+        return View("Admin");
     }
     //Создание бэкапа
     public async Task<FileResult> PostgreSqlDump(
@@ -108,18 +107,18 @@ public class AdminController : Controller
         string user,
         string password = "123")
     {
-        outFile = $"D:\\db.sql"; 
+        outFile = $"D:\\db.sql";
         string dumpCommand =
             $"pg_dump" + " -Fc" + " -h " + $"{DbConnection.Server}" + " -p " + $"{DbConnection.Port}" + " -d " + $"{DbConnection.Database}" + " -U " + $"{DbConnection.UserId}" + "";
 
         string batchContent = "" + dumpCommand + "  > " + "\"" + outFile + "\"" + "\n";
-//        if (System.IO.File.Exists(outFile)) System.IO.File.Delete(outFile);
+        //        if (System.IO.File.Exists(outFile)) System.IO.File.Delete(outFile);
 
         await Execute(batchContent);
 
         byte[] fileBytes = System.IO.File.ReadAllBytes(outFile);
-            string fileName = "db.sql";
-        
-        return File(fileBytes,System.Net.Mime.MediaTypeNames.Text.Plain, fileName );
+        string fileName = "db.sql";
+
+        return File(fileBytes, System.Net.Mime.MediaTypeNames.Text.Plain, fileName);
     }
 }

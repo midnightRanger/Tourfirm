@@ -14,5 +14,7 @@ public class TourBookingViewModel
     public int SleepingPlaceValue { get; set; }
     
     public double TotalServiceCost { get; set; }
+
+    public Tour? Tour { get; set; }
     
 }

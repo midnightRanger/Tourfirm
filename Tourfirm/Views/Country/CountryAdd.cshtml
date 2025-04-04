@@ -1,5 +1,5 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model Tourfirm.Domain.Entity.Country; 
+@model Tourfirm.Domain.Entity.Country;
 
 @{
     ViewBag.Title = "Add country";
@@ -11,40 +11,40 @@
 <head>
     <meta charset="UTF-8">
     <title>Country add</title>
- <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
- <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
 </head>
 <body>
- 
-<form asp-controller="Country" asp-action="CountryAdd" method="post" enctype="multipart/form-data">
-<div class="alert alert-danger" asp-validation-summary="All"></div>
-    <div class="form-row">
-        <div class="form-group col-md-6">
-            <label for="inputName"> Name </label>
-            <input type="text" class="form-control" id="inputName" asp-for="Name" placeholder="England, Germany, USA"/>
-            <span asp-validation-for="Name"></span>
+
+    <form asp-controller="Country" asp-action="CountryAdd" method="post" enctype="multipart/form-data">
+        <div class="alert alert-danger" asp-validation-summary="All"></div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="inputName"> Name </label>
+                <input type="text" class="form-control" id="inputName" asp-for="Name" placeholder="England, Germany, USA" />
+                <span asp-validation-for="Name"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputLanguage"> Language </label>
+                <input type="text" class="form-control" id="inputLanguage" asp-for="Language" placeholder="English, German, American English" />
+                <span asp-validation-for="Language"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputClimate"> Climate </label>
+                <input type="text" class="form-control" id="inputClimate" asp-for="Climate" placeholder="Sub-tropical, Tropical" />
+                <span asp-validation-for="Climate"></span>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="inputMidTemp"> MidTemp </label>
+                <input type="number" step="0.1" class="form-control" id="inputMidTemp" asp-for="MidTemp" placeholder="18.2, 11.2, -9.0" />
+                <span asp-validation-for="MidTemp"></span>
+            </div>
+
         </div>
-        <div class="form-group col-md-6">
-            <label for="inputLanguage"> Language </label>
-            <input type="text" class="form-control" id="inputLanguage" asp-for="Language" placeholder="English, German, American English"/>
-            <span asp-validation-for="Language"></span>
+        <div class="container-fluid">
+            <button type="submit" class="btn btn-primary margin-md">Add Country</button>
         </div>
-        <div class="form-group col-md-6">
-            <label for="inputClimate"> Climate </label>
-            <input type="text" class="form-control" id="inputClimate" asp-for="Climate" placeholder="Sub-tropical, Tropical"/>
-            <span asp-validation-for="Climate"></span>
-        </div>
-        <div class="form-group col-md-6">
-                    <label for="inputMidTemp"> MidTemp </label>
-                    <input type="number" step="0.1" class="form-control" id="inputMidTemp" asp-for="MidTemp" placeholder="18.2, 11.2, -9.0"/>
-                    <span asp-validation-for="MidTemp"></span>
-                </div>
-        
-    </div>
-    <div class="container-fluid">
-        <button type="submit" class="btn btn-primary margin-md">Add Country</button>
-    </div>
-</form>
+    </form>
 
 </body>
 </html>

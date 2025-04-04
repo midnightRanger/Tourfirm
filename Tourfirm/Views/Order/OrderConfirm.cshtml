@@ -8,30 +8,30 @@
     <link href="~/css/grid.css" rel="stylesheet">
 </head>
 <body>
-<div class="container">
-    @if (!ViewData.ModelState.IsValid)
-    {
-      <div class="validation alert alert-info mb-md-5 padding-md" asp-validation-summary="All"></div>
-    }
-    <h1 class="display-1">Please, check the order description</h1>
+    <div class="container">
+        @if (!ViewData.ModelState.IsValid)
+        {
+            <div class="validation alert alert-info mb-md-5 padding-md" asp-validation-summary="All"></div>
+        }
+        <h1 class="display-1">Please, check the order description</h1>
 
 
-    <div class="row">
-        <div class="col-4">Tour Name: @Model.Tour.Name </div>
-        <div class="col-4">Total Cost: @Model.TotalCost </div>
+        <div class="row">
+            <div class="col-4">Tour Name: @Model.Tour.Name </div>
+            <div class="col-4">Total Cost: @Model.TotalCost </div>
+        </div>
+        <div class="row">
+            <div class="col-4">Arrival Time: @Model.ArrivalTime </div>
+            <div class="col-4">Booking Time: @Model.BookingTime </div>
+        </div>
+        <div class="row">
+            <div class="col">Sleep Places: @Model.SleepingPlaceValue </div>
+        </div>
+
+
+        <form method="post" asp-action="MakeOrder" asp-controller="Order">
+            <button type="submit" class="btn btn-sm btn-outline-secondary" style="margin-top: 1em; width: 100%"> Confirm Order </button>
+        </form>
     </div>
-    <div class="row">
-        <div class="col-4">Arrival Time: @Model.ArrivalTime </div>
-        <div class="col-4">Booking Time: @Model.BookingTime </div>
-    </div>
-    <div class="row">
-                    <div class="col">Sleep Places: @Model.SleepingPlaceValue </div>
-                    >
-                </div>
-    
-    <form method="post" asp-action="MakeOrder" asp-controller="Order">
-        <button type="submit" class="btn btn-sm btn-outline-secondary" style="margin-top: 1em; width: 100%"> Confirm Order </button>
-    </form>
-</div>
 
 </body>

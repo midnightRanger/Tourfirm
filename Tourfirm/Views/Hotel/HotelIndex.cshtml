@@ -6,65 +6,65 @@
 }
 @if (!ViewData.ModelState.IsValid)
 {
-  <div class="validation alert alert-danger mb-md-5 padding-md" asp-validation-summary="All"></div>
+    <div class="validation alert alert-danger mb-md-5 padding-md" asp-validation-summary="All"></div>
 }
 <table class="table">
-  <thead>
-  <tr>
-    <th scope="col"> <a asp-action="HotelIndex" asp-controller="Hotel" asp-route-sortHotel="@ViewBag.IdHotel"> ID </a> </th>
-    <th scope="col">Name</th>
-    <th scope="col">Rate</th>
-    <th scope="col">Booking</th>
-    <th scope="col">Capacity</th>
-    <th scope="col">Classification</th>
-    <th scope="col">Food</th>
-    <th scope="col">Stars</th>
-    <th scope="col">Style</th>
-    <th scope="col">Service</th>
-    <th scope="col">Delete</th>
-    <th scope="col">Update</th>
-    <th scope="col">Services</th>
-  </tr>
-  </thead>
-  <tbody>
-  @foreach (var item in Model)
-  {
-    <tr>
-      <th scope="row">@item.Id</th>
-      <td>@item.Name</td>
-      <td>@item.Rate</td>
-      <td>@item.HotelProperties.BookingType.Name</td>
-      <td>@item.HotelProperties.Capacity</td>
-      <td>@item.HotelProperties.Classification</td>
-      <td>@item.HotelProperties.Food</td>
-      <td>@item.HotelProperties.Stars</td>
-      <td>@item.HotelProperties.Style</td>
-      <td>
-        @if (item.HotelProperties.HotelServices.Count == 0)
+    <thead>
+        <tr>
+            <th scope="col"> <a asp-action="HotelIndex" asp-controller="Hotel" asp-route-sortHotel="@ViewBag.IdHotel"> ID </a> </th>
+            <th scope="col">Name</th>
+            <th scope="col">Rate</th>
+            <th scope="col">Booking</th>
+            <th scope="col">Capacity</th>
+            <th scope="col">Classification</th>
+            <th scope="col">Food</th>
+            <th scope="col">Stars</th>
+            <th scope="col">Style</th>
+            <th scope="col">Service</th>
+            <th scope="col">Delete</th>
+            <th scope="col">Update</th>
+            <th scope="col">Services</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
         {
-          <div> There are no services for this hotel:(</div>
+            <tr>
+                <th scope="row">@item.Id</th>
+                <td>@item.Name</td>
+                <td>@item.Rate</td>
+                <td>@item.HotelProperties.BookingType.Name</td>
+                <td>@item.HotelProperties.Capacity</td>
+                <td>@item.HotelProperties.Classification</td>
+                <td>@item.HotelProperties.Food</td>
+                <td>@item.HotelProperties.Stars</td>
+                <td>@item.HotelProperties.Style</td>
+                <td>
+                    @if (item.HotelProperties.HotelServices.Count == 0)
+                    {
+                        <div> There are no services for this hotel:(</div>
+                    }
+                    else
+                    {
+                        <ul>
+                            @foreach (var service in item.HotelProperties.HotelServices)
+                            {
+                                <li> @service.Name - @service.Cost </li>
+                            }
+                        </ul>
+                    }
+                </td>
+
+                <td><a asp-action="HotelDeleteConfirm" asp-controller="Hotel" asp-route-id="@item.Id">Delete</a></td>
+                <td><a asp-action="HotelUpdate" asp-controller="Hotel" asp-route-id="@item.Id">Update</a></td>
+                <td><a asp-action="HotelService" asp-controller="Hotel" asp-route-id="@item.Id">Services</a></td>
+            </tr>
         }
-        else
-        {
-          <ul>
-          @foreach (var service in item.HotelProperties.HotelServices)
-          {
-          <li> @service.Name - @service.Cost </li>
-          }
-        </ul>
-        }
-      </td>
-       
-      <td><a asp-action="HotelDeleteConfirm" asp-controller="Hotel" asp-route-id="@item.Id">Delete</a></td>
-      <td><a asp-action="HotelUpdate" asp-controller="Hotel" asp-route-id="@item.Id">Update</a></td>
-      <td><a asp-action="HotelService" asp-controller="Hotel" asp-route-id="@item.Id">Services</a></td>
-    </tr>
-  }
-  </tbody>
+    </tbody>
 </table>
 
-<form asp-action="HotelAdd" method="get"  asp-controller="Hotel">
-<div class="container-fluid">
-  <input type="submit" value="Add new hotel" class="btn btn-primary" style="width:100%"/>
-</div>
+<form asp-action="HotelAdd" method="get" asp-controller="Hotel">
+    <div class="container-fluid">
+        <input type="submit" value="Add new hotel" class="btn btn-primary" style="width:100%" />
+    </div>
 </form>

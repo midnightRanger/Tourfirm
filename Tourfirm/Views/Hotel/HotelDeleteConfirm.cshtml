@@ -5,17 +5,17 @@
     Layout = "_Layout";
 }
 <body class="bg-light">
-<div class="container-fluid position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center">
-    <div class="col-md-5 p-lg-5 mx-auto my-5">
-        <h1 class="display-4 fw-normal">Are you sure?</h1>
-        <p class="lead fw-normal">You want to delete a Hotel "@Model.Name" </p>
-        
-        <div style="margin-bottom: 1em">
-        <a asp-action="HotelDelete" asp-controller="Hotel" asp style="width:100%; padding: 10px;"  asp-route-id="@Model.Id" class="btn btn-danger margin-bottom-md"> Delete </a>
+    <div class="container-fluid position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center">
+        <div class="col-md-5 p-lg-5 mx-auto my-5">
+            <h1 class="display-4 fw-normal">Are you sure?</h1>
+            <p class="lead fw-normal">You want to delete a Hotel "@Model.Name" </p>
+
+            <div style="margin-bottom: 1em">
+                <a asp-action="HotelDelete" asp-controller="Hotel" asp style="width:100%; padding: 10px;" asp-route-id="@Model.Id" class="btn btn-danger margin-bottom-md"> Delete </a>
+            </div>
+            <form asp-action="HotelIndex" asp-controller="Hotel" method="get">
+                <input type="submit" style="width:100%; padding: 10px;" value="Back" class="btn btn-primary margin-bottom-md" />
+            </form>
         </div>
-        <form asp-action="HotelIndex" asp-controller="Hotel" method="get">
-            <input type="submit" style="width:100%; padding: 10px;" value="Back" class="btn btn-primary margin-bottom-md"/>
-        </form>
     </div>
-</div>
 </body>

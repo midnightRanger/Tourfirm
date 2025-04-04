@@ -35,7 +35,7 @@ public class TourController : Controller
     private readonly ITourBookingService _tourBookingService;
 
     public TourController(ILogger<TourController> logger, ITour tourRepository,
-        IUser userRepository, IReview reviewRepository, IHotel hotelRepository, 
+        IUser userRepository, IReview reviewRepository, IHotel hotelRepository,
         ITourType tourTypeRepository, ICountry countryRepository, IRoute routeRepository,
         ITourImage tourImageRepository, ITourService tourService, ITourBooking tourBookingRepository, ITourBookingService tourBookingService)
     {
@@ -53,72 +53,72 @@ public class TourController : Controller
         _tourBookingService = tourBookingService;
     }
 
-    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
+    [Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
     public async Task<IActionResult> ImageRemove(int id, int tourId)
     {
         _tourImageRepository.deleteTourImage(id);
-        return RedirectToAction("TourUpdate", "Tour", new {id = tourId });
+        return RedirectToAction("TourUpdate", "Tour", new { id = tourId });
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> TourIndex(string? notification, Tour.SortState sortTour = Tour.SortState.IdAsc)
     {
-        if(notification != null)
+        if (notification != null)
             ModelState.AddModelError("", notification);
-        
+
         // ReSharper disable once HeapView.BoxingAllocation
         ViewData["IdSort"] = sortTour == Tour.SortState.IdAsc ? Tour.SortState.IdDesc : Tour.SortState.IdAsc;
         IQueryable<Tour> tours = _tourRepository.getAll();
-        
-        var allTours = _tourRepository.getAll().Include(t=>t.Reviews).ThenInclude(r=>r.User).Include(t => t.TourImages).Include(t => t.Country)
-            .Include(t => t.Hotel).ThenInclude(t=>t.HotelProperties).ThenInclude(t=>t.HotelServices).Include(t => t.Route).Include(t => t.TourType);
+
+        var allTours = _tourRepository.getAll().Include(t => t.Reviews).ThenInclude(r => r.User).Include(t => t.TourImages).Include(t => t.Country)
+            .Include(t => t.Hotel).ThenInclude(t => t.HotelProperties).ThenInclude(t => t.HotelServices).Include(t => t.Route).Include(t => t.TourType);
 
         switch (sortTour)
         {
             case Tour.SortState.IdAsc:
-            {
-                tours = allTours.OrderBy(p => p.Id);
-                break;
-            }
+                {
+                    tours = allTours.OrderBy(p => p.Id);
+                    break;
+                }
 
             case Tour.SortState.IdDesc:
-            {
-                tours = allTours.OrderByDescending(p => p.Id);
-                break;
-            }
+                {
+                    tours = allTours.OrderByDescending(p => p.Id);
+                    break;
+                }
         }
 
         return View("TourIndex", tours.AsNoTracking().ToList());
 
     }
 
-    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
+    [Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
     [HttpGet]
     public async Task<IActionResult> TourDeleteConfirm(int id)
     {
         return View(await _tourRepository.getTour(id));
     }
 
-    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
+    [Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
     public async Task<IActionResult> TourDelete(int? id)
     {
         var response = await _tourService.DeleteTour(await _tourRepository.getTour(id));
 
-        return RedirectToAction("TourIndex", "Tour", new { notification = response.Description});
-        
+        return RedirectToAction("TourIndex", "Tour", new { notification = response.Description });
+
     }
 
-    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
+    [Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
     [HttpGet]
     public async Task<IActionResult> TourUpdate(string? notification, int? id)
     {
-        IQueryable<Tour> tours = _tourRepository.getAll().Include(t=>t.TourImages);
-        var tour = await tours.FirstOrDefaultAsync(t=>t.Id == id);
-        
-        if(notification != null)
+        IQueryable<Tour> tours = _tourRepository.getAll().Include(t => t.TourImages);
+        var tour = await tours.FirstOrDefaultAsync(t => t.Id == id);
+
+        if (notification != null)
             ModelState.AddModelError("", notification);
 
-        TourUpdateViewModel tourUpdateViewModel = new(); 
+        TourUpdateViewModel tourUpdateViewModel = new();
         tourUpdateViewModel.AllHotels = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
         tourUpdateViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
         tourUpdateViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
@@ -127,32 +127,32 @@ public class TourController : Controller
         tourUpdateViewModel.Cost = tour.Cost;
         tourUpdateViewModel.Description = tour.Description;
         tourUpdateViewModel.Name = tour.Name;
-        tourUpdateViewModel.Id = tour.Id; 
+        tourUpdateViewModel.Id = tour.Id;
 
         foreach (var image in tour.TourImages)
         {
             tourUpdateViewModel.Images.Add(image);
         }
-        
-        
+
+
         return View(tourUpdateViewModel);
     }
 
-    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
+    [Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
     [HttpPost]
     public async Task<IActionResult> TourUpdate(TourUpdateViewModel tourUpdateViewModel, Tour tour)
     {
         if (!ModelState.IsValid)
-        { 
+        {
             tourUpdateViewModel.AllHotels = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
             tourUpdateViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
             tourUpdateViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
             tourUpdateViewModel.AllTourTypes = new(await _tourTypeRepository.getTourTypes(), nameof(TourType.Id), nameof(TourType.Name));
-            
-            IQueryable<Tour> tours = _tourRepository.getAll().Include(t=>t.TourImages);
-            var tourModel = await tours.FirstOrDefaultAsync(t=>t.Id == tourUpdateViewModel.Id);
-            tourUpdateViewModel.Images = tourModel.TourImages; 
-            
+
+            IQueryable<Tour> tours = _tourRepository.getAll().Include(t => t.TourImages);
+            var tourModel = await tours.FirstOrDefaultAsync(t => t.Id == tourUpdateViewModel.Id);
+            tourUpdateViewModel.Images = tourModel.TourImages;
+
             return View(tourUpdateViewModel);
         }
 
@@ -166,15 +166,15 @@ public class TourController : Controller
         return RedirectToAction("TourUpdate", "Tour", new { notification = response.Description });
 
     }
-    
-    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
+
+    [Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
     [HttpGet]
     public async Task<IActionResult> TourAdd(string? notification)
     {
-        if(notification != null)
+        if (notification != null)
             ModelState.AddModelError("", notification);
 
-        TourAddViewModel tourAddViewModel = new(); 
+        TourAddViewModel tourAddViewModel = new();
         tourAddViewModel.AllHotels = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
         tourAddViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
         tourAddViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
@@ -182,14 +182,14 @@ public class TourController : Controller
 
         return View(tourAddViewModel);
     }
-    
 
-    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
+
+    [Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
     [HttpPost]
     public async Task<IActionResult> TourAdd(TourAddViewModel tourAddViewModel, Tour tour)
     {
         if (!ModelState.IsValid)
-        { 
+        {
             tourAddViewModel.AllHotels = new(await _hotelRepository.getHotels(), nameof(Hotel.Id), nameof(Hotel.Name));
             tourAddViewModel.AllCountries = new(await _countryRepository.getCountries(), nameof(Country.Id), nameof(Country.Name));
             tourAddViewModel.AllRoutes = new(await _routeRepository.getRoutes(), nameof(Route.Id), nameof(Route.EndPost));
@@ -207,20 +207,20 @@ public class TourController : Controller
         ModelState.AddModelError("", response.Description);
         return RedirectToAction("TourAdd", "Tour", new { notification = response.Description });
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> TourInfo(int? id)
     {
-        var allTours = _tourRepository.getAll().Include(t=>t.Reviews).ThenInclude(r=>r.User).Include(t => t.TourImages).Include(t => t.Country)
+        var allTours = _tourRepository.getAll().Include(t => t.Reviews).ThenInclude(r => r.User).Include(t => t.TourImages).Include(t => t.Country)
             .Include(t => t.Hotel).
-            ThenInclude(t=>t.HotelProperties).
-            ThenInclude(h=>h.BookingType).
+            ThenInclude(t => t.HotelProperties).
+            ThenInclude(h => h.BookingType).
             Include(t => t.Hotel).
-            ThenInclude(t=>t.HotelProperties).
-            ThenInclude(t=>t.HotelServices).Include(t => t.Route).
+            ThenInclude(t => t.HotelProperties).
+            ThenInclude(t => t.HotelServices).Include(t => t.Route).
             Include(t => t.TourType);
         Tour tour = allTours.FirstOrDefault(p => p.Id == id);
-        
+
         if (tour != null)
         {
             tour.Reviews = tour.Reviews.Where(r => r.IsAccept).ToList();
@@ -229,76 +229,78 @@ public class TourController : Controller
             return View(tour);
         }
 
-        return NotFound(); 
+        return NotFound();
     }
 
     [HttpPost]
     public async Task<IActionResult> ReviewAdd(Review review)
     {
         review.TourId = (int)TempData["TourId"];
-        review.IsAccept = false; 
+        review.IsAccept = false;
         review.User = _userRepository.getAll().FirstOrDefault(u => u.Account.Login == User.Identity.Name);
         await _reviewRepository.addReview(review);
 
         return RedirectToAction("TourInfo", "Tour", new { id = review.TourId });
     }
 
-    [Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
+    [Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
     public async Task<IActionResult> TourToCsv()
     {
         using var ms = new MemoryStream();
         using var writer = new StreamWriter(ms, System.Text.Encoding.UTF8);
         using var csv = new CsvWriter(writer, CultureInfo.InvariantCulture);
-        
+
         await writer.WriteLineAsync("Tour");
         await csv.WriteRecordsAsync(await _tourRepository.getAll().ToListAsync());
         await csv.NextRecordAsync();
 
-           await writer.FlushAsync();
-                    ms.Seek(0, SeekOrigin.Begin);
-                    var result = ms.ToArray();
-                    ms.Close();
-                    return File(result, "application/force-download", "tours.csv");
+        await writer.FlushAsync();
+        ms.Seek(0, SeekOrigin.Begin);
+        var result = ms.ToArray();
+        ms.Close();
+        return File(result, "application/force-download", "tours.csv");
     }
 
-    
+
 
     public async Task<IActionResult> TourBookingServiceAdd(TourBookingViewModel tourBookingViewModel)
     {
         var response = await _tourBookingService.AddServiceToBooking(tourBookingViewModel, (int)TempData["tourId"]);
-        
+
         if (response.StatusCode == Domain.Safety.StatusCode.OK)
-             return RedirectToAction("TourBooking", "Tour", new { id = (int)TempData["tourId"] });
+            return RedirectToAction("TourBooking", "Tour", new { id = (int)TempData["tourId"] });
         return RedirectToAction("TourBooking", "Tour", new { id = (int)TempData["tourId"] });
     }
 
     public async Task<IActionResult> TourBookingServiceRemove(int id)
     {
         var response = await _tourBookingService.DeleteServiceFromBooking((int)TempData["tourId"], id);
-        
+
         return RedirectToAction("TourBooking", "Tour", new { id = (int)TempData["tourId"] });
     }
 
     public async Task<IActionResult> MakeTourBooking(TourBookingViewModel model)
     {
         var response = await _tourBookingService.CreateTourBooking((int)TempData["tourId"]);
-        
-        return RedirectToAction("Main", "Home",new { notification = response.Description });
-    } 
-    
+
+        return RedirectToAction("Main", "Home", new { notification = response.Description });
+    }
+
     public async Task<IActionResult> TourBooking(int id)
     {
         Tour tour = await _tourRepository.getAll().Include(t => t.Hotel).ThenInclude(t => t.HotelProperties)
-            .ThenInclude(t => t.HotelServices).Where(t=>t.Id == id).SingleOrDefaultAsync();
-        
+            .ThenInclude(t => t.HotelServices).Where(t => t.Id == id).SingleOrDefaultAsync();
+
         TourBookingViewModel model = new TourBookingViewModel();
+
+        model.Tour = tour;
         model.AllService = new(tour.Hotel.HotelProperties.HotelServices, nameof(HotelService.Id), nameof(HotelService.Name));
 
-        TourBooking? existTourBooking = null; 
+        TourBooking? existTourBooking = null;
 
-        var user = await _userRepository.getAll().Include(u => u.TourBookings).ThenInclude(t=>t.HotelServices).Include(u=>u.Account).SingleOrDefaultAsync(u=>u.Account.Login == User.Identity.Name);
+        var user = await _userRepository.getAll().Include(u => u.TourBookings).ThenInclude(t => t.HotelServices).Include(u => u.Account).SingleOrDefaultAsync(u => u.Account.Login == User.Identity.Name);
 
-        
+
         foreach (var tourBooking in user.TourBookings)
         {
             if (tourBooking.TourId == id)
@@ -316,18 +318,19 @@ public class TourController : Controller
         {
             await _tourBookingRepository.addTourBooking(new TourBooking()
             {
-                UserId = user.Id, TourId = id
-            }); 
+                UserId = user.Id,
+                TourId = id
+            });
         }
-        
-            
+
+
         foreach (var service in model.SelectedServices)
             model.TotalServiceCost += service.Cost;
 
-        model.CostForBed = tour.Hotel.CostForBed; 
-        
+        model.CostForBed = tour.Hotel.CostForBed;
+
         TempData["tourId"] = id;
-        
-        return View(model); 
+
+        return View(model);
     }
 }

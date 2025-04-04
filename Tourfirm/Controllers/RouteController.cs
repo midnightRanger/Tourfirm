@@ -10,14 +10,14 @@ using Route = Tourfirm.Domain.Entity.Route;
 
 namespace Tourfirm.Controllers;
 
-[Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
+[Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
 public class RouteController : Controller
 {
     private readonly ILogger<RouteController> _logger;
     private readonly IRoute _routeRepository;
-    private readonly IRouteService _routeService; 
+    private readonly IRouteService _routeService;
 
-    public RouteController( ILogger<RouteController> logger, IRoute routeRepository, IRouteService routeService)
+    public RouteController(ILogger<RouteController> logger, IRoute routeRepository, IRouteService routeService)
     {
         _logger = logger;
         _routeRepository = routeRepository;
@@ -44,56 +44,56 @@ public class RouteController : Controller
         ModelState.AddModelError("", response.Description);
         return RedirectToAction("RouteIndex", "Route", new { notification = response.Description });
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> RouteDeleteConfirm(int id)
     {
         return View(await _routeRepository.getRoute(id));
     }
 
-    
+
     public async Task<IActionResult> RouteDelete(int id)
     {
         var response = await _routeService.DeleteRoute(await _routeRepository.getRoute(id));
 
-        return RedirectToAction("RouteIndex", "Route", new { notification = response.Description});
-        
+        return RedirectToAction("RouteIndex", "Route", new { notification = response.Description });
+
     }
 
     [HttpGet]
     public async Task<IActionResult> RouteIndex(string? notification, Route.SortState sortRoute = Route.SortState.IdAsc)
     {
-        if(notification != null)
+        if (notification != null)
             ModelState.AddModelError("", notification);
-        
+
         // ReSharper disable once HeapView.BoxingAllocation
         ViewData["IdSort"] = sortRoute == Route.SortState.IdAsc ? Route.SortState.IdDesc : Route.SortState.IdAsc;
         IQueryable<Route> routes = _routeRepository.getAll();
-        
+
         switch (sortRoute)
         {
             case Route.SortState.IdAsc:
-            {
-                routes = routes.OrderBy(p => p.Id);
-                break;
-            }
+                {
+                    routes = routes.OrderBy(p => p.Id);
+                    break;
+                }
 
             case Route.SortState.IdDesc:
-            {
-                routes = routes.OrderByDescending(p => p.Id);
-                break;
-            }
+                {
+                    routes = routes.OrderByDescending(p => p.Id);
+                    break;
+                }
         }
 
         return View("RouteIndex", await routes.AsNoTracking().ToListAsync());
     }
-    
-     [HttpGet]
+
+    [HttpGet]
     public async Task<IActionResult> RouteUpdate(string? notification, int id)
     {
         var route = await _routeRepository.getRoute(id);
-        
-        if(notification != null)
+
+        if (notification != null)
             ModelState.AddModelError("", notification);
 
         return View(route);

@@ -8,7 +8,7 @@ using Tourfirm.Service.Interfaces;
 
 namespace Tourfirm.Controllers;
 
-[Authorize(Roles="USER,ADMIN,MODERATOR")]
+[Authorize(Roles = "USER,ADMIN,MODERATOR")]
 public class CartController : Controller
 {
     private readonly ILogger<CartController> _logger;
@@ -23,33 +23,33 @@ public class CartController : Controller
         _db = db;
         _userRepository = userRepository;
         _cartService = cartService;
-        _userList = userRepository.getAll().Include(u => u.Account).Include(u=>u.Cart).ThenInclude(c=>c.Tours).ThenInclude(c=>c.TourImages).ToList();
+        _userList = userRepository.getAll().Include(u => u.Account).Include(u => u.Cart).ThenInclude(c => c.Tours).ThenInclude(c => c.TourImages).ToList();
     }
 
     [HttpGet]
     public async Task<IActionResult> Cart(string? notification)
     {
-        if(notification != null)
+        if (notification != null)
             ModelState.AddModelError("", notification);
 
         User? user = _userList.FirstOrDefault(u => u.Account?.Login == User.Identity.Name);
-        
-        return View(user.Cart); 
+
+        return View(user.Cart);
     }
-    
+
     public async Task<IActionResult> DeleteFromCart(int? id)
     {
         User? user = _userList.FirstOrDefault(u => u.Account?.Login == User.Identity.Name);
 
         var response = await _cartService.DeleteFromCart(id, user.Cart);
-        
-        if (response.StatusCode == Domain.Safety.StatusCode.OK) 
+
+        if (response.StatusCode == Domain.Safety.StatusCode.OK)
             return RedirectToAction("Cart", "Cart");
-        
-        return RedirectToAction("Cart", "Cart", new {notification = response.Description});
+
+        return RedirectToAction("Cart", "Cart", new { notification = response.Description });
 
     }
-    
+
     public async Task<IActionResult> AddToCart(int? id)
     {
         User? user = _userList.FirstOrDefault(u => u.Account?.Login == User.Identity.Name);
@@ -57,14 +57,14 @@ public class CartController : Controller
         if (user != null)
         {
             var response = await _cartService.AddToCart(id, user);
-        
+
             if (response.StatusCode == Domain.Safety.StatusCode.OK)
             {
                 return RedirectToAction("Cart", "Cart");
             }
             //TODO normal response transfer
-            return RedirectToAction("Main", "Home", new { error = response.Description  });
+            return RedirectToAction("Main", "Home", new { error = response.Description });
         }
-        return RedirectToAction("Main", "Home", new { error = "User is null!"  });
+        return RedirectToAction("Main", "Home", new { error = "User is null!" });
     }
 }

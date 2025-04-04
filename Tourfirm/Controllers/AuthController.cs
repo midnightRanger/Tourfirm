@@ -15,7 +15,7 @@ public class AuthController : Controller
     private readonly IAuthService _authService;
 
     private readonly ILogger<AuthController> _logger;
-    
+
     public AuthController(ApplicationContext context, IWebHostEnvironment app, IAuthService authService)
     {
         db = context;
@@ -25,8 +25,8 @@ public class AuthController : Controller
 
     [HttpGet]
     public IActionResult Login() => View();
-    
-    
+
+
     [HttpPost]
     public async Task<IActionResult> Login(LoginViewModel model)
     {
@@ -44,14 +44,14 @@ public class AuthController : Controller
         }
         return View(model);
     }
-    
+
     [HttpGet]
     public IActionResult Register() => View();
-    
+
     [HttpPost]
     public async Task<IActionResult> Register(RegisterViewModel model)
     {
-        if(ModelState.IsValid)
+        if (ModelState.IsValid)
         {
             var response = await _authService.Register(model);
             if (response.StatusCode == Domain.Safety.StatusCode.OK)
@@ -65,7 +65,7 @@ public class AuthController : Controller
         }
         return View(model);
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> Logout()
     {

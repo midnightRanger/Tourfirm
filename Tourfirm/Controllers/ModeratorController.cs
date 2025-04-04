@@ -8,7 +8,7 @@ using Tourfirm.Domain.ViewModels;
 using Route = Microsoft.AspNetCore.Routing.Route;
 
 namespace Tourfirm.Controllers;
-[Authorize(Roles="ADMIN,MODERATOR")]
+[Authorize(Roles = "ADMIN,MODERATOR")]
 public class ModeratorController : Controller
 {
     private readonly IReview _reviewRepository;
@@ -27,39 +27,39 @@ public class ModeratorController : Controller
     [HttpGet]
     public async Task<IActionResult> ReviewIndex(string? notification, Review.SortState sortReview = Review.SortState.IdAsc)
     {
-        if(notification != null)
+        if (notification != null)
             ModelState.AddModelError("", notification);
-        
+
         // ReSharper disable once HeapView.BoxingAllocation
         ViewData["IdSort"] = sortReview == Review.SortState.IdAsc ? Review.SortState.IdDesc : Review.SortState.IdAsc;
         ViewData["TextSort"] = sortReview == Review.SortState.TextAsc ? Review.SortState.TextDesc : Review.SortState.TextAsc;
 
-        IQueryable<Review> reviews = _reviewRepository.getAll().Include(r=>r.Tour).Include(r=>r.User);
-        
+        IQueryable<Review> reviews = _reviewRepository.getAll().Include(r => r.Tour).Include(r => r.User);
+
         switch (sortReview)
         {
             case Review.SortState.IdAsc:
-            {
-                reviews = reviews.OrderBy(p => p.Id);
-                break;
-            }
+                {
+                    reviews = reviews.OrderBy(p => p.Id);
+                    break;
+                }
 
             case Review.SortState.IdDesc:
-            {
-                reviews = reviews.OrderByDescending(p => p.Id);
-                break;
-            }
+                {
+                    reviews = reviews.OrderByDescending(p => p.Id);
+                    break;
+                }
             case Review.SortState.TextAsc:
-            {
-                reviews = reviews.OrderBy(p => p.Text);
-                break;
-            }
+                {
+                    reviews = reviews.OrderBy(p => p.Text);
+                    break;
+                }
 
             case Review.SortState.TextDesc:
-            {
-                reviews = reviews.OrderByDescending(p => p.Text);
-                break;
-            }
+                {
+                    reviews = reviews.OrderByDescending(p => p.Text);
+                    break;
+                }
         }
 
         return View("ReviewIndex", await reviews.AsNoTracking().ToListAsync());
@@ -81,74 +81,74 @@ public class ModeratorController : Controller
         return RedirectToAction("ReviewIndex", "Moderator", new { notification = "Review was deleted" });
 
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> UserIndex(string? notification, User.SortState sortUser = Domain.Entity.User.SortState.IdAsc)
     {
-        if(notification != null)
+        if (notification != null)
             ModelState.AddModelError("", notification);
-        
+
         // ReSharper disable once HeapView.BoxingAllocation
         ViewData["IdSort"] = sortUser == Domain.Entity.User.SortState.IdAsc ? Domain.Entity.User.SortState.IdDesc : Domain.Entity.User.SortState.IdAsc;
         ViewData["LoginSort"] = sortUser == Domain.Entity.User.SortState.LoginAsc ? Domain.Entity.User.SortState.LoginDesc : Domain.Entity.User.SortState.LoginAsc;
 
-        IQueryable<User> users = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles);
-        
+        IQueryable<User> users = _userRepository.getAll().Include(u => u.Account).ThenInclude(a => a.Roles);
+
         switch (sortUser)
         {
             case Domain.Entity.User.SortState.IdAsc:
-            {
-                users = users.OrderBy(p => p.Id);
-                break;
-            }
+                {
+                    users = users.OrderBy(p => p.Id);
+                    break;
+                }
 
             case Domain.Entity.User.SortState.IdDesc:
-            {
-                users = users.OrderByDescending(p => p.Id);
-                break;
-            }
+                {
+                    users = users.OrderByDescending(p => p.Id);
+                    break;
+                }
             case Domain.Entity.User.SortState.LoginAsc:
-            {
-                users = users.OrderBy(p => p.Account.Login);
-                break;
-            }
+                {
+                    users = users.OrderBy(p => p.Account.Login);
+                    break;
+                }
 
             case Domain.Entity.User.SortState.LoginDesc:
-            {
-                users = users.OrderByDescending(p => p.Account.Login);
-                break;
-            }
+                {
+                    users = users.OrderByDescending(p => p.Account.Login);
+                    break;
+                }
         }
 
         return View("UserIndex", await users.AsNoTracking().ToListAsync());
     }
-    
+
     public async Task<IActionResult> UserChange(int id)
     {
-        User? user = await _userRepository.getAll().Include(u => u.Account).ThenInclude(r=>r.Roles).FirstOrDefaultAsync(u => u.Id == id);
+        User? user = await _userRepository.getAll().Include(u => u.Account).ThenInclude(r => r.Roles).FirstOrDefaultAsync(u => u.Id == id);
 
         if (user.Account.Login == User.Identity.Name)
             return RedirectToAction("UserIndex", "Moderator", new { notification = "You cant ban yourself!" });
-        if (user.Account.Roles.Contains( await _roleRepository.getRole(2)))  
+        if (user.Account.Roles.Contains(await _roleRepository.getRole(2)))
             return RedirectToAction("UserIndex", "Moderator", new { notification = "You cant ban admin!" });
 
-        
+
         user.Account.isActive = !user.Account.isActive;
         _userRepository.updateUser(user);
 
         return RedirectToAction("UserIndex", "Moderator", new { notification = "User status was updated" });
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> UserRoleUpdate(string? notification, int id)
     {
-        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u=>u.Id == id);
+        User? user = _userRepository.getAll().Include(u => u.Account).ThenInclude(a => a.Roles).FirstOrDefault(u => u.Id == id);
 
-        if(notification != null)
+        if (notification != null)
             ModelState.AddModelError("", notification);
 
         UserRoleUpdateViewModel roleModel = new UserRoleUpdateViewModel();
-        roleModel.UserRoles = user.Account.Roles; 
+        roleModel.UserRoles = user.Account.Roles;
         roleModel.AllRoles = new(await _roleRepository.getRoles(), nameof(Role.Id), nameof(Role.Name));
         roleModel.UserId = user.Id;
         return View(roleModel);
@@ -157,38 +157,38 @@ public class ModeratorController : Controller
     [HttpPost]
     public async Task<IActionResult> UserRoleUpdate(UserRoleUpdateViewModel roleModel, int userId)
     {
-        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u => u.Id == userId);
+        User? user = _userRepository.getAll().Include(u => u.Account).ThenInclude(a => a.Roles).FirstOrDefault(u => u.Id == userId);
         Role? role = await _roleRepository.getRole(roleModel.Id);
-        
-        if (user.Account.Login == User.Identity.Name)
-            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "You cant do any actions with your account",  id=userId });
 
-        
+        if (user.Account.Login == User.Identity.Name)
+            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "You cant do any actions with your account", id = userId });
+
+
         user.Account.Roles.Add(role);
-        await _db.SaveChangesAsync(); 
-        
-        return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "User roles was updated" , id=userId });
+        await _db.SaveChangesAsync();
+
+        return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "User roles was updated", id = userId });
 
     }
-    
+
     public async Task<IActionResult> RoleRemove(int id, int userId)
     {
-        User? user = _userRepository.getAll().Include(u=>u.Account).ThenInclude(a=>a.Roles).FirstOrDefault(u => u.Id == userId);
+        User? user = _userRepository.getAll().Include(u => u.Account).ThenInclude(a => a.Roles).FirstOrDefault(u => u.Id == userId);
         Role? role = await _roleRepository.getRole(id);
-        
+
         //Проверка если АДМИН
-        if (user.Account.Roles.Contains(await _roleRepository.getRole(2))) 
-            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "You cant remove roles from Admin ", id=userId });
+        if (user.Account.Roles.Contains(await _roleRepository.getRole(2)))
+            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "You cant remove roles from Admin ", id = userId });
         if (user.Account.Roles.Count == 1)
-            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "Please, leave a user at least one role",  id=userId });
+            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "Please, leave a user at least one role", id = userId });
         if (user.Account.Login == User.Identity.Name)
-            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "You cant do any actions with your account",  id=userId });
-        
+            return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "You cant do any actions with your account", id = userId });
+
         user.Account.Roles.Remove(role);
-        
-        await _db.SaveChangesAsync(); 
-        
-        return RedirectToAction("UserRoleUpdate", "Moderator", new {notification = "Role was successfully removed! ", id=userId});
+
+        await _db.SaveChangesAsync();
+
+        return RedirectToAction("UserRoleUpdate", "Moderator", new { notification = "Role was successfully removed! ", id = userId });
     }
-    
+
 }

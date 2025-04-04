@@ -8,7 +8,7 @@ using Route = Microsoft.AspNetCore.Routing.Route;
 
 namespace Tourfirm.Controllers;
 
-[Authorize(Roles="ADMIN,MODERATOR,MANAGER")]
+[Authorize(Roles = "ADMIN,MODERATOR,MANAGER")]
 public class CountryController : Controller
 {
     private readonly ILogger<CountryController> _logger;
@@ -22,81 +22,81 @@ public class CountryController : Controller
         _countryRepository = countryRepository;
         _countryService = countryService;
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> CountryIndex(string? notification, Country.SortState sortCountry = Country.SortState.IdAsc)
     {
-        if(notification != null)
+        if (notification != null)
             ModelState.AddModelError("", notification);
-        
+
         // ReSharper disable once HeapView.BoxingAllocation
         ViewData["IdSort"] = sortCountry == Country.SortState.IdAsc ? Country.SortState.IdDesc : Country.SortState.IdAsc;
         ViewData["NameSort"] = sortCountry == Country.SortState.NameAsc ? Country.SortState.NameDesc : Country.SortState.NameAsc;
         ViewData["LanguageSort"] = sortCountry == Country.SortState.LanguageAsc ? Country.SortState.LanguageDesc : Country.SortState.LanguageAsc;
         ViewData["MidTempSort"] = sortCountry == Country.SortState.MidTempAsc ? Country.SortState.MidTempDesc : Country.SortState.MidTempAsc;
         ViewData["ClimateSort"] = sortCountry == Country.SortState.ClimateAsc ? Country.SortState.ClimateDesc : Country.SortState.ClimateAsc;
-         
+
         IQueryable<Country> countries = _countryRepository.getAll();
-        
+
         switch (sortCountry)
         {
             case Country.SortState.IdAsc:
-            {
-                countries = countries.OrderBy(p => p.Id);
-                break;
-            }
+                {
+                    countries = countries.OrderBy(p => p.Id);
+                    break;
+                }
 
             case Country.SortState.IdDesc:
-            {
-                countries = countries.OrderByDescending(p => p.Id);
-                break;
-            }
+                {
+                    countries = countries.OrderByDescending(p => p.Id);
+                    break;
+                }
             case Country.SortState.ClimateAsc:
-            {
-                countries = countries.OrderBy(p => p.Climate);
-                break;
-            }
+                {
+                    countries = countries.OrderBy(p => p.Climate);
+                    break;
+                }
             case Country.SortState.ClimateDesc:
-            {
-                countries = countries.OrderByDescending(p => p.Climate);
-                break;
-            }
+                {
+                    countries = countries.OrderByDescending(p => p.Climate);
+                    break;
+                }
             case Country.SortState.LanguageAsc:
-            {
-                countries = countries.OrderBy(p => p.Language);
-                break;
-            }
+                {
+                    countries = countries.OrderBy(p => p.Language);
+                    break;
+                }
             case Country.SortState.LanguageDesc:
-            {
-                countries = countries.OrderByDescending(p => p.Language);
-                break;
-            }
+                {
+                    countries = countries.OrderByDescending(p => p.Language);
+                    break;
+                }
             case Country.SortState.MidTempAsc:
-            {
-                countries = countries.OrderBy(p => p.MidTemp);
-                break;
-            }
+                {
+                    countries = countries.OrderBy(p => p.MidTemp);
+                    break;
+                }
             case Country.SortState.MidTempDesc:
-            {
-                countries = countries.OrderByDescending(p => p.MidTemp);
-                break;
-            }
-            
+                {
+                    countries = countries.OrderByDescending(p => p.MidTemp);
+                    break;
+                }
+
             case Country.SortState.NameAsc:
-            {
-                countries = countries.OrderBy(p => p.Name);
-                break;
-            }
+                {
+                    countries = countries.OrderBy(p => p.Name);
+                    break;
+                }
             case Country.SortState.NameDesc:
-            {
-                countries = countries.OrderByDescending(p => p.Name);
-                break;
-            }
+                {
+                    countries = countries.OrderByDescending(p => p.Name);
+                    break;
+                }
         }
 
         return View("CountryIndex", await countries.AsNoTracking().ToListAsync());
     }
-    
+
     [HttpGet]
     public IActionResult CountryAdd() => View();
 
@@ -117,13 +117,13 @@ public class CountryController : Controller
         ModelState.AddModelError("", response.Description);
         return RedirectToAction("CountryIndex", "Country", new { notification = response.Description });
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> CountryUpdate(string? notification, int id)
     {
         var country = await _countryRepository.getCountry(id);
-        
-        if(notification != null)
+
+        if (notification != null)
             ModelState.AddModelError("", notification);
 
         return View(country);
@@ -147,19 +147,19 @@ public class CountryController : Controller
         return RedirectToAction("CountryIndex", "Country", new { notification = response.Description });
 
     }
-    
+
     [HttpGet]
     public async Task<IActionResult> CountryDeleteConfirm(int id)
     {
         return View(await _countryRepository.getCountry(id));
     }
 
-    
+
     public async Task<IActionResult> CountryDelete(int id)
     {
         var response = await _countryService.DeleteCountry(await _countryRepository.getCountry(id));
 
-        return RedirectToAction("CountryIndex", "Country", new { notification = response.Description});
-        
+        return RedirectToAction("CountryIndex", "Country", new { notification = response.Description });
+
     }
 }
